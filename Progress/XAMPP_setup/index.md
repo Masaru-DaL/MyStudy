@@ -17,3 +17,8 @@ $ sudo /opt/lampp/lampp stop
 
 -> localhost:8080/RAT-X=5/public
 でlaravel documentが表示
+
+# xampp再インストール時のApacheエラー
+https://kirohi.com/apache_xampp_error
+
+
