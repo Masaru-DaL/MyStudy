@@ -25,3 +25,5 @@ nmp installおよび、npm run dev
   - rm -rf node_modules
 
 再度nmp installおよび、npm run dev
+
+※login画面のヘッダーのいじり方が分からなかったので、viewだけ見れるようにして、HTMLでログインフォームのみ実装
