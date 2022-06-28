@@ -62,4 +62,13 @@ https://www.fe-siken.com/kakomon/31_haru/q10.html
 - 命令レジスタ
   - 主記憶から取り出された命令が格納される場所
 
-
+## SDカード
+SDカードを記憶容量で分けると3規格が存在する
+- SD
+- SDHC
+- SDXC
+  - ファイルシステム
+    - exFAT
+  - 容量上限
+    - 2Tバイト
+    - 
