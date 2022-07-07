@@ -18,4 +18,8 @@ Point！！
 ![picture 2](../../images/be7396cc793ba6795234714adff9676766ca8c8a6a9d3d9af8723492f37a852f.png)
 
 
-## 
+## MIPSの求め方
+![picture 3](../../images/2f901cf2600ec8d2e5f05a712d1a20d80e440d13be7a77d4420f17c7148e6582.png)
+
+1. 1命令に必要なクロック数を出す
+2. 1秒間の命令実行可能回数を出す
