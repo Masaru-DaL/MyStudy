@@ -4,5 +4,17 @@
 
 
 ## メモリ
-
 ![picture 1](../../images/1008e0dbee5aa4ab1c78d67017d7b441e3771eeac133bd60b6a1adf8b14f4399.png)
+
+CPU XとCPU Yのヒット率は同じという所から、連立方程式を利用する。
+
+
+## コンピュータシステムの信頼性
+- MTBF
+  - Mean Time Between Failures
+  - システムが修理され正常に稼働し始めてから、次回故障するまでの平均故障間隔のこと
+
+- MTTR
+  - Mean Time To Repair
+  - 平均修理時間
+  - システムの故障を修理するために要した平均時間のこと
