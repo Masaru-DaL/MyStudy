@@ -3,3 +3,5 @@
 - 計算結果の有効桁数が少なくなること
 
 
+## OSS
+![picture 1](../../../images/d17a5cf95ab8004cb647b42bb1196feb04ee66b1f39e7d5685e4bd4c53aa7143.png)
