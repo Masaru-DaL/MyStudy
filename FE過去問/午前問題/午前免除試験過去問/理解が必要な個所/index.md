@@ -7,3 +7,7 @@
 
 ## 論理式
 [論理式図解](https://pyming.info/2021/07/24/ronri_kairo/)
+
+
+## 無限小数点
+![picture 1](../../../images/2037f0262ea5569e2367985b7ba8d12b832cafa155a71accc5d8d50521486d24.png)
