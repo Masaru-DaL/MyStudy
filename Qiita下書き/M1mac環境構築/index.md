@@ -18,7 +18,8 @@ Homebrewはパッケージマネージャーと呼ばれるもので、インス
 - ユーザー名、メールアドレスの設定
   - git config user.name / git config user.email で登録したのが出てればOK
 - Remoteの設定
-  - 
+
+この2つを設定しておけば、pull, pushは問題ないはずです。
 
 ## VScodeのinstall
 参考: [【2021年】Apple silicon(M1)Macに最適化したVSCode安定版をインストール](https://kunolog.com/m1_vscode/)
