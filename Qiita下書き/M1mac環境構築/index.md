@@ -12,14 +12,19 @@ Homebrewはパッケージマネージャーと呼ばれるもので、インス
 こちらもこの通りに進めます。
 
 ### Gitの設定(既にアカウントなどをお持ちの方)
-参考: [8.1 Git のカスタマイズ - Git の設定](https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA-Git-%E3%81%AE%E8%A8%AD%E5%AE%9A)
+参考:
+[8.1 Git のカスタマイズ - Git の設定](https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA-Git-%E3%81%AE%E8%A8%AD%E5%AE%9A)
 [githubでユーザー名とパスワードを毎回聞かれる問題解消](https://qiita.com/non0311/items/03e3e7a042f70f072286)
+[GitHubでssh接続する手順~公開鍵・秘密鍵の生成から~](https://qiita.com/shizuma/items/2b2f873a0034839e47ce)
 
 - ユーザー名、メールアドレスの設定
   - git config user.name / git config user.email で登録したのが出てればOK
 - Remoteの設定
+- ssh
+  - keyの生成(.sshがなければディレクトリの作成)
+  - githubに生成したkey(id_rsa.pubの方)の登録
 
-この2つを設定しておけば、pull, pushは問題ないはずです。
+この3つを設定しておけば、pull, pushは問題ないはずです。
 
 ## VScodeのinstall
 参考: [【2021年】Apple silicon(M1)Macに最適化したVSCode安定版をインストール](https://kunolog.com/m1_vscode/)
