@@ -23,6 +23,7 @@ Homebrewはパッケージマネージャーと呼ばれるもので、インス
 - ssh
   - keyの生成(.sshがなければディレクトリの作成)
   - githubに生成したkey(id_rsa.pubの方)の登録
+  - Are you sure you want to continue connecting? と聞かれるのでyesと打つ
 
 この3つを設定しておけば、pull, pushは問題ないはずです。
 
