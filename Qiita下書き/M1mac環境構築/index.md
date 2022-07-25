@@ -31,3 +31,5 @@ Homebrewはパッケージマネージャーと呼ばれるもので、インス
 参考: [【2021年】Apple silicon(M1)Macに最適化したVSCode安定版をインストール](https://kunolog.com/m1_vscode/)
 
 MacのVScodeはWindows版などと違って上部のタブが隠れているんですねぇ。少し違和感があります。
+(と思いましたが、⌘ + Ctrl + w で切り替えられました。)
+出てないと流石に不便でしたね。
