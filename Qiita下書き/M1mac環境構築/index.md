@@ -33,3 +33,24 @@ Homebrewはパッケージマネージャーと呼ばれるもので、インス
 MacのVScodeはWindows版などと違って上部のタブが隠れているんですねぇ。少し違和感があります。
 (と思いましたが、⌘ + Ctrl + w で切り替えられました。)
 出てないと流石に不便でしたね。
+
+## 電源の落とし方
+参考: [Macをシステム終了する/再起動する](https://support.apple.com/ja-jp/guide/mac-help/mchlp2522/mac#:~:text=Mac%E3%81%A7%E3%80%81%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%20%EF%BC%9E,%E7%94%BB%E9%9D%A2%E3%81%8C%E9%BB%92%E3%81%8F%E3%81%AA%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82)
+
+そろそろ疲れましたよね。
+一旦休憩しましょう。
+
+## Alfredのinstall
+[Alfred【概要・設定・使い方】〜Mac最強のランチャーアプリ](https://paso-jiyu.com/alfred/#st-toc-h-11)
+
+Macと言えばAlfredですよね〜ずっと使ってみたかったです。
+ショートカットキーは 「⌘ + spaceキー」 がおすすめみたいなのでその設定をしておきます。
+1. デフォルトで割り当てられているspotlightのショートカットキーの削除
+2. Alfredを削除したキーに割り当てる
+参考: [お前らのターミナルはダサい](https://qiita.com/kinchiki/items/57e9391128d07819c321)
+
+1. terminal or iTerm のセットアップ
+2. vim のセットアップ
+3. 自分は好みでフォントを「Fira Code Light」にしているのでそちらの設定
+   1. やった感じ、Lightだと暗すぎたんで、Retinaにしました。
+4.
