@@ -47,10 +47,99 @@ Macと言えばAlfredですよね〜ずっと使ってみたかったです。
 ショートカットキーは 「⌘ + spaceキー」 がおすすめみたいなのでその設定をしておきます。
 1. デフォルトで割り当てられているspotlightのショートカットキーの削除
 2. Alfredを削除したキーに割り当てる
+
+## ターミナルのセットアップ
 参考: [お前らのターミナルはダサい](https://qiita.com/kinchiki/items/57e9391128d07819c321)
+
+基本的にはこれに沿ってカスタマイズでいいと思いますが、あとはお好みで進めていきましょう！
+自分は、Iceberg, hybrid, pureを入れずに手動でターミナルは設定しました(promptが思ったように表示されなかったので...)
+
+設定した .zshrc の中身がこちら。
+```c
+# モジュールの有効化
+autoload -Uz colors && colors
+
+# pathの追加
+typeset -U path PATH
+path=(
+  /opt/homebrew/bin(N-/)
+  /opt/homebrew/sbin(N-/)
+  /usr/bin
+  /usr/sbin
+  /bin
+  /sbin
+  /usr/local/bin(N-/)
+  /usr/local/sbin(N-/)
+  /Library/Apple/usr/bin
+)
+
+# completions / autosuggestions
+ if type brew &>/dev/null; then
+   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+   autoload -Uz compinit && compinit
+ fi
+
+# prompt
+PROMPT="%F{075}%n%f %F{059}($(arch))%f:%F{220}%~%f"$'\n'"%# "
+
+# 空行を追加するようにする
+add_newline() {
+  if [[ -z $PS1_NEWLINE_LOGIN ]]; then
+    PS1_NEWLINE_LOGIN=true
+  else
+    printf '\n'
+  fi
+}
+precmd() { add_newline }
+
+# zsh-git-prompt
+source $(brew --prefix)/opt/zsh-git-prompt/zshrc.sh
+
+PROMPT='%F{075}%n%f %F{103}($(arch))%f:%F{220}%~%f $(git_super_status)'
+PROMPT+=""$'\n'"%# "
+
+# macOS 12 Monterey 以降ではデフォルトパス内に python コマンドが存在しないため、エイリアスを設定しないと git_super_status が機能しません。
+alias python="python3"
+
+# Iceberg
+export CLICOLOR=1
+
+# インストールしたコマンドを即認識させる
+zstyle ":completion:*:commands" rehash 2
+
+# alias
+## ls
+alias ls="ls -FG"
+alias ll="ls -al"
+
+## cd -> ls(HOMEじゃない場合)
+chpwd() {
+	if [[ $(pwd) != $HOME ]]; then;
+		ls
+	fi
+}
+
+# enchancd
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
+source $ZPLUG_HOME/init.zsh
+```
 
 1. terminal or iTerm のセットアップ
 2. vim のセットアップ
 3. 自分は好みでフォントを「Fira Code Light」にしているのでそちらの設定
    1. やった感じ、Lightだと暗すぎたんで、Retinaにしました。
-4.
+4. terminal(適用に手間取った所は参考にさせて頂いたサイトを貼っておきます)
+   1. 参考: [macOSのzshではこれだけはやっておこう](https://zenn.dev/sprout2000/articles/bd1fac2f3f83bc)
+      1. zsh-completions
+      2. zsh-autosuggestions
+      3. 空行を出すようにする
+      4. プロンプトの表示の変更
+         1. Gitリポジトリの状態含む
+   2. 参考: [cdした後にlsするのはzshにやらせよう。zshは両手を広げ我々を迎え入れてくれる。 - Qiita](https://qiita.com/2357gi/items/0ab1297357dedb90bbb1)
+   3. 参考: [ディレクトリの移動を高速にする](https://note.com/youichiroz/n/ne7d214c5ebad#EyZFW)
+
+      1. aliasの追加
+         1. ls
+         2. cd -> ls
+         3. enchacdの追加
