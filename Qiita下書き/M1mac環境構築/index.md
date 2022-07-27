@@ -52,7 +52,30 @@ Macと言えばAlfredですよね〜ずっと使ってみたかったです。
 参考: [お前らのターミナルはダサい](https://qiita.com/kinchiki/items/57e9391128d07819c321)
 
 基本的にはこれに沿ってカスタマイズでいいと思いますが、あとはお好みで進めていきましょう！
-自分は、Iceberg, hybrid, pureを入れずに手動でターミナルは設定しました(promptが思ったように表示されなかったので...)
+自分は、Iceberg, hybridを設定し、pureを入れずに手動でpureみたいな感じになるように設定しました(promptが思ったように表示されなかったので...)
+
+
+
+
+1. terminal or iTerm のセットアップ
+2. vim のセットアップ
+3. 自分は好みでフォントを「Fira Code Light」にしているのでそちらの設定
+   1. やった感じ、Lightだと暗すぎたんで、Retinaにしました。
+4. terminal(適用に手間取った所は参考にさせて頂いたサイトを貼っておきます)
+   1. 参考: [macOSのzshではこれだけはやっておこう](https://zenn.dev/sprout2000/articles/bd1fac2f3f83bc)
+      1. zsh-completions
+      2. zsh-autosuggestions
+      3. 空行を出すようにする
+      4. プロンプトの表示の変更
+         1. Gitリポジトリの状態含む
+   2. 参考: [cdした後にlsするのはzshにやらせよう。zshは両手を広げ我々を迎え入れてくれる。 - Qiita](https://qiita.com/2357gi/items/0ab1297357dedb90bbb1)
+   3. 参考: [ディレクトリの移動を高速にする](https://note.com/youichiroz/n/ne7d214c5ebad#EyZFW)
+      1. aliasの追加
+         1. ls
+         2. cd -> ls
+         3. enchacdの追加
+
+
 
 設定した .zshrc の中身がこちら。
 ```c
@@ -125,21 +148,18 @@ export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
 ```
 
-1. terminal or iTerm のセットアップ
-2. vim のセットアップ
-3. 自分は好みでフォントを「Fira Code Light」にしているのでそちらの設定
-   1. やった感じ、Lightだと暗すぎたんで、Retinaにしました。
-4. terminal(適用に手間取った所は参考にさせて頂いたサイトを貼っておきます)
-   1. 参考: [macOSのzshではこれだけはやっておこう](https://zenn.dev/sprout2000/articles/bd1fac2f3f83bc)
-      1. zsh-completions
-      2. zsh-autosuggestions
-      3. 空行を出すようにする
-      4. プロンプトの表示の変更
-         1. Gitリポジトリの状態含む
-   2. 参考: [cdした後にlsするのはzshにやらせよう。zshは両手を広げ我々を迎え入れてくれる。 - Qiita](https://qiita.com/2357gi/items/0ab1297357dedb90bbb1)
-   3. 参考: [ディレクトリの移動を高速にする](https://note.com/youichiroz/n/ne7d214c5ebad#EyZFW)
+気付いたらスライムが出現していました...
 
-      1. aliasの追加
-         1. ls
-         2. cd -> ls
-         3. enchacdの追加
+![picture 1](../../images/terminal1.png)
+
+vimの表示はこんな感じ(hybrid)
+
+![picture 1](../../images/vim1.png)
+
+vimは一旦保存しないとカラーが反映されないのに気付かず沼ってました。
+
+promptはarrowなラベルな感じも気になりますが、一旦ダサくない、かつシンプルに仕上がったので一旦満足です。
+上記の.zshrc にスライムの記述はないんですが、気になる方用にリンクを貼っておきます。
+参考:  [【これでダサくない。】ターミナルをかっこよくするカスタマイズ方法~ Prezto,zsh,スライム~](https://satoriku.com/terminal-customize/)
+
+2,3日ぐらいterminalいじってますけど、終わりが見えないので一旦終わりにしたいと思います。
