@@ -30,6 +30,7 @@ Homebrewはパッケージマネージャーと呼ばれるもので、インス
 ## VScodeのinstall
 参考: [【2021年】Apple silicon(M1)Macに最適化したVSCode安定版をインストール](https://kunolog.com/m1_vscode/)
 
+setting syncを導入していれば一瞬で同期可能です。
 MacのVScodeはWindows版などと違って上部のタブが隠れているんですねぇ。少し違和感があります。
 (と思いましたが、⌘ + Ctrl + w で切り替えられました。)
 出てないと流石に不便でしたね。
@@ -48,14 +49,11 @@ Macと言えばAlfredですよね〜ずっと使ってみたかったです。
 1. デフォルトで割り当てられているspotlightのショートカットキーの削除
 2. Alfredを削除したキーに割り当てる
 
-## ターミナルのセットアップ
+# ターミナルのセットアップ
 参考: [お前らのターミナルはダサい](https://qiita.com/kinchiki/items/57e9391128d07819c321)
 
 基本的にはこれに沿ってカスタマイズでいいと思いますが、あとはお好みで進めていきましょう！
 自分は、Iceberg, hybridを設定し、pureを入れずに手動でpureみたいな感じになるように設定しました(promptが思ったように表示されなかったので...)
-
-
-
 
 1. terminal or iTerm のセットアップ
 2. vim のセットアップ
@@ -76,90 +74,36 @@ Macと言えばAlfredですよね〜ずっと使ってみたかったです。
          3. enchacdの追加
 
 
-
-設定した .zshrc の中身がこちら。
-```c
-# モジュールの有効化
-autoload -Uz colors && colors
-
-# pathの追加
-typeset -U path PATH
-path=(
-  /opt/homebrew/bin(N-/)
-  /opt/homebrew/sbin(N-/)
-  /usr/bin
-  /usr/sbin
-  /bin
-  /sbin
-  /usr/local/bin(N-/)
-  /usr/local/sbin(N-/)
-  /Library/Apple/usr/bin
-)
-
-# completions / autosuggestions
- if type brew &>/dev/null; then
-   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-   autoload -Uz compinit && compinit
- fi
-
-# prompt
-PROMPT="%F{075}%n%f %F{059}($(arch))%f:%F{220}%~%f"$'\n'"%# "
-
-# 空行を追加するようにする
-add_newline() {
-  if [[ -z $PS1_NEWLINE_LOGIN ]]; then
-    PS1_NEWLINE_LOGIN=true
-  else
-    printf '\n'
-  fi
-}
-precmd() { add_newline }
-
-# zsh-git-prompt
-source $(brew --prefix)/opt/zsh-git-prompt/zshrc.sh
-
-PROMPT='%F{075}%n%f %F{103}($(arch))%f:%F{220}%~%f $(git_super_status)'
-PROMPT+=""$'\n'"%# "
-
-# macOS 12 Monterey 以降ではデフォルトパス内に python コマンドが存在しないため、エイリアスを設定しないと git_super_status が機能しません。
-alias python="python3"
-
-# Iceberg
-export CLICOLOR=1
-
-# インストールしたコマンドを即認識させる
-zstyle ":completion:*:commands" rehash 2
-
-# alias
-## ls
-alias ls="ls -FG"
-alias ll="ls -al"
-
-## cd -> ls(HOMEじゃない場合)
-chpwd() {
-	if [[ $(pwd) != $HOME ]]; then;
-		ls
-	fi
-}
-
-# enchancd
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
-```
+筆者のターミナルはこんな感じです。
+![picture 1](../../images/terminal.png)
 
 気付いたらスライムが出現していました...
-
-![picture 1](../../images/terminal1.png)
-
-vimの表示はこんな感じ(hybrid)
-
-![picture 1](../../images/vim1.png)
-
-vimは一旦保存しないとカラーが反映されないのに気付かず沼ってました。
-
-promptはarrowなラベルな感じも気になりますが、一旦ダサくない、かつシンプルに仕上がったので一旦満足です。
-上記の.zshrc にスライムの記述はないんですが、気になる方用にリンクを貼っておきます。
 参考:  [【これでダサくない。】ターミナルをかっこよくするカスタマイズ方法~ Prezto,zsh,スライム~](https://satoriku.com/terminal-customize/)
 
-2,3日ぐらいterminalいじってますけど、終わりが見えないので一旦終わりにしたいと思います。
+凝り始めると時間が溶けますね〜
+vimは一旦保存しないとカラーが反映されないのに気付かず沼ってました。
+
+prompt表示は派手すぎずいい感じに仕上がりました。
+手動でカラーをカスタマイズできるのもいいですね。
+
+## もうちょっと使いやすくしときたい
+ここからは好みで進めてください。
+凝り出すとキリがないと思うのでw
+
+参考: [ぼくのVimさばきを支える設定とその導入手順を紹介する](https://qiita.com/jiroshin/items/ee86ea426a51fa24b319#8-tig%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E3%81%8B%E3%82%89git%E3%82%92%E9%AB%98%E9%80%9F%E3%81%A7%E6%93%8D%E4%BD%9C%E3%81%97%E3%82%88%E3%81%86-pencil)
+
+上記記事にはありませんが、後述するtab補完はやっておいて損はないと思います！
+### dotfilesで管理する
+~ 直下にdotfilesを作成し、ドットファイルをシンボリックリンクで紐付けて一括管理する。
+
+### VimとEmacsのキーバインドと仲良くなろう
+vimでカーソル移動でターミナルと同じコマンドが打てないのが気持ち悪いのでこれもやっておきます。
+
+### fzfのinstall
+Ctrl + r で過去のコマンド検索が出来ます。これだけでも強力！！
+
+### tab補完で大文字、小文字の区別を無くす
+参考: [zshで大文字小文字を区別しないで補完](https://qiita.com/kenta4327/items/8faaa83f6a5bf595a4bc)
+
+DocumentディレクトリをわざわざShift押しながらDocuって打うつのはイケてないです。
+docuで補完されるようにしときましょう！
