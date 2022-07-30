@@ -15,18 +15,81 @@ w3schoolsはWeb上で演習問題も解くことが可能です(ただし、英�
 - * (全てという意味, 正規表現で使われる)
 
 
-![picture 2](../../images/25e6b91087dd193f82bbb28c720b38bc89ee3d2706a59ea4d5b88a5300bc91f9.png)
+![picture 2](images/25e6b91087dd193f82bbb28c720b38bc89ee3d2706a59ea4d5b88a5300bc91f9.png)
 
 
 ## SELECT構文
+基礎中の基礎、ここから覚えていきます。
+取り出したい表と、列を指定し、指定の列を抜き出せます。
+
+- FROM ~
+  - 取り出したいテーブル(表)を指定
+- SELECT ~
+  - カラム(列)の名前を指定
+  - 複数選択可能
+
 ```c
 SELECT column1, column2, ...
 FROM table_name;
 ```
 
-基礎中の基礎、ここから覚えていきます。
-- FROM ~
-  - 取り出したいテーブル(表)を指定
-- SELECT ~
-  - カラム(列)の名前を指定
+![picture 3](images/a0371e0ebced2e7664ad6a6b871429d082082a3778a12715774ae3eee77ea68d.png)
 
+
+## SELECT DISTINCT 構文
+- SELECT構文と使い方は同じですが、**重複している行**を取り除いて抜き出せます。
+
+```c
+SELECT DISTINCT column1, column2, ...
+FROM table_name;
+```
+
+![picture 4](images/811c0e2239d3ecf017556f08653b2be1f75341ee540ba8b3bd2c54456cd8f5cd.png)
+
+
+## SELECT WHERE 句
+- 指定した条件を満たすレコードのみを抽出するために使用される。
+
+```c
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+```
+
+![picture 5](images/25ebc4949a14939d17463f08cd9cdfc9b711e538005e84bef6fb7857b5f84ade.png)
+
+### 比較演算子
+![picture 1](images/3017431d3b5524999a1013c8d0b89474bc3899dc27c4931db757de8f5efd5e14.png)
+
+:::message alert
+=>, =<のように=が前に来ないようにする
+:::
+
+### AND, OR, NOT演算子
+- AND構文
+  - 条件を全て満たすものを抽出する
+
+```c
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 AND condition2 AND condition3 ...;
+```
+
+- OR構文
+  - どちらかの条件が満たされているものを抽出する
+
+```c
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 OR condition2 OR condition3 ...;
+```
+
+- NOT構文
+  - NOT ~ と記述し、~ではないものを抽出する
+  - WHERE NOT, AND NOTなどの場合がある
+
+```c
+SELECT column1, column2, ...
+FROM table_name
+WHERE NOT condition;
+```
