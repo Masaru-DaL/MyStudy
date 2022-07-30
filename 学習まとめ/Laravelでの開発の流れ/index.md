@@ -9,7 +9,7 @@
 とします。
 
 ## MVCを何となく理解する
-![0ea88fa012e77de8e76f47a6b3c61d9c4b7a012a73cae73c9d55639b695f12c6.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2564369/b7f57dde-b07f-0107-6e1a-917306a9a7a7.png)
+![../../0ea88fa012e77de8e76f47a6b3c61d9c4b7a012a73cae73c9d55639b695f12c6.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2564369/b7f57dde-b07f-0107-6e1a-917306a9a7a7.png)
 
 参考: [Laravel学習帳](https://laraweb.net/surrounding/922/)
 
