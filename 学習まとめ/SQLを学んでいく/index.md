@@ -93,3 +93,41 @@ SELECT column1, column2, ...
 FROM table_name
 WHERE NOT condition;
 ```
+
+## ORDER BY
+- ORDER BY ~
+  - ~を昇順、または降順でソートするために使用される
+  - デフォルトでは昇順
+  - 降順でソートするには、DESCを使用する
+
+```c
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1, column2, ... ASC|DESC;
+```
+
+### 1. ORDER BY (昇順)
+```c: Countryを昇順で抽出
+SELECT * FROM Customers
+ORDER BY Country;
+```
+
+### 2. ORDER BY DESC (降順)
+```c: Countryを降順で抽出
+SELECT * FROM Customers
+ORDER BY Country DESC;
+```
+
+### 3. ORDER BY (複数列の抽出 / 昇順)
+```c: Country, CustomerNameを昇順で抽出
+SELECT * FROM Customers
+ORDER BY Country, CustomerName;
+```
+
+### 4. ORDER BY DESC (複数列の抽出 / 列毎)
+```c: Countyを昇順, CustomerNameを降順で抽出
+SELECT * FROM Customers
+ORDER BY Country ASC, CustomerName DESC;
+```
+
+
