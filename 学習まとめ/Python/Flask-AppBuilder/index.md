@@ -1,6 +1,7 @@
 # 本記事のゴール
 :::message
 Flask-AppBuilderを使ってブラウザにアクセスする
+※AppBuilderは、Flask製のCRUDアプリケーションをさくっと作れるオープンソースのことです。
 :::
 
 Flaskの環境構築はこちらの前回の記事をご覧ください。
