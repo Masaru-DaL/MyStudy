@@ -1,6 +1,6 @@
 #　今回の開発のゴール
 :::message
-Flask-AppBuilderを使用してToDoアプリケーションの作成
+Flask-AppBuilderの公式ドキュメントに沿ってBaseViewを理解する。
 :::
 
 環境構築は済んでいるものとする。
@@ -13,7 +13,7 @@ Flask-AppBuilderを使用してToDoアプリケーションの作成
 AppBuilder自体の参考記事がほとんどないので、[公式ドキュメント](https://flask-appbuilder.readthedocs.io/en/latest/index.html#)を元に進めていきます。
 
 
-# Viewの作り方
+# BaseView
 [参考ページ](https://flask-appbuilder.readthedocs.io/en/latest/views.html)
 
 ## 1. URLのみのルーティングでViewを表示する
@@ -181,6 +181,10 @@ appbuilder.add_link("Method3", href='/myview/method3/john', category='My View')
 :::
 
 #### 4-1. form.py
+WTFormsを使用します。
+> ブラウザ用のviewから提出されるフォームのデータを使って作業する必要があるときは、コードは途端にとても読みづらくなります。
+> このプロセスをより管理しやすくするためにデザインされたライブラリが公開されています。そのなかのひとつが、WTFormsです。
+
 ```python: form.py
 from wtforms import Form, StringField
 from wtforms.validators import DataRequired
@@ -195,6 +199,12 @@ class MyForm(DynamicForm):
     field2 = StringField(('Field2'),
         description=('Your field number two!'), widget=BS3TextFieldWidget())
 ```
+
+class MyFormを作成するに当たってFAB DynamicFormから継承します。
+field1, field2と、2つの入力欄を作成します。
+
+#### 4-2. view.py
+`view.py`は上記で作成した`form.py`をimportして呼び出します。
 
 ```python: view.py
 from flask import flash
@@ -220,3 +230,16 @@ class MyFormView(SimpleFormView):
 appbuilder.add_view(MyFormView, "My form View", icon="fa-group", label=_('My form View'),
                      category="My Forms", category_icon="fa-cogs")
 ```
+
+メニューにMyFormsが追加されていて、投稿フォーム欄が2つ出来ています。
+
+`form_get`でフォームにデータを事前入力出来ます。
+事前に`This was prefilled`が入力された状態になります。
+
+`form_post`はユーザがフォームを送信した後にフォームを後処理出来ます。
+何かしらの値を入力するとmessage変数に入れた`My form submitted`が出力されます。
+
+
+# まとめ
+AppBuilderの最低限のViewの表示の仕方を学びました。
+軽量フレームワークであるため、自由度が高い反面覚えることが多そうな印象です。
