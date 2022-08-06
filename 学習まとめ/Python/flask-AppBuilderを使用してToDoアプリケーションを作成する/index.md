@@ -14,7 +14,7 @@ AppBuilder自体の参考記事がほとんどないので、[公式ドキュメ
 
 
 # BaseView
-[参考ページ](https://flask-appbuilder.readthedocs.io/en/latest/views.html)
+公式ドキュメントの参考ページ[BaseView](https://flask-appbuilder.readthedocs.io/en/latest/views.html)
 
 ## 1. URLのみのルーティングでViewを表示する
 ```python: view.py
