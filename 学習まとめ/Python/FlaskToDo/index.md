@@ -192,7 +192,7 @@ from app import routes
 
 1. importするモジュールのroutesが別のファイルに保存されていることをFlaskに伝えるために最後の行に記述しています。
 
-#### 4-5. app = Flask(__name__)
+#### 4-5. app = Flask(__name__)　の理解を深める
 この`app`にはflaskアプリの核が入っているイメージ(みたいです)
 
 - __name__
@@ -209,3 +209,33 @@ from app import routes
 1. `index.html`をtodoリストのhtnlに更新する
 2. `route.py`に、フロントエンドのJavaScriptとバックエンドのURLを橋渡しをさせる。
 3. `database.py`ファイルが実際のクエリのためのデータを返すように、データベースに接続する
+
+
+## 5. フロントエンドコードの確立
+#### 5-1. route.py
+```python: routes.py
+@app.route("/")
+def homepage():
+	return render_template("index.html")
+```
+
+1. `routes.py`をhtmlのみを返すように変更する。
+
+#### 5-2. ファイル構造の更新
+```c: ファイル構造
+demo
+├── app/
+│   ├── static/
+│   │   ├── script/
+│   │   │   └── model.js
+│   │   ├── styles/
+│   │   │   └── custom.css
+│   │   └── index.html
+│   ├── templates/
+│   │   └── index.html
+│   ├── routes.py
+│   ├── database.py
+│   └── __init__.py
+└── main.py
+```
+
