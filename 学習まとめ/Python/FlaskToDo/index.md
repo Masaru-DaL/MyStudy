@@ -155,4 +155,57 @@ demo
 └── main.py
 ```
 
+#### 4-2. database.py
+```python: database.py
+import random
 
+def query_name():
+  return random.choice(["Alice", "Bob", "Chris", "Dolly"])
+```
+
+1. randomモジュールをimport
+2. リストからランダムに抜き出す
+
+#### 4-3. routes.py
+```python: routes.py
+from flask import render_template
+from app import app
+from app import database as db_helper
+
+@app.route("/")
+def homepage():
+  return render_template("index.html", name=db_helper())
+```
+
+1. 各種モジュールのimport
+   1. as でdb_helperに名前を変更している
+2. htmlのrender
+
+#### 4-4. __init__.py
+```python: __init__.py
+from flask import Flask
+
+app = Flask(__name__)
+
+from app import routes
+```
+
+1. importするモジュールのroutesが別のファイルに保存されていることをFlaskに伝えるために最後の行に記述しています。
+
+#### 4-5. app = Flask(__name__)
+この`app`にはflaskアプリの核が入っているイメージ(みたいです)
+
+- __name__
+  - モジュールの属性の1つ
+  - グローバル変数
+
+この`.py`ファイルが直接起動された時は、`__name__`には`__main__`という文字列が入る。
+一方で、このファイルが他のスクリプトからimportされて呼ばれた時には、`__name__`にはモジュール名(拡張子なしのファイル名)が入る。
+
+第一引数に`__name__`を渡してFlaskクラスのインスタンスを作成し、`app`に代入している。
+
+
+#### 4-6. ここからToDoアプリに変換するためには
+1. `index.html`をtodoリストのhtnlに更新する
+2. `route.py`に、フロントエンドのJavaScriptとバックエンドのURLを橋渡しをさせる。
+3. `database.py`ファイルが実際のクエリのためのデータを返すように、データベースに接続する
