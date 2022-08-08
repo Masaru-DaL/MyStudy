@@ -439,8 +439,50 @@ hr {
 1. 現在は静的な状態
 2. ToDoリストとして機能するために動的にしなくてはいけない
 
+#### 5-4. 次に行うことの整理
 :::message
-次に行うこと
 1. ToDoリストテーブルがサーバからの動的タスクをレンダリングするようにする
 2. ボタンを押した時の動作を機能するようにする
 :::
+
+## 6. 動的なhtmlへの更新
+#### 6-1. index.htmlの変更
+```html: index.html
+<tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.task}}</td>
+
+                {% if item.status == "In Progress" %}
+                    <td><button type="button" class="btn btn-outline-warning btn-sm state"
+														data-source="{{item.id}}">{{item.status}}</button></td>
+                {%endif%}
+                {% if item.status == "Todo" %}
+                    <td><button type="button" class="btn btn-outline-secondary btn-sm state"
+														data-source="{{item.id}}">{{item.status}}</button></td>
+                {%endif%}
+                {% if item.status == "Complete" %}
+                    <td><button type="button" class="btn btn-outline-success btn-sm state"
+														data-source="{{item.id}}">{{item.status}}</button></td>
+                {%endif%}
+
+                <td><button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal"
+														data-bs-target="#task-modal" data-source="{{item.id}}"
+														data-content="{{item.task}}"><i class="fa fa-pen fa-1" aria-hidden="true"></i>
+										</button></td>
+
+                <td><button class="btn btn-outline-secondary btn-sm remove" data-source="{{item.id}}"
+														type="button"><i class="fa fa-trash fa-1" aria-hidden="true"></i>
+										</button></td>
+            </tr>
+        {% endfor %}
+</tbody>
+```
+
+1. 動的なToDoリストに対応するために、テーブル本体をjinjaに置き換える
+2. items->itemに渡す
+   1. itemにはID, タスクの説明、状態(Todo, Complate, In Progressのいずれか)を持つものとします。(DBとの連携)
+
+#### 6-2. routes.py
+```python: routes.py
