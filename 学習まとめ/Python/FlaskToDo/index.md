@@ -484,5 +484,110 @@ hr {
 2. items->itemに渡す
    1. itemにはID, タスクの説明、状態(Todo, Complate, In Progressのいずれか)を持つものとします。(DBとの連携)
 
-#### 6-2. routes.py
+#### 6-2. routes.py, database.py の更新
 ```python: routes.py
+@app.route("/")
+def homepage():
+    items = db_helper.fetch_todo()
+    return render_template("index.html", items=items)
+```
+
+```python: database.py
+def fetch_todo():
+    todo_list = [
+			{"id": 1, "task": "Task 1" , "status": "In Progress"},
+			{"id": 2, "task": "Task 2", "status": "Todo"},\
+		]
+    return todo_list
+```
+
+1. `database.py`にtodoリストを返す関数を記述
+2. `routes.py`のhomepage関数
+   1. items変数に①を入れる
+
+:::message
+動的に対応するために、jinjaを使用しています。
+htmlで変数を利用するには、`render_template`の第2引数以降で変数を埋め込むことで使用出来ます。
+`items=items`とすることで、index.htmlの変数で利用出来ます。
+:::
+
+
+## 7. CRUD操作をサポートするルートの追加, JavaScriptの追加
+#### 7-1. ルートの追加(routes.py)
+```python: routes.py
+from flask import render_template, request, jsonify
+from app import app
+from app import database as db_helper
+
+@app.route("/delete/<int:task_id>", method=['POST'])
+def delete(task_id):
+  try:
+    result = {'success': True, 'response': 'Removed task'}
+  except:
+    result = {'success': False, 'response': 'Something went wrong'}
+
+  return jsonify(result)
+
+
+@app.route("/edit/<int:task_id>", method=['POST'])
+def update(task_id):
+  data = request.get_json()
+    print(data)
+  try:
+    if "status" in data:
+      result = {'success': True, 'response': 'Status Updated'}
+    elif "description" in data:
+      result = {'success': True, 'response': 'Task Updated'}
+    else:
+      result = {'success': True, 'response': 'Nothing Updated'}
+  except:
+    result = {'success': False, 'response': Something went wrong}
+
+  return jsonify(result)
+
+
+@app.route("/create", method=['POST'])
+def create():
+  data = request.get_json()
+  result = {'success': True, 'response': 'Done'}
+  return jsonify(result)
+
+
+@app.route("/")
+def homepage():
+  items = db_helper.fetch_todo
+	return render_template("index.html", items=items)
+```
+
+- 例外処理
+try: エラーが発生するかもしれないプログラム
+except: 例外発生時に行いたいプログラム
+※tryとexceptはセットで使用する
+
+- in演算子
+`x in y`
+xがyにあるかどうかを判定して、TrueもしくはFlaseを返す
+
+#### 7-2. JavaScriptを定義してURLを呼び出す
+
+- jQuery
+
+```c: javascript
+$(document).ready(function(){
+  //何かしらの処理
+});
+```
+
+> これは画像などを除いて、HTRL=DOMの読み込みが終わったらfunction()の中の処理(=なにかしらの処理)を実行するという意味です。
+
+- bootstrap modal
+
+```c: javascript
+$('#task-modal').on('show.bs.modal', function (event) {
+    // 何かしらの処理
+  });
+```
+
+> bootstrapに用意されているイベントを使用している
+> 何かしらの処理が実行されたら実行されるイベント
+> [Modal](https://getbootstrap.jp/docs/4.2/components/modal/#events)
