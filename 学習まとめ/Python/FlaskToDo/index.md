@@ -591,3 +591,54 @@ $('#task-modal').on('show.bs.modal', function (event) {
 > bootstrapに用意されているイベントを使用している
 > 何かしらの処理が実行されたら実行されるイベント
 > [Modal](https://getbootstrap.jp/docs/4.2/components/modal/#events)
+
+`const button = $(event.relatedTarget);`
+button = モーダルのトリガー
+
+`const taskID = button.data('source');`
+taskID = データ(ソース)から情報を抽出
+
+`const content = button.data('content');`
+content = データ(コンテント)から情報を抽出
+
+`const modal = $(this);`
+modal = 取得したパラメータを表示
+
+```c: モーダルのタイトルに値を表示する処理
+if (taskID === 'New Task') {
+      modal.find('.modal-title').text(taskID);
+      $('#task-form-display').removeAttr('taskID');
+    } else {
+      modal.find('.modal-title').text('Edit Task ' + taskID);
+      $('#task-form-display').attr('taskID', taskID);
+    }
+```
+
+- .text(テキスト)
+https://api.jquery.com/text/#text2
+> 一致した各要素のコンテンツとして設定するテキスト。
+
+- .find(セレクター)
+https://api.jquery.com/find/#find-selector
+> 要素を照合するセレクタ式を含む文字列
+
+- .removeAttr(属性名)
+https://api.jquery.com/removeattr/
+> 一致した要素のセット内の各要素から属性を削除する
+
+- .attr(属性名)
+https://api.jquery.com/attr/#attr-attributeName
+> 取得する属性の名前
+
+
+```c: フォームコントロールクラスの値を取得する処理
+if (content) {
+      modal.find('.form-control').val(content);
+    } else {
+      modal.find('.form-control').val('');
+    }
+```
+
+- .val()
+https://api.jquery.com/val/#val
+> 一致した要素のセットの最初の要素の現在の値を取得する
