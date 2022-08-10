@@ -512,7 +512,7 @@ htmlで変数を利用するには、`render_template`の第2引数以降で変�
 :::
 
 
-## 7. CRUD操作をサポートするルートの追加, JavaScriptの追加
+## 7. CRUD操作をサポートするルートの追加
 #### 7-1. ルートの追加(routes.py)
 ```python: routes.py
 from flask import render_template, request, jsonify
@@ -568,9 +568,102 @@ except: 例外発生時に行いたいプログラム
 `x in y`
 xがyにあるかどうかを判定して、TrueもしくはFlaseを返す
 
-#### 7-2. JavaScriptを定義してURLを呼び出す
+## 8. routesのURLを呼び出せるように、JavaScriptを定義する
+#### 8-1. modal.js
+```javascript: modal.js
+$(document).ready(function () {
+  $('#task-modal').on('show.bs.modal', function (event) {
+    const button = $(event.relatedTarget);
+    const taskID = button.data('source');
+    const content = button.data('content');
 
+    const modal = $(this);
+
+    if (taskID === 'New Task') {
+      modal.find('.modal-title').text(taskID);
+      $('#task-form-display').removeAttr('taskID');
+    } else {
+      modal.find('.modal-title').text('Edit Task ' + taskID);
+      $('#task-form-display').attr('taskID', taskID);
+    }
+
+    if (content) {
+      modal.find('.form-control').val(content);
+    } else {
+      modal.find('.form-control').val('');
+    }
+  })
+
+  $('#submit-task').click(function (){
+    const tID = $('#task-form-display').attr('taskID');
+    console.log($('#task-modal').find('.form-control').val());
+    $.ajax({
+      type: 'POST',
+      url: tID ? '/edit' + tID : '/create',
+      contentType: 'application/json;charset=UTF-8',
+      data: JSON.stringify({
+        'description': $('#task-modal').find('.form-control').val()
+      }),
+      success: function (res) {
+        console.log(res.response)
+        location.reload();
+      },
+      error:function () {
+        console.log('Error');
+      }
+    });
+  });
+
+  $('.remove').click(function () {
+    const remove = $(this);
+    $.ajax({
+      type: 'POST',
+      url: '/delete' + remove.data('source'),
+      success: function (res) {
+        console.log(res.response)
+        location.reload();
+      },
+      error: function () {
+        console.log('Error');
+      }
+    });
+  });
+
+  $('.state').click(function () {
+    const state = $(this);
+    const tID = state.data('source');
+    let new_state;
+    if (state.text() === "In Progress") {
+      new_state = "Complete";
+    } else if (state.text() === "Complete") {
+      new_state = "Todo";
+    } else if (state.text() === "Todo") {
+      new_state = "In Progress"
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/edit' + tID,
+      contentType: 'application/json;charset=UTF-8',
+      data: JSON.stringify({
+        'status': new_state
+      }),
+      success: function (res) {
+        console.log(res)
+        location.reload();
+      },
+      error: function () {
+        console.log('Error');
+      }
+    });
+  });
+});
+```
+
+#### 8-2. modal.jsの理解
 - jQuery
+- modal
+- Ajax
 
 ```c: javascript
 $(document).ready(function(){
@@ -578,8 +671,9 @@ $(document).ready(function(){
 });
 ```
 
-> これは画像などを除いて、HTRL=DOMの読み込みが終わったらfunction()の中の処理(=なにかしらの処理)を実行するという意味です。
+> これは画像などを除いて、HTML=DOMの読み込みが終わったらfunction()の中の処理(=なにかしらの処理)を実行するという意味
 
+#### 8-3. モーダルを開く前の処理
 - bootstrap modal
 
 ```c: javascript
@@ -642,3 +736,164 @@ if (content) {
 - .val()
 https://api.jquery.com/val/#val
 > 一致した要素のセットの最初の要素の現在の値を取得する
+
+#### 8-4. 各ボタンがクリックされた時の処理
+- submit-task
+  - IDを持つボタン(submit-task)がクリックされると、そのエントリのID(html内のデータソース)が収集される。
+- remove
+  - 削除
+- state
+  - 状態
+
+- Ajaxによる処理
+  - Ajax(他のボタン操作もこれに従う)
+1. 操作が成功した場合(success)、サーバは200を返す
+2. サーバの応答をクライアントコンソールに記録し、ページを更新する
+3. この更新により、Webページがデータベースから再度プルされる
+
+
+## 9. MySQLの操作
+#### 9-1. データベースの作成
+dockerが立ち上がっている状態で、
+`docker compose exec db bash`でデータベースコンテナに入り、`mysql -u root -p` + password(root)でmysqlの操作ができる状態にします。
+
+1. データベースの作成
+`mysql > create database todo;`
+データベース名は任意の名前でOKです。
+
+2. 作成されているか確認
+`mysql > show databases;`
+作成したデータベースがあるのを確認します。
+
+3. データベースの選択
+`mysql > use todo;`
+作成したデータベースを選択した状態になります。
+
+#### 9-2. テーブルの作成
+id, task, statusという3つのフィールドを作成する。
+
+```c:
+CREATE TABLE tasks (
+  id int NOT NULL AUTO_INCREMENT,
+  task varchar(255) NOT NULL,
+  status char(30),
+  PRIMARY KEY (id),
+);
+```
+
+- NOT NULL
+何も入れないことを許可しないようにする
+
+- AUTO_INCREMENT
+1. データ型は整数型
+2. カラムに値が指定されなかった場合、自動的に値を割り当て、その値は1ずつ増加して連番になる
+
+:::message
+つまり、INSERT文でidのカラムに値を必ずしも渡さなくても過去のデータに +1されてインサートされるということ。
+例えば、id1, id20を指定してデータを2つ入れた後にidを指定せずにインサートすると、idが21に割り当てられる。
++ NOTNULLを満たすようにするという役割を持つ。
+:::
+
+- char と varchar
+  - char
+    - 固定長
+    - 指定したバイト数に満たない場合は右側に空白が追加されて、指定バイトぴったりに調整される。
+  - varchar
+    - 可変長
+    - 指定したバイト数を超えることは出来ない
+    - 満たない場合、それに合わせた領域が確保されるため、そのままの長さで格納することが可能
+
+:::message
+- var と varcharの使い分けの例
+char型は、郵便番号や社員番号など、データの桁数が決まっているものに向く。
+varchar型は、氏名や書籍名など、データ桁数が変動する可能性があるものに向く。
+:::
+
+- PRIMARY KEY
+主キーの設定。
+idを主キーに設定している。
+
+`DESC todo;`
+作成したテーブル設計を確認する。
+
+#### 9-3. レコードの追加
+```c:
+INSERT INTO tasks (task, status) VALUES ("task no.1" , "Todo");
+INSERT INTO tasks (task, status) VALUES ("task no.2" , "Todo");
+INSERT INTO tasks (task, status) VALUES ("task no.3" , "Todo");
+```
+
+`INSERT INTO`でレコードを追加します。
+テーブル`tasks`のフィールド`(task, status)`と`("task no.1", "Todo")`が紐づいています。
+
+`select * from tasks`でレコードの追加を確認します。
+
+
+## 10. GCP MySQLへの接続
+:::message alert
+参照サイトがGCPにデプロイするところがゴールになっているので倣いますが、ローカルで確認することをゴールとして進めます。
+:::
+
+#### 10-1. GCPの設定
+プロジェクトのルートフォルダ内に作成します。
+
+```c: app.yaml
+runtime: python38 # or another supported version
+
+instance_class: F1
+
+env_variables:
+  MYSQL_USER: <user_name> # please put in your credentials
+  MYSQL_PASSWORD: <user_pw> # please put in your credentials
+  MYSQL_DB: <database_name> # please put in your credentials
+  MYSQL_HOST: <database_ip> # please put in your credentials
+
+handlers:
+# Matches requests to /images/... to files in static/images/...
+- url: /img
+  static_dir: static/img
+
+- url: /script
+  static_dir: static/script
+
+- url: /styles
+  static_dir: static/styles
+```
+
+#### 10-2. __init__.py
+```python: __init__.py
+import os
+import sqlalchemy
+from yaml import load, Loader
+from flask import Flask
+
+def init_connect_engine():
+    if os.environ.get('GAE_ENV') != 'standard':
+        variables = load(open("app.yaml"), Loader=Loader)
+        env_variables = variables['env_variables']
+        for var in env_variables:
+            os.environ[var] = env_variables[var]
+
+    pool = sqlalchemy.create_engine(
+            sqlalchemy.engine.url.URL(
+                drivername="mysql+pymysql",
+                username=os.environ.get('MYSQL_USER'), #username
+                password=os.environ.get('MYSQL_PASSWORD'), #user password
+                database=os.environ.get('MYSQL_DB'), #database name
+                host=os.environ.get('MYSQL_HOST') #ip
+            )
+        )
+    return pool
+
+app = Flask(__name__)
+db = init_connect_engine()
+
+from app import routes
+```
+
+1. `init_connect_engine()`
+データベースへの接続を開始する場所で呼び出される関数の宣言
+
+2. `os.environ.get('GAE_ENV') != 'standard'`
+サーバがGCPインスタンス、またはローカルで実行されているかを検出するために使用される。
+
