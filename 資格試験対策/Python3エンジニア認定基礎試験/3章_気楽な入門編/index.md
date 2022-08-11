@@ -137,3 +137,43 @@ raw文字列で使用する`r`, `R`はraw文字列を指定するためのリテ
 - `*`を用いて文字列を繰り返す
 `>>> 'hello' * 3`
 'hellohellohello'
+
+#### 2-8. n文字目の文字を取得
+index番号はリストと同様
+
+`>>> 'abcdefg'[0]`
+'a'
+`>>> 'abcdefg'[1]`
+'b'
+`>>> 'abcdefg'[-1]`
+'g'
+
+:::message alert
+範囲外の文字を取得することは出来ない。
+`>>> 'abcdefg'[10]`
+> Traceback (most recent call last):
+>   File "<stdin>", line 1, in <module>
+> IndexError: string index out of range
+:::
+
+#### 2-9. 複数文字列の取得
+1. `'abcdefg'[始まり:終わり]`
+
+`>>> 'abcdefg'[0:2]`
+'ab'
+`>>> 'abcdefg'[0:3]`
+'abc'
+`>>> 'abcdefg'[1:3]` (1番目から3番目の1個手前まで)
+'bc'
+
+2. 始点や終点を省略した場合、以降全部となる
+
+`>>> 'abcdefg'[0:]`
+'abcdefg'
+`>>> 'abcdefg'[1:]`
+'bcdefg'
+`>>> 'abcdefg'[:7]`(範囲外を指定してもエラーにはならない)
+'abcdefg'
+`>>> 'abcdefg'[5:7]`
+'fg'
+
