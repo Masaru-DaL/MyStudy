@@ -54,3 +54,28 @@
 - 小数点第一位で四捨五入する場合
 `>>> round(3.14, 1)`
 -> 3.1
+
+## 2. 文字列の取り扱い
+#### 2-1. 文字列の宣言
+シングルクオーテーション or ダブルクオーテーションで囲む
+`>>> 'hello'` or `>>> "hello"`
+
+#### 2-2. クオーテーションを文字列ないで扱う
+\ or ¥ で**エスケープ**する
+`>>> 'dosen\'t'` -> "dosen't"
+
+違うクオーテーションを利用する
+`>>> "dosen't"` -> "dosen't"
+
+#### 2-3. 特殊文字を使った改行, printで出力
+改行 -> `\n`
+改行を行いたい場合は`print()`を使用する。
+
+`>>> 'First Line.\nSecond Line.'`
+-> 'First Line.\nSecond Line.'
+
+`>>> print('First Line.\nSecond Line.')`
+->
+First Line.
+Second Line.
+
