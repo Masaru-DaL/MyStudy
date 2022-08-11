@@ -177,3 +177,24 @@ index番号はリストと同様
 `>>> 'abcdefg'[5:7]`
 'fg'
 
+#### 2-10.文字列の長さを取得
+`len()`関数で、文字列の長さを取得
+
+`>>> len('abc')`
+3
+`>>> len('abcdef')`
+6
+
+#### 2-11. 文字列はn文字目を指定して変更は出来ない
+1. 変数`moji`に文字列を代入
+2. 文字列の0番目を`h`に変更するとする
+
+`>>> moji = 'abcdefg'`
+`>>> moji[0] = 'h'`
+> Traceback (most recent call last):
+>   File "<stdin>", line 1, in <module>
+> TypeError: 'str' object does not support item assignment
+
+この事を**変更不能体** または**immutable** という。
+
+
