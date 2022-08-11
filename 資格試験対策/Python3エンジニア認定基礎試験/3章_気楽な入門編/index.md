@@ -79,3 +79,13 @@
 First Line.
 Second Line.
 
+#### 2-3. 特殊文字を使ったタブ, printで出力
+タブ(インデント) -> `\t`
+同じく`print()`を使用する。
+
+`>>> 'abc\tdef'`
+-> 'abc\tdef'
+
+`>>> print('abc\tdef')`
+->
+abc     def
