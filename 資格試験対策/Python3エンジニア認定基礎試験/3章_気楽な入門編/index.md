@@ -110,4 +110,16 @@ raw文字列で使用する`r`, `R`はraw文字列を指定するためのリテ
 `>>> r'abc\tdef'`
 -> 'abc\\tdef'
 
-#### 2-5. 
+#### 2-5. 複数行の文字列宣言
+トリプルクオーテーション(シングルもしくはダブル)を使用する
+
+```c
+>>> '''
+... First Line.
+... Second Line.
+... Third Line.
+... '''
+```
+-> '\nFirst Line.\nSecond Line.\nThird Line.\n'
+
+  
