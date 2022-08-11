@@ -72,10 +72,9 @@
 改行を行いたい場合は`print()`を使用する。
 
 `>>> 'First Line.\nSecond Line.'`
--> 'First Line.\nSecond Line.'
+'First Line.\nSecond Line.'
 
 `>>> print('First Line.\nSecond Line.')`
-->
 First Line.
 Second Line.
 
@@ -84,10 +83,9 @@ Second Line.
 同じく`print()`を使用する。
 
 `>>> 'abc\tdef'`
--> 'abc\tdef'
+'abc\tdef'
 
 `>>> print('abc\tdef')`
-->
 abc     def
 
 #### 2-4. エスケープ文字そのものを表示したい
@@ -101,14 +99,14 @@ raw文字列で使用する`r`, `R`はraw文字列を指定するためのリテ
 
 1. エスケープ文字をエスケープする場合
 `>>> 'abc\\tdef'`
--> 'abc\tdef'
+'abc\tdef'
 
-2. raw文字列として宣言
+1. raw文字列として宣言
 > raw文字列を使用すると`\`を1つの文字として扱うため、`\\`のように記述する必要がなくなる。
 > 文字列の前に`r`または`R`を記述する
 
 `>>> r'abc\tdef'`
--> 'abc\\tdef'
+'abc\\tdef'
 
 #### 2-5. 複数行の文字列宣言
 トリプルクオーテーション(シングルもしくはダブル)を使用する
@@ -120,7 +118,7 @@ raw文字列で使用する`r`, `R`はraw文字列を指定するためのリテ
 ... Third Line.
 ... '''
 ```
--> '\nFirst Line.\nSecond Line.\nThird Line.\n'
+'\nFirst Line.\nSecond Line.\nThird Line.\n'
 
 #### 2-6. 長い文字列の宣言
 `()`を使用して、何行かに分けて記述することが出来る
@@ -129,4 +127,13 @@ raw文字列で使用する`r`, `R`はraw文字列を指定するためのリテ
 >>> ('長い文字列'
 ... 'をこんな風に宣言できます。')
 ```
--> '長い文字列をこんな風に宣言できます。'
+'長い文字列をこんな風に宣言できます。'
+
+#### 2-7. 文字列の結合と繰り返し
+- `+`を用いて結合(結合部分の空白を1文字加える)
+`>>> 'hello' + ' ' + 'world'`
+'hello world'
+
+- `*`を用いて文字列を繰り返す
+`>>> 'hello' * 3`
+'hellohellohello'
