@@ -1,5 +1,5 @@
-def print_hello():
-  print("hello")
+def do_nothing():
+  pass
 
 if __name__ == "__main__":
-    print_hello()
+    do_nothing()

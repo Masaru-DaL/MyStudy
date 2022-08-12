@@ -398,4 +398,26 @@ if __name__ == "__main__":
 - 処理に名前を付けて、再利用しやすくする
 - 後で見返す時、他の人が見た時にわかりやすい関数名を書くことが重要
 
+関数を実行すると`hello`と出力される関数名を`print_hello`と付ける。
 
+```python: def
+def print_hello():
+  print("hello")
+
+if __name__ == "__main__":
+    print_hello()
+```
+hello
+
+#### 6-2. pass
+- 後で処理を書きたい時の仮置きに使う
+何も実行されない事を利用して、一時的にエラーを起こさないように仮置きすることの使用が多い
+
+```python: pass(def)
+def do_nothing():
+  pass
+
+if __name__ == "__main__":
+    do_nothing()
+```
+何も実行されない。
