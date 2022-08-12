@@ -229,5 +229,142 @@ if __name__ == "__main__":
 
 ## 4. rangeとcontinue
 #### 4-1. range
-連続した数字を取得することが出来る
+:::message alert
+rangeは指定した数字の1個前までしか取得出来ない、という所を覚えておく必要がある。
+indexが0から始まる点と合わせて意識しておくと安心。
+:::
 
+連続した数字を取得することが出来る
+1. 例えば、`for i in range(5):`とすると5回繰り返す。
+
+```python: range
+def main():
+  for i in range(5):
+    print(i)
+
+if __name__ == "__main__":
+    main()
+```
+0
+1
+2
+3
+4
+
+2. 連続した数字を取得(0~)
+0から20までの数字から、5刻みで数字を取得する
+
+```python: range
+def main():
+  for i in range(0, 20, 5):
+    print(i)
+
+if __name__ == "__main__":
+    main()
+```
+0
+5
+10
+15
+
+3. 連続した数字を取得(not0~)
+10から20までの数字から、2刻みで数字を取得する
+
+```python: range
+def main():
+  for i in range(10, 20, 2):
+    print(i)
+
+if __name__ == "__main__":
+    main()
+```
+10
+12
+14
+16
+18
+
+3. 連続した数字を取得(-から始める)
+-10から5までの数字から、3刻みで数字を取得する
+
+```python: range
+def main():
+  for i in range(-10, 5, 3):
+    print(i)
+
+if __name__ == "__main__":
+    main()
+```
+-10
+-7
+-4
+-1
+2
+
+#### 4-2. continue
+- 繰り返し処理をスキップして、次に移る
+
+1. 変数iが3の時だけ処理をスキップする
+処理を中断して以降を行わないのではなく、あくまでも条件を満たした時の処理だけをスキップする
+
+```python: continue(range)
+def main():
+  for i in range(5):
+    if i == 3:
+      continue
+    print(i)
+
+if __name__ == "__main__":
+    main()
+```
+0
+1
+2
+4
+
+
+## 5. for, break, else
+#### 5-1. break
+- 繰り返し処理を中断させる
+iが5になったらfor文を中断させる
+```python: break(for)
+def main():
+  for i in range(10):
+    if i == 5:
+      break
+    print(i)
+
+if __name__ == "__main__":
+    main()
+```
+0
+1
+2
+3
+4
+
+#### 5-2. for文終了後に実行する節else
+正常に終了した場合にのみ実行されるfor文の中で使用出来るelse句
+0~9まで出力され、for文が終了した後にelse句が実行される。
+
+```python: else(for)
+def main():
+  for i in range(10):
+    print(i)
+  else:
+    print("最後まで繰り返しました")
+
+if __name__ == "__main__":
+    main()
+```
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+最後まで繰り返しました
