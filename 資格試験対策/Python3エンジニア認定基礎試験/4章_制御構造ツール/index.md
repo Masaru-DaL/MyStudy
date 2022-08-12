@@ -421,3 +421,110 @@ if __name__ == "__main__":
     do_nothing()
 ```
 何も実行されない。
+
+
+## 7. 引数, キーワード引数
+#### 7-1. 引数
+- 関数に情報を与える
+`print_something`の引数に`something`を渡し、この引数は関数を実行する時に指定する引数となる。
+実行する際の引数に`"apple"`を指定する。
+
+```python: def
+def print_something(something):
+  print("hello", something)
+
+print_something("apple")
+```
+hello apple
+
+#### 7-2. 引数: 複数の引数を与える
+2つの引数を足し算する
+
+```python: def
+def plus_a_b(a, b):
+  print(a + b)
+
+plus_a_b(10, 20)
+```
+30
+
+#### 7-3. 引数: デフォルト値を設定
+- 接尾辞を付ける
+`add_suffix`の第2引数に`"xxx"`という文字列をデフォルト値として代入する
+実行の引数には`"hello"`だけ指定する
+`"hello"` + `suffix(デフォルト値)`
+
+```python: def
+def add_suffix(text, suffix = "xxx"):
+  print(text + suffix)
+
+add_suffix("hello")
+```
+helloxxx
+
+#### 7-4. キーワード引数
+- 引数に与える時に名前を付ける
+関数の第2引数にデフォルト値が代入されている
+実行する時に、第2引数に新たに値を指定する事でデフォルト値を更新する
+
+```python: def
+def add_suffix(text, suffix = "xxx"):
+  print(text + suffix)
+
+add_suffix("hello", suffix = "yyy")
+```
+helloyyy
+
+`suffix = "yyy"`と名前を付けて関数を呼び出す事を**キーワード引数**と呼ぶ。
+
+#### 7-5. 位置引数
+引数の値だけ指定して関数を呼び出す。
+`[関数名]("hello")`の`"hello"`が位置引数
+
+:::messege
+位置引数とキーワード引数の違いは、関数を実行する時の引数の渡し方。
+位置引数は引数の値だけ書く。
+キーワード引数はhoge=fugaのように書く。
+:::
+
+#### 7-6. 可変の引数を与える
+`*args`がタプル、`**kwargs`が辞書型として受け取る
+
+1. 関数を定義する
+
+```python: def
+def kansu(a, *args, **kwargs):
+  print(a, type(a))
+  print(args, type(args))
+  print(kwargs, type(kwargs))
+```
+
+2. 第一引数の`a`を確認する
+第一引数に値を渡す
+
+`kansu(1)`
+1 <class 'int'>
+() <class 'tuple'>
+{} <class 'dict'>
+`a`に1が入り、int型である事が分かる。
+
+
+`kansu("a")`
+a <class 'str'>
+() <class 'tuple'>
+{} <class 'dict'>
+`a`にaが入り、文字列型である事が分かる。
+
+3. 複数の引数を指定する(tuple)
+`kansu(1, 2, 3, 4)`
+1 <class 'int'>
+(2, 3, 4) <class 'tuple'>
+{} <class 'dict'>
+`a`に1が入り、2, 3, 4はタプルとなる。
+
+a <class 'str'>
+('b', 'c', 'd') <class 'tuple'>
+{} <class 'dict'>
+`a`に文字列aが入り、b, c, dはタプルとなる。
+
+4.

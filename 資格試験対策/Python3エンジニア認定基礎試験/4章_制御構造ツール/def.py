@@ -1,5 +1,6 @@
-def do_nothing():
-  pass
+def kansu(a, *args, **kwargs):
+  print(a, type(a))
+  print(args, type(args))
+  print(kwargs, type(kwargs))
 
-if __name__ == "__main__":
-    do_nothing()
+kansu("a", "b", "c", "d")
