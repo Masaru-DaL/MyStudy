@@ -1,37 +1,39 @@
 # 4章_制御構造ツール
+出題数 9問
+
 ## 1. if文
 - もし ○○ なら ×× する
 
-1. もしaが1ならhelloと表示し、もしaが2ならworldと表示する
+#### 1-1. もしaが1ならhelloと表示し、もしaが2ならworldと表示する
 
-```c:
+```python: if
 if a == 1:
   print("hello")
 if a == 2:
   print("world")
 ```
 
-2. もしaが1ならhelloと表示し、もしbが10ならPythonと表示する
+#### 1-2. もしaが1ならhelloと表示し、もしbが10ならPythonと表示する
 
-```c:
+```python: if
 if a == 1:
   print("hello")
 if b == 10:
   print("Python")
 ```
 
-3. もしaがhelloならworldと表示し、もしaがworldならhelloと表示する
+#### 1-3. もしaがhelloならworldと表示し、もしaがworldならhelloと表示する
 
-```c:
+```python: if
 if a == "hello":
   print("world")
 if a == "world":
   print("hello")
 ```
 
-4. もしaが10以下なら小さいと表示し、もしaが100以下なら中ぐらいと表示する
+#### 1-4. もしaが10以下なら小さいと表示し、もしaが100以下なら中ぐらいと表示する
 
-```c:
+```python: if
 if a <= 10:
   print("小さい")
 if a <= 100:
@@ -41,7 +43,7 @@ if a <= 100:
 これは誤りです。
 実際に実行してみましょう。
 
-```c:
+```python: if
 def main():
   a = 5
   if a <= 10:
@@ -62,8 +64,170 @@ if __name__ == "__main__":
 
 100以下の時の処理を`elif a <= 100`か`if 10 < a and a <= 100:`に書き換える事で期待通りにプログラムが処理されます。
 
-5. もしaが10以下なら小さいと表示し、100以下なら中ぐらい、100より大きいなら大きいと表示する
+#### 1-5. もしaが10以下なら小さいと表示し、100以下なら中ぐらい、100より大きいなら大きいと表示する
 
 4のコードに、
 `else:`か`elif a > 100:`を追加します。
 どちらも`print("大きい")`と続けます。
+
+
+## 2. for文
+- 繰り返しの処理をする(回数を伴う)
+  - 深呼吸を**10回**する
+  - 戸締りの確認を**2回**する
+  - 手を**3回**洗う
+  - など
+
+#### 2-1. リスト(数字)
+```python: for
+def main():
+  for i in [1, 2, 3]:
+    print(i)
+
+if __name__ == "__main__":
+    main()
+```
+1
+2
+3
+
+1. i = 1, print(i)
+2. i = 2, print(i)
+3. i = 3, print(i)
+リストに格納された個数分繰り返される。
+
+#### 2-2. リスト(文字列)
+```python: for
+def main():
+  for i in ["Python", "R", "SQL"]:
+    print(i)
+
+if __name__ == "__main__":
+    main()
+```
+Python
+R
+SQL
+
+#### 2-3. 変数の変更、文字列の長さも表示
+iをwordに変更し、print()での出力に変数word+文字列の長さを出力させる
+
+```python: for
+def main():
+  for word in ["Python", "R", "SQL"]:
+    print(word, len(word))
+
+if __name__ == "__main__":
+    main()
+```
+Python 6
+R 1
+SQL 3
+
+## 3. while, break
+- 条件を満たす限り、処理を繰り返す
+  - 部屋がキレイになる**まで**、掃除を**続ける**
+  - ラスボスを倒す**まで**、ゲームを**続ける**
+  - 5kg減量できる**まで**、ダイエットを**続ける**
+
+**条件に何を入れるかが重要**
+
+#### 3-1. whileの条件: i < 10
+変数iの初期値が0、iに1ずつ足しながら10より小さい間は繰り返す
+
+```python: while
+def main():
+  i = 0
+  while i < 10:
+    print(i)
+    i = i + 1
+
+if __name__ == "__main__":
+    main()
+```
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+#### 3-2. whileの条件: len(moji) < 5
+変数mojiの初期値はa、mojiにaを1つずつ足しながら文字列の長さが5より小さい間は繰り返す
+
+```python: while
+def main():
+  moji = "a"
+  while len(moji) < 5:
+    print(moji)
+    moji = moji + "a"
+
+if __name__ == "__main__":
+    main()
+```
+a
+aa
+aaa
+aaaa
+
+#### 3-3. break
+- 繰り返し処理を中断する
+  - ラスボスを倒すまで、ゲームを続ける。ただし、親に注意されたら**中断(break)**
+
+1. 変数iが3の倍数になったら中断
+(3の倍数、つまりiを3で割った余りが0ということ)
+
+```python: break(while)
+def main():
+  i = 0
+  while i < 10:
+    print(i)
+    i += 1
+    if i % 3 == 0:
+      break
+
+if __name__ == "__main__":
+    main()
+```
+0
+1
+2
+
+:::message
+0, 1, 2と出力して+1する度にif文で判定されるが、3の倍数でない場合はbreakの処理はされない。
+iが3の倍数になってif文に判定され、3の倍数ということを満たした時にbreakの処理、つまり中断される。
+:::
+
+2. 変数iが5の倍数になったら中断
+iの初期値が10
+iが100より小さい時には繰り返す
+iが5の倍数になったら中断する
+なお、printの出力で5で割った時の数も同時に出力する
+
+```python: break(while)
+def main():
+  i = 10
+  while i < 100:
+    print(i, i % 5)
+    i += 1
+    if i % 5 == 0:
+      break
+
+if __name__ == "__main__":
+    main()
+```
+10 0
+11 1
+12 2
+13 3
+14 4
+
+
+## 4. rangeとcontinue
+#### 4-1. range
+連続した数字を取得することが出来る
+
