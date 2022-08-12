@@ -563,3 +563,22 @@ a <class 'str'>
 
 
 ## 8. lambda(ラムダ)式
+- 無名関数(名前のない関数)を定義する
+
+```python: def
+def plus_one(x):
+  return x + 1
+
+print(plus_one(10))
+```
+11
+
+```python: lambda
+plus_one = lambda x: x+1
+
+print(plus_one(10))
+```
+11
+
+**上記2つは同じ意味(結果)**
+
