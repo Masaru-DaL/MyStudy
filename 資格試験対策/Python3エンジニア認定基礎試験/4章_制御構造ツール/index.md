@@ -507,13 +507,14 @@ def kansu(a, *args, **kwargs):
 () <class 'tuple'>
 {} <class 'dict'>
 `a`に1が入り、int型である事が分かる。
-
+タプルと辞書型には何も入らない。
 
 `kansu("a")`
 a <class 'str'>
 () <class 'tuple'>
 {} <class 'dict'>
 `a`にaが入り、文字列型である事が分かる。
+タプルと辞書型には何も入らない。
 
 3. 複数の引数を指定する(tuple)
 `kansu(1, 2, 3, 4)`
@@ -521,10 +522,44 @@ a <class 'str'>
 (2, 3, 4) <class 'tuple'>
 {} <class 'dict'>
 `a`に1が入り、2, 3, 4はタプルとなる。
+辞書型には何も入らない。
 
 a <class 'str'>
 ('b', 'c', 'd') <class 'tuple'>
 {} <class 'dict'>
 `a`に文字列aが入り、b, c, dはタプルとなる。
+辞書型には何も入らない。
 
 4. 複数の引数を指定する(dict)
+`kansu(1, x="x", y="y", z="z")`
+1 <class 'int'>
+() <class 'tuple'>
+{'x': 'x', 'y': 'y', 'z': 'z'} <class 'dict'>
+`a`に1が入り、x, y, z = x, y, zがそれぞれ辞書型として入る。
+タプルには何も入らない。
+
+`kansu(1, x=10, y=20, z=30)`
+1 <class 'int'>
+() <class 'tuple'>
+{'x': 10, 'y': 20, 'z': 30} <class 'dict'>
+`a`に1が入り、x, y, z = 10, 20, 30がそれぞれ辞書型として入る。
+タプルには何も入らない。
+
+5. それぞれを組み合わせる
+`kansu(1, 2, 3, 4, x=10, y=20, z=30,)`
+1 <class 'int'>
+(2, 3, 4) <class 'tuple'>
+{'x': 10, 'y': 20, 'z': 30} <class 'dict'>
+`a`には1が入り、2, 3, 4がタプル、x, y, z = 10, 20, 30が辞書型として入る。
+
+:::message alert
+ちなみに、
+`kansu(1, x=10, y=20, z=30, 2, 3, 4)`
+このように引数を渡すとエラーが起こる。
+> positional argument follows keyword argument
+> 位置指定引数はキーワード引数に続くという意味
+位置引数とキーワード引数を合わせて使用する場合、**キーワード引数の後に位置引数を書けない**というルールになっている為に起こる。
+:::
+
+
+## 8. lambda(ラムダ)式

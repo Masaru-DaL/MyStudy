@@ -3,4 +3,4 @@ def kansu(a, *args, **kwargs):
   print(args, type(args))
   print(kwargs, type(kwargs))
 
-kansu("a", "b", "c", "d")
+kansu(1, 2, 3, 4, x=10, y=20, z=30,)
