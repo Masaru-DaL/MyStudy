@@ -1,8 +1,4 @@
-def square(x):
-  result = x ** 2
-  return result
+b = [[1,2], [2,1], [0,3]]
+b.sort(key = lambda x: x[0])
 
-a = [1, 2, 3, 4, 5]
-
-result = map(square, a)
-print(result)
+print(b)
