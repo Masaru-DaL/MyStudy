@@ -1,4 +1,4 @@
-b = [[1,2], [2,1], [0,3]]
-b.sort(key = lambda x: x[0])
+a = [1, 2, 3, 4, 5]
+match = list(filter(lambda x: x > 3, a))
 
-print(b)
+print(match)

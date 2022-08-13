@@ -653,3 +653,157 @@ print(b)
 `b.sort(key = lambda x: x[0])`
 [[0, 3], [1, 2], [2, 1]]
 もちろん、keyを0(1番目)に指定すれば先頭の要素順にソート出来ます。
+
+#### 8-3. lambda式の使い所-3
+- 条件に合致する要素を抽出する
+リスト`a`から3より大きい要素を抜き出す。
+
+```python: filter
+a = [1, 2, 3, 4, 5]
+match = list(filter(lambda x: x>3, a))
+
+print(match)
+```
+[4, 5]
+
+:::message
+filter関数とは
+> filter(f1, iterable) 関数は、第二引数に渡したコレクション (iterable) オブジェクトの要素を、 第一引数の関数 f1 にひとつずつ渡して評価し、True となる要素だけからなるコレクションを作成します。
+:::
+
+
+## 9. docstring
+#### 9-1. docstringとは？
+- ドキュメントをコード内に残す記法
+- 未来の自分や、同僚のための情報になる
+- 書き方
+  - ダブルクオーテーションを3つ書き、その中にコメントを記述する
+  - 書き方にいくつかの流派がある
+
+#### 9-2. Google流docstring
+1. VScodeで簡単に利用するための拡張機能を入れる。
+`autoDocstring: VSCode Python Docstring Generator`
+をインストールする。
+
+2. pythonファイル内でダブルクオーテーションを3つ書くと、`Generate Docstring`という候補が出るのでエンターを押すと補完する事が出来る。
+
+```python: docstring(google)
+"""_summary_
+
+  Args:
+      x (_type_): _description_
+
+  Returns:
+      _type_: _description_
+  """
+```
+
+- summary section
+  - 説明のタイトル
+
+- Args section
+  - 引数の名前、型、optional(省略可能)かどうかなど、引数の説明を記載するセクション
+
+- Returns section
+  - return文を使用した関数の戻り値を記載するセクション
+
+:::message
+補完で出てくるのは上の3つだが、Googleスタイルでは以下の用途別に定義されたセクションがある。
+Attributes、 Args、Returns、Yields、Raises、Examples、Note、Todo
+:::
+
+
+## 10. 関数アノテーション
+#### 10-1. 関数アノテーションとは
+**関数注釈**とも呼ばれる。
+任意で使うことが出来るオプションで、引数や戻り値に入るべき型を記述できる。
+
+```python: Annotations
+def plus_one(x: int) -> int:
+  return x + 1
+```
+
+```python: Comments
+def plus_one(x: "x is int") -> int:
+  return x + 1
+```
+
+:::message
+実装の参考にはなるが、挙動の変化はない。
+型以外にもコメントを書く事が出来る。
+:::
+
+#### 10-2. 型を確認してみる。
+`関数名.__annotations__` で型を確認出来る。
+
+```python: annotations
+def plus_one(x: int) -> int:
+  return x + 1
+
+print(plus_one(1))
+print(plus_one.__annotations__)
+```
+2
+{'x': <class 'int'>, 'return': <class 'int'>}
+
+引数xがint, 戻り値もintとなっている事が確認出来ます。
+
+#### 10-3. コメントの方も確認してみる
+
+```python: comments
+def plus_one(x: "x is int") -> int:
+  return x + 1
+
+print(plus_one(1))
+print(plus_one.__annotations__)
+```
+2
+{'x': 'x is int', 'return': <class 'int'>}
+
+
+## 11. PEP8
+#### 11-1. PEPとは
+- Python Enhancement Proposal(パイソン エンハンスメント プロポーサル)
+- Python機能拡張提案
+- Pythonに関する機能を議論した結果がまとめられている資料のこと
+
+#### 11-2. PEP8
+- Pythonのコーディング規約が書かれている
+  - コードは書くよりも読まれる方が多い
+  - 読みやすいコードを書くためのノウハウが書かれている
+
+#### 11-3. コーディング規約の例
+- インデントはスペース4つ
+- コロンやセミコロンは直前にスペース不要
+- i = i + 1のようにイコールの前後はスペースを入れる
+- など
+
+#### 11-4. black
+- PEP8を全て覚えるのは手間
+- 自動で読みやすくしたい
+- コードレビューでの指摘は高コスト
+
+**規約が非常に多い**ことから上記の問題がある。
+そこで、blackというソフトウェアを用いると、**コーディング規約に沿うように自動で変換**してくれる。
+
+#### 11-5. blackの設定(VScode)
+1. install
+ターミナルでpipを用いて簡単にインストール出来る。
+`python3 -m pip install black`
+
+2. VScodeの自動フォーマット設定
+setting.jsonに以下を設定する
+
+```json: setting.json
+{
+  // Python コードを black でフォーマットする設定
+  // （Python 拡張をインストールして pip install black しておく）
+  "python.formatting.provider": "black",
+  "[python]": {
+    "editor.defaultFormatter": null, // Prettier を使わないようにする
+    "editor.formatOnSave": true // ファイル保存時に自動フォーマット
+  },
+
+  // ...
+}
+```
