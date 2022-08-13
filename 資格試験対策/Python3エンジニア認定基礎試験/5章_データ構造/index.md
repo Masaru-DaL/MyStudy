@@ -440,3 +440,91 @@ b = {1, 4}
 print(a ^ b)
 ```
 {2, 3, 4}
+
+
+## 7. 辞書型 dict と落穂拾い
+#### 7-1. 辞書型とは
+- 辞書型(ディクショナリ)
+- キーとバリューが2つでセット
+  - キーは入力、バリューは出力
+  - キーとバリューの1対1の関係を作る
+    - キーを与えるとバリューが出る
+    - [key] -> [value]
+
+#### 7-2. 辞書型の使い方
+**必ず、key->valueの順に指定する**
+1. key:valueを1:1のセットにして宣言する
+2. 入力(key)を与える
+3. 出力(value)が出る
+
+```python: dictionary
+data = {"key": "value"}
+print(data["key"])
+```
+value
+
+#### 7-3. キーでループ-1
+1. 辞書型に入っている回数分ループする
+2. ループする毎にkeyとそれに対応したvalueを出力する
+
+```python: dictionary(for)
+data = {
+  "key": "value",
+  "key2": "value2",
+  "key3": "value3",
+}
+
+for key in data:
+    print(key, data[key])
+```
+key value
+key2 value2
+key3 value3
+
+#### 7-4. キーでループ-2
+`items()`を用いる。
+items()とは、各要素のキーkeyと値valueに対してforループ処理を行えるメソッドのこと
+
+```python: dictionary(items)
+data = {
+    "key": "value",
+    "key2": "value2",
+    "key3": "value3",
+}
+
+for key, value in data.items():
+    print(key, value)
+```
+key value
+key2 value2
+key3 value3
+
+#### 7-5. キーの削除
+- `del`でkeyを指定するとそれに対応したvalueも削除される。
+
+```python: dictionary(del)
+data = {
+    "key": "value",
+    "key2": "value2",
+    "key3": "value3",
+}
+
+del data["key"]
+print(data)
+
+del data["key3"]
+print(data)
+```
+{'key2': 'value2', 'key3': 'value3'}
+{'key2': 'value2'}
+
+#### 7-6. 辞書型のデータを一度に作る時
+`dict`型のコンストラクタである`dict()`を使用すると、辞書を作成することができる。
+`dict()`の引数にkey, valueを指定する。
+
+```python:dictionary(dict)
+data = dict([("key", "value"), ("key2", "value2"), ("key3", "value3")])
+
+print(data)
+```
+{'key': 'value', 'key2': 'value2', 'key3': 'value3'}
