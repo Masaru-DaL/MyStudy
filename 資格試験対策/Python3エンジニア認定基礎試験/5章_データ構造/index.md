@@ -217,3 +217,130 @@ print(list_a)
 [100, 2, 3]
 [1, 2, 3]
 無事、別々の値が出力されました。
+
+
+## 2. キュー
+#### 2-1. キューとは
+- First in First out
+- 先に入れたデータを先に出す
+
+#### 2-2. キューの使い方
+`from collections import deque`
+> `collections`モジュールから`deque`というクラスをインポートすると使えるようになります。
+
+```python: que
+from collections import deque
+
+queue = deque(["hello", "world"])
+queue.append("Python")
+print(queue)
+
+print(queue.popleft())
+print(queue)
+```
+deque(['hello', 'world', 'Python'])
+hello
+deque(['world', 'Python'])
+
+1. `queue = deque(["hello", "world"])`で`queue`にデータを2つ入れます。
+2. `append()`でデータを1つ追加します。
+3. `popleft()`とすると、データが取り出せます。一番最初に入れた`hello`が取り出されているのが分かります。
+
+
+## 3. リスト内包表記
+#### 3-1. リスト内包表記とは
+- Python独特の書き方
+- for文の特殊パターン
+  - 短い文字数で記述できる
+  - パフォーマンスの向上が見込める
+  - ※python初学者には読みにくい
+
+#### 3-2. for文で書いた場合
+- `data`に0~9を1つずつ追加する
+1. 通常の書き方で書いた場合
+
+```python: for(normal)
+data = [] # 空のリストを宣言
+for i in range(10):
+  data.append(i)
+print(data)
+```
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+2. リスト内包表記で書いた場合
+0~9を持つリストを生成する
+
+```python: for(list comprehension)
+data = [i for i in range(10)]
+print(data)
+```
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+シンプルで短いコードで表現出来る。
+
+#### 3-3. for文からリスト内包表記への書き換え方
+```python:
+data = []  # 空のリストを宣言
+for i in range(10):
+    data.append(i)
+
+# step1(空のリストを宣言)
+data = []
+
+# step2(for i in ~をリスト内に持ってくる)
+data = [for i in range(10)]
+
+# step3(追加する値iを先頭に書く)
+data = [i for i in range(10)]
+```
+
+#### 3-4. リスト内包表記の読み解き方
+- 書き換え方と手順は変わらない。
+`data = [i for i in range(10)]` を読み解く。
+
+1. リストであることに注目する
+`data = []`
+
+2. ループに注目
+`for i in range(10)`
+
+3. 取り出すデータに注目
+`i`
+※この`i`の部分は「式」と考えた方が良さそうです。
+
+
+## 4. del
+#### 4-1. delとは
+- データを削除する
+- popとの違いは、データを返さない
+
+```python: del
+list_num = [1, 2, 3]
+
+del list_num[0] # index0を削除 -> 1を削除
+print(list_num)
+```
+[2, 3]
+
+#### 4-2. リスト内を全部削除する(== clear)
+- clearと同じ挙動
+- スライシングを使う
+
+```python: del
+list_num = [1, 2, 3]
+del list_num[:]
+print(list_num)
+```
+[]
+
+:::message alert
+`del list_num`とすると、`list_num`自体が削除されてしまうので、`NameError: name 'list_num' is not defined`のエラーが出力されます。
+
+`del`と使うとデータへアクセスする事が出来なくなるが、直前で宣言したデータを解放するわけではない。
+pythonのメモリ管理は自動で行われるため、delを用いてメモリを節約するといった事は必要ない。
+`pop`や`clear`というリストに付随するメソッドで対応が可能。
+:::
+
+
+## 5. タプル
+#### 5-1. タプルとは
+
