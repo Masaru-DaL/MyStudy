@@ -1,3 +1,8 @@
-plus_one = lambda x: x+1
+def square(x):
+  result = x ** 2
+  return result
 
-print(plus_one(10))
+a = [1, 2, 3, 4, 5]
+
+result = map(square, a)
+print(result)
