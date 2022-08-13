@@ -787,23 +787,4 @@ print(plus_one.__annotations__)
 そこで、blackというソフトウェアを用いると、**コーディング規約に沿うように自動で変換**してくれる。
 
 #### 11-5. blackの設定(VScode)
-1. install
-ターミナルでpipを用いて簡単にインストール出来る。
-`python3 -m pip install black`
-
-2. VScodeの自動フォーマット設定
-setting.jsonに以下を設定する
-
-```json: setting.json
-{
-  // Python コードを black でフォーマットする設定
-  // （Python 拡張をインストールして pip install black しておく）
-  "python.formatting.provider": "black",
-  "[python]": {
-    "editor.defaultFormatter": null, // Prettier を使わないようにする
-    "editor.formatOnSave": true // ファイル保存時に自動フォーマット
-  },
-
-  // ...
-}
-```
+[Pythonの自動フォーマッター「black」を入れようとしたら苦戦した話](https://zenn.dev/masaruxstudy/articles/6ebe32ed5490e0)
