@@ -1,2 +1,2 @@
 data = (1, 2, 3)
-print(data[0])
+data[0] = 10
