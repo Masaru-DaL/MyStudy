@@ -157,3 +157,38 @@ name = "Taro"
 print(f"Hello, {name}")
 ```
 Hello, Taro
+
+
+## 2. 入出力 2/2
+#### 2-1. open()
+- ファイルを開く(読み込みモード)
+- 書き方
+  - `open(開くファイル, mode)`
+第2引数のmodeは、
+1. 読み出し専用なら `r`
+2. 書き込み専用なら `w`
+3. ファイルを追記用に開くなら `a`
+:::message
+mode引数は省略可能で、省略された場合には`r`であると仮定されます
+:::
+
+#### 2-2. read()
+- `open`で開いたファイルを読み込む
+open -> read のコードを記述する
+
+```python: open, read
+# 変数にはファイルの格納場所のパスを指定出来る(絶対パス or 相対パス)
+path = './str.py'
+file1 = open(path)
+print(file1.read())
+
+# カレントディレクトリの場合はこちらの書き方でOK
+file2 = open('str.py')
+print(file2.read())
+```
+word = "Hello, world"
+print(str(word))
+
+word = "Hello, world"
+print(str(word))
+(出力されるものは同じ)
