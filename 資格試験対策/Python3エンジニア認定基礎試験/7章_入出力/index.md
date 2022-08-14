@@ -200,10 +200,11 @@ print(str(word))
 #### 2-4. write()
 - 新規ファイルの場合は新しく書き込む
 - 既存ファイルの場合は上書きする
+(新規作成ファイルはマークダウンファイルとします。)
 
 ```python: write
 # ファイル自体も新規作成される
-file1 = open("new.py", "w")
+file1 = open("new.md", "w")
 file1.write("Hello, Python")
 file1.closed
 
@@ -212,7 +213,7 @@ file2 = open("str.py", "w")
 file2.write("Hello, Python")
 file2.closed
 ```
-`-> cat new.py`
+`-> cat new.md`
 Hello, Python
 
 `-> cat str.py`
@@ -222,20 +223,20 @@ str.pyには元々以下が記述されていた
 `word = "Hello, world"`
 `print(str(word))`
 
-#### open(add)
+#### 2-5. open(add)
 - ファイルを開く(追記モード)
 
-`-> cat new.py`
+`-> cat new.md`
 Hello, Python
 
 こちらを追記モードでファイルを開き、書き込む
 
 ```python: add
-file = open("new.py", "a")
+file = open("new.md", "a")
 file.write("Add Comments")
 file.closed
 ```
-`-> cat new.py`
+`-> cat new.md`
 Hello, Python
 Add Comments
 
@@ -244,3 +245,33 @@ Add Comments
 また、必ず最後にファイルを閉じる処理`closed`を行わなければなりません。
 `with`を使えば自動的にファイルを閉じてくれるので便利です
 :::
+
+#### 2-6. json.dumps()
+- 辞書型を文字列に変換
+
+```python: dumps
+import json
+
+# 辞書型を定義
+dictionary = {"a": 1, "b": 2}
+
+print(type(dictionary))
+print(type(json.dumps(dictionary)))
+```
+<class 'dict'>
+<class 'str'>
+
+#### 2-7. json.loads()
+- 文字列を辞書型に変換
+
+```python: loads
+import json
+
+dictionary = {"a": 1, "b": 2}
+dictionary_str = json.dumps(dictionary)
+print(type(dictionary_str))
+
+print(type(json.loads(dictionary_str)))
+```
+<class 'str'>
+<class 'dict'>
