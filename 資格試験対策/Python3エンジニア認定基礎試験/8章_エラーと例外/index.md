@@ -72,4 +72,24 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'
 - 自分独自のコードに関する箇所は消して、ググる
 - 例外が発生する最小のコードを作って再現させて、質問する
 
+#### 1-7. 例外が発生した場合の処理を予め記述しておくことが出来る
+1. `try ~`
+2. `except ~`
+tryの中で例外が起きたら、exceptへ処理を移す。
+どんな例外かで分岐が可能
+書き方は`if`, `elif`, `else` と良く似ています。
 
+#### 1-8. TypeErrorを処理した例
+`"1" + 1`を実行すると、
+`TypeError: can only concatenate str (not "int") to str`
+TypeErrorが返ってきます
+
+```python: try
+try:
+  "1" + 1
+except TypeError:       # TypeErrorの時
+  print("TypeErrorです")
+except:                 # TypeError以外の時
+  print("何かのエラーが起きています")
+```
+TypeErrorです
