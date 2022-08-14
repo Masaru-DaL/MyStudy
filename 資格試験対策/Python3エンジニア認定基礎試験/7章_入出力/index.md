@@ -213,10 +213,34 @@ file2.write("Hello, Python")
 file2.closed
 ```
 `-> cat new.py`
-`Hello, Python`
+Hello, Python
 
 `-> cat str.py`
-`Hello, Python`
+Hello, Python
+
 str.pyには元々以下が記述されていた
 `word = "Hello, world"`
 `print(str(word))`
+
+#### open(add)
+- ファイルを開く(追記モード)
+
+`-> cat new.py`
+Hello, Python
+
+こちらを追記モードでファイルを開き、書き込む
+
+```python: add
+file = open("new.py", "a")
+file.write("Add Comments")
+file.closed
+```
+`-> cat new.py`
+Hello, Python
+Add Comments
+
+:::message alert
+改行する場合は`\n`を適宜入れなくてはならない。
+また、必ず最後にファイルを閉じる処理`closed`を行わなければなりません。
+`with`を使えば自動的にファイルを閉じてくれるので便利です
+:::
