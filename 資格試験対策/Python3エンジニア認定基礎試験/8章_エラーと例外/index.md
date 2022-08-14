@@ -169,4 +169,23 @@ except Exception as E:
 ```
 何らかの例外
 
+#### 2-3. 自分でエラーを出して、例外処理をする練習
+上記では`try` -> `except` の流れに移る処理の流れを見るだけでしたので、try, exceptを使ってエラーを出してみます。
+
+```python: error
+try:
+  raise NameError("Hi There")
+except NameError:
+  print("NameErrorが出た")
+  raise
+```
+NameErrorが出た
+...
+    raise NameError("Hi There")
+NameError: Hi There
+
+:::message
+最後の`raise`がないとexceptの処理に移り、同じようにprintしか実行しないので、最後に`raise`を実行し、エラーを送出します。
+:::
+
 
