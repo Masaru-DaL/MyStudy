@@ -188,4 +188,33 @@ NameError: Hi There
 最後の`raise`がないとexceptの処理に移り、同じようにprintしか実行しないので、最後に`raise`を実行し、エラーを送出します。
 :::
 
+#### 2-4. ユーザー定義例外
+- 自作の例外で、関数ないで起きた問題を明確にする
+  - try ~, except ~ で例外処理が可能
+  - 通常の関数と同じように記述可能
+  - 名前の最後にErrorを付ける慣習
+  - 複雑な処理はさせずに、エラー理由が分かると良い
 
+#### 2-5. 自作の例外(1例)
+MyErrorというクラスを作成する
+
+```python: MyError
+class MyError(Exception):
+    pass
+
+
+def main():
+    try:
+        raise MyError("マイエラー")
+    except MyError as e:
+        print("Error Massage: ", e)
+        raise
+
+
+if __name__ == "__main__":
+    main()
+```
+Error Massage:  マイエラー
+...
+    raise MyError("マイエラー")
+__main__.MyError: マイエラー
