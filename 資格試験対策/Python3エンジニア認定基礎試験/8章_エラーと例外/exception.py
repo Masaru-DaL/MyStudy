@@ -1,2 +1,3 @@
 # print(10 / 0)
-sushi+"wasabi"
+# sushi + "wasabi"
+1 + "1"
