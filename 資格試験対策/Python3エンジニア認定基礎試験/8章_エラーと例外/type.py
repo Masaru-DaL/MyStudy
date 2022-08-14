@@ -1,6 +1,12 @@
 try:
-  "1"+1
+    sushi + "wasabi"
 except TypeError:
-  print("TypeErrorです")
+    print("TypeErrorです")
 except:
-  print("何かのエラーが起きています")
+    print("何かのエラーが起きています")
+# try:
+#   "1"+1
+# except TypeError:
+#   print("TypeErrorです")
+# except:
+#   print("何かのエラーが起きています")

@@ -84,7 +84,7 @@ tryの中で例外が起きたら、exceptへ処理を移す。
 `TypeError: can only concatenate str (not "int") to str`
 TypeErrorが返ってきます
 
-```python: try
+```python: try, except
 try:
   "1" + 1
 except TypeError:       # TypeErrorの時
@@ -93,3 +93,38 @@ except:                 # TypeError以外の時
   print("何かのエラーが起きています")
 ```
 TypeErrorです
+
+#### 1-9. 準備した例外以外が起きた場合
+1-8 で使用したコードを用いて、`sushi + "wasabi"`(NameError)を実行してみます。
+
+```python: try, except
+try:
+    sushi + "wasabi"
+except TypeError:
+    print("TypeErrorです")
+except:
+    print("何かのエラーが起きています")
+```
+何かのエラーが起きています
+`try, except`がTypeErrorにしか対応させていないため、それ以外となります。
+
+#### 1-10. try内のコードは最小限に抑える
+- 意図しない箇所での例外処理を防ぐ必要がある
+  - `else`が利用出来る
+  - try内のコードが正常に処理された場合、else内が処理される
+
+```python:try.py
+print("try, else文の実行")
+```
+
+```python: try, else
+try:
+    file = open("try.py")
+except IOError:
+    print("cannot open")
+else:
+    print(file.read())
+    file.close()
+```
+print("try, else文の実行")
+例外処理に引っかからず、無事に処理を行えました。
