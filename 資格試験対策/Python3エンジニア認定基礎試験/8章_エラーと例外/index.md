@@ -128,3 +128,45 @@ else:
 ```
 print("try, else文の実行")
 例外処理に引っかからず、無事に処理を行えました。
+
+
+## 2. 例外創出とユーザー定義例外
+#### 2-1. 例外の送出
+- 好きなタイミングで例外を発生させることが出来る
+` raise 例外名("メッセージ")`
+
+```python: raise
+raise NameError("Hi There")
+```
+    raise NameError("Hi There")
+NameError: Hi There
+
+```python: raise
+try:
+    raise NameError("Hi There")
+except NameError as e:
+    print(e)
+```
+Hi There
+
+:::message
+下の方が分かりやすいかもしれません。
+try節でraiseを使用し、NameErrorクラスの例外を発生させています。
+try節で例外が発生したので、except節の処理が実行され、エラーメッセージが表示されています。
+:::
+
+#### 2-2. Exception: 何かの例外
+- NameErrorなどはExceptionの派生
+Exceptionは例外の基底クラスなので、書き方は同じで良い。
+
+```python: Exception
+# raise Exception("何らかの例外")
+
+try:
+    raise Exception("何らかの例外")
+except Exception as E:
+    print(E)
+```
+何らかの例外
+
+

@@ -1,3 +1,6 @@
-# print(10 / 0)
-# sushi + "wasabi"
-"1" + 1
+# raise Exception("何らかの例外")
+
+try:
+    raise Exception("何らかの例外")
+except Exception as E:
+    print(E)
