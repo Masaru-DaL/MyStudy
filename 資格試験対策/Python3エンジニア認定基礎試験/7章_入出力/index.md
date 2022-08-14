@@ -160,7 +160,7 @@ Hello, Taro
 
 
 ## 2. 入出力 2/2
-#### 2-1. open()
+#### 2-1. open(read)
 - ファイルを開く(読み込みモード)
 - 書き方
   - `open(開くファイル, mode)`
@@ -192,3 +192,31 @@ print(str(word))
 word = "Hello, world"
 print(str(word))
 (出力されるものは同じ)
+
+#### 2-3. open(write)
+- 新規ファイルを書き込みモードで開く
+- または、既存ファイルを書き込みモードで開く
+
+#### 2-4. write()
+- 新規ファイルの場合は新しく書き込む
+- 既存ファイルの場合は上書きする
+
+```python: write
+# ファイル自体も新規作成される
+file1 = open("new.py", "w")
+file1.write("Hello, Python")
+file1.closed
+
+# ファイルが上書きされる
+file2 = open("str.py", "w")
+file2.write("Hello, Python")
+file2.closed
+```
+`-> cat new.py`
+`Hello, Python`
+
+`-> cat str.py`
+`Hello, Python`
+str.pyには元々以下が記述されていた
+`word = "Hello, world"`
+`print(str(word))`
