@@ -111,4 +111,49 @@ Hello, Misaki
 Hello, Taro
 
 3. 小数点第何位まで表示するか
+```python: format{}
+import math
 
+# Pi == π
+# 小数点第2位まで表示する
+print("Pi is about {0:.2f}".format(math.pi))
+
+# 何桁分のスペースを確保するか
+print("{0:10d}".format(12345))
+```
+Pi is about 3.14
+     12345
+
+#### 1-8. formatをもう少し理解する
+- 小数点第1位まで表示
+`{:.1f}`
+
+- 小数点第3位まで表示
+`{:.3f}`
+
+- 文字の表示位置を指定する(引数に20をした場合)
+  - `{:<20}`：左寄せ
+  - `{:^20}`：中央寄せ
+  - `{:>20}`：右寄せ
+
+- 桁数指定(0で埋める)
+`a = 1234567890`
+`print('{:020}'.format(a))`
+00000000001234567890
+
+- 桁区切りを指定する(3桁ごとのみ)
+`a = 1234567890`
+`print('{:,}'.format(a))`
+1,234,567,890
+
+他の詳しい所の参考サイト: [Pythonの文字列フォーマット（formatメソッドの使い方）](https://gammasoft.jp/blog/python-string-format/)
+
+#### 1-9. f文字列: Python3.6からの新機能
+- 古い参考書に掲載されていない可能性あり
+- 変数を自動で参照してくれる
+
+```python: f
+name = "Taro"
+print(f"Hello, {name}")
+```
+Hello, Taro
