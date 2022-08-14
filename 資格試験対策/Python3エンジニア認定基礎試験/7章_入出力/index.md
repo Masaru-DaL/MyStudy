@@ -83,3 +83,32 @@ print(num2.zfill(5)) # 効果無し
 03.14
 000010.2
 3.1415926535
+
+#### 1-7. str.format()
+- 文字列に変数を代入する
+
+1. 通常の使い方
+```python: format
+print("Hello, {}".format("Misaki"))
+
+# 変数自体を変数を代入できる形にする
+word2 = "Hello, {}"
+print(word2.format("Taro"))
+```
+Hello, Misaki
+Hello, Taro
+
+2. 代入先に名前を付けることも出来る
+こちらの方が可読性が上がる
+
+```python: format(name)
+print("Hello, {name}".format(name="Misaki"))
+
+word2 = "Hello, {name}"
+print(word2.format(name="Taro"))
+```
+Hello, Misaki
+Hello, Taro
+
+3. 小数点第何位まで表示するか
+
