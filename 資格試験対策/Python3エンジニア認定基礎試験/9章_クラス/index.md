@@ -187,4 +187,32 @@ AttributeError: 'Person' object has no attribute 'sex'
 > Personオブジェクトにsexという属性がありません。
 というエラーが出ます。
 
+#### 2-5. メソッドの上書き(オーバーライド)
+親クラスからeat, sleepのメソッドを継承していますが、eatメソッドを新たに定義、sleepは継承したままにしてみます。
+
+```python: override
+class Person:
+    def eat(self, food):
+        print(f"{food}を食べる")
+
+    def sleep(self, time):
+        print(f"{time}時に寝る")
+
+
+class Man(Person):
+    sex = "man"
+
+    def eat(self, food):
+        print(f"{food}をたくさん食べた")
+
+
+man = Man()
+man.eat("ラーメン")
+man.sleep(11)
+```
+ラーメンをたくさん食べた
+11時に寝る
+
+eatメソッドは新たに定義したものが実行され、sleepは親クラスで定義されたものが実行されました。
+
 
