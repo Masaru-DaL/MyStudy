@@ -148,4 +148,23 @@ class Man(Person):
 親クラスから継承を用いて新たにクラスを定義するには、
 `class 新しいクラス名(親クラス名):` とします。
 
+#### 2-3. 継承しているメソッドを確認する
+```python: inheritance
+# 親クラスのメソッドを確認
+person = Person()
+person.eat("おにぎり")
+person.sleep(11)
+
+# Manクラスの継承したメソッドの確認
+man = Man()
+man.eat("おにぎり")
+man.sleep(11)
+```
+おにぎりを食べる
+11時に寝る
+おにぎりを食べる
+11時に寝る
+
+PersonもManも、eat, sleepのメソッドを持っていることが分かります。
+
 
