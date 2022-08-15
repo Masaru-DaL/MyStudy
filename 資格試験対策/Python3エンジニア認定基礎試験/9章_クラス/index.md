@@ -59,3 +59,93 @@ print(male2.name, male2.age)
 ```
 Yosaku 30
 Kaoru 18
+　
+#### 1-5. メソッド
+- クラス内で定義された関数
+`def メソッド名(self):` と書く。
+Personクラスに挨拶をするメソッドを追加する。
+`say_hello`の引数に名前を入れるとその人に挨拶をする。
+
+```python: method
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def say_hello(self, name):
+        self.name = name
+        print(f"Hello, {self.name}")
+
+
+male1 = Person("Takeshi", 18)
+# female1 = Person("Hanako", 18)
+
+male1.say_hello("Hanako")
+```
+Hello, Hanako
+
+#### 1-6. クラス変数
+- クラスの中で変数を定義すると、そこから作成される全てのインスタンスにクラス変数が共有される。
+日本人クラスを定義し、言語を日本語という変数を作成します。
+複数のインスタンスからクラス変数を呼び出すと同じものが呼び出されます。
+
+```python: class
+class PersonJapanese:
+    # クラス内に変数を作成する
+    language = "Japanese"
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+
+male1 = PersonJapanese("Takeshi", 18)
+male2 = PersonJapanese("Satoru", 15)
+
+print(male1.language)
+print(male2.language)
+```
+Japanese
+Japanese
+
+
+## 2. クラス part.2
+#### 2-1. 継承
+- クラスが持つ機能を別のクラスに受け渡す
+  - クラス同士で同じ機能のメソッドを持たせること
+  - 親クラスのメソッドを上書き(**オーバーライド**)することも出来る
+
+#### 2-2. 具体的に
+- 親クラス
+  - `Person`
+    - 食べる
+    - 寝る
+
+- 子クラス
+  - `Man`, `Woman`
+    - 継承するメソッド
+      - 食べる
+      - 寝る
+    - 各クラス独自のメソッド
+      - 性別(男性, 女性)
+
+```python: inheritance
+class Person:
+    def eat(self, food):
+        print(f"{food}を食べる")
+
+    def sleep(self, time):
+        print(f"{time}時に寝る")
+
+
+class Man(Person):
+    sex = "man"
+
+
+class Man(Person):
+    sex = "woman"
+```
+親クラスから継承を用いて新たにクラスを定義するには、
+`class 新しいクラス名(親クラス名):` とします。
+
+
