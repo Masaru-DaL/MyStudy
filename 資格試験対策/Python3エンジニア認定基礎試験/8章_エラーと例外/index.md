@@ -218,3 +218,63 @@ Error Massage:  マイエラー
 ...
     raise MyError("マイエラー")
 __main__.MyError: マイエラー
+
+
+## 3. 例外処理 クリーンアップ動作の定義
+#### 3-1.  クリーンアップ動作の定義
+- tryから抜け出す時に必ず実行される
+- try内で例外が発生しても実行される
+  - `finally`という処理で書く事が出来る
+
+```python: cleanup
+try:
+    raise KeyboardInterrupt
+finally:
+    print("Goodbye, world!!")
+```
+Goodbye, world!!
+...
+    raise KeyboardInterrupt
+KeyboardInterrupt
+
+#### 3-2. finallyとは
+- tryが正常終了した場合も実行される
+
+```python: cleanup
+try:
+    print("try内の実行")
+finally:
+    print("Goodbye, world!!")
+```
+try内の実行
+Goodbye, world!!
+
+#### 3-3. 例外処理における役割分担
+:::message
+- try
+  - 例外が発生するかもしれない処理
+- except
+  - 例外発生時の対応方法
+- ele
+  - try正常終了時の処理
+- finally
+  - 何が起きても実行される
+:::
+
+#### 3-4. 実装例
+- 上記全てを使用する
+- `divide` -> 割り算を処理
+
+- 各役割
+:::message
+- try
+  - `x / y`の時に例外が発生するかもしれない
+- except
+  - `x / y`が0で除算された時に行う対応
+- else
+  - `x / y`が0除算されず、正常に処理が行われた場合に行う処理
+- finally
+  - 何が起きても実行する処理
+:::
+
+
