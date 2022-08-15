@@ -325,14 +325,25 @@ Goodbye, world!!
 
 ```python: divide
 def divide(x, y):
-  try:
-    result=x/y
-  except ZeroDivisionError as ZDE:
-    print(" 0除算されました ")
-  else:
-    print(" 答えは ", result)
-  finally:
-    print("finally 実行中 ")
+    try:
+        result = x / y
+    except ZeroDivisionError as ZDE:
+        print(" 0除算されました ")
+    else:
+        print(" 答えは ", result)
+    finally:
+        print("finally 実行中 ")
 ```
 
+- 正常終了時(else)
+`divide(10, 5)`
+ 答えは  2.0
+finally 実行中
 
+- 例外発生時(except)
+`divide(10, 0)`
+ 0除算されました
+finally 実行中
+
+実際行ってみると分かりやすいですが、
+tryで関数が判定され、例外だったらexceptへ、例外ではなければelseで処理され、常にfinallyが実行されています。
