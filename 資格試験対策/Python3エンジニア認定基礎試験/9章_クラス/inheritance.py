@@ -10,7 +10,7 @@ class Man(Person):
     sex = "man"
 
 
-class Man(Person):
+class Woman(Person):
     sex = "woman"
 
 
@@ -23,3 +23,12 @@ person.sleep(11)
 man = Man()
 man.eat("おにぎり")
 man.sleep(11)
+
+# 子クラス独自のメソッド
+print(man.sex)
+
+woman = Woman()
+print(woman.sex)
+
+# 子クラスだけのメソッドを親クラスで呼び出そうとすると
+person.sex

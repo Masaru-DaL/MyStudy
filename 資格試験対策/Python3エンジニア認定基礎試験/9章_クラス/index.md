@@ -167,4 +167,24 @@ man.sleep(11)
 
 PersonもManも、eat, sleepのメソッドを持っていることが分かります。
 
+#### 2-4. 親クラスは、子クラス独自のメソッドを持たない
+```python: inheritance
+# 子クラス独自のメソッド
+print(man.sex)
+
+woman = Woman()
+print(woman.sex)
+```
+man
+woman
+
+```python: inheritance
+# 子クラスだけのメソッドを親クラスで呼び出そうとすると
+person.sex
+```
+    person.sex
+AttributeError: 'Person' object has no attribute 'sex'
+> Personオブジェクトにsexという属性がありません。
+というエラーが出ます。
+
 
