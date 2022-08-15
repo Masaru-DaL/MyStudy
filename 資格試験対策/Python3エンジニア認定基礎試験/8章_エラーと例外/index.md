@@ -347,3 +347,24 @@ finally 実行中
 
 実際行ってみると分かりやすいですが、
 tryで関数が判定され、例外だったらexceptへ、例外ではなければelseで処理され、常にfinallyが実行されています。
+
+#### 3-5. オブジェクトに定義済みのクリーンアップ動作
+- ファイルを開く操作は`with`文で正常終了させる
+- `with`を使わない場合は、`close`が必要
+
+:::message
+以前、,`closed`を使っていましたが、`close`と`closed`の違いは何かなというこということで調べてみると、ファイルを閉じるのが`close()`で、ファイルオブジェクトが開いているかどうかを確認出来るのが`closed`のようです。
+:::
+
+1. withを使用した場合
+```python: with
+with open("README") as f:
+  readme = f.read()
+```
+
+2. withを使用しない場合
+```python: notwith
+f = open("README")
+readme = f.read()
+f.close()
+```
