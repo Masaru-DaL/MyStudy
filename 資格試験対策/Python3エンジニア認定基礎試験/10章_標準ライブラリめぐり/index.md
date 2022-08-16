@@ -362,3 +362,106 @@ $ python -m cProfile -s cumulative os.py
         1    0.000    0.000    0.000    0.000 {built-in method posix.chdir}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 ```
+
+#### 4-3. テストによる品質管理: doctest
+- docstringに実行結果を書くことで、動作確認が出来る
+- doctestの書き方
+  - docstringにPython対話モードの形式で関数の呼び出しと期待される出力値を記述する
+  - 実行は`doctest.testmod()`で行う
+
+```python: doctest
+def plus(i, j):
+    """
+    >>> plus(1, 1)
+    2
+    """
+    return i + j
+
+
+def main():
+    for i in range(100000):
+        i = plus(i, i)
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod()  # 埋め込まれたテストを自動検証する
+```
+
+#### 4-4. doctestの可否
+:::message
+doctestが通る場合は、画面には何も出力されない
+:::
+
+- doctestが落ちる場合
+docstringに`>>> plus(1, 1) 3`という処理を追加して動作を見てみる。
+
+```python: doctest
+def plus(i, j):
+    """
+    >>> plus(1, 1)
+    2
+    >>> plus(1, 1)
+    3
+    """
+    return i + j
+
+
+def main():
+    for i in range(100000):
+        i = plus(i, i)
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod()  # 埋め込まれたテストを自動検証する
+```
+
+```c: error_code
+[file path] line 5, in __main__.plus
+Failed example:
+    plus(1, 1)
+Expected:
+    3
+Got:
+    2
+**********************************************************************
+1 items had failures:
+   1 of   2 in __main__.plus
+***Test Failed*** 1 failures.
+```
+
+#### 4-5. テストによる品質管理: unittest
+- テスト用のコードを分離して書く事が出来る
+上で作成したテスト用のコードをインポートして使用します。(fromはテストファイルが記述されたファイル名を指定)
+
+```python: unittest
+import unittest
+from s43 import plus
+
+# unittestのTestCaseを使用してTestPlusクラスを作成する
+class TestPlus(unittest.TestCase):
+    def test01(self):
+        actual = plus(1, 1)
+        expected = 2
+        # 確認事項 -> assertEqual(a, b)が a == bであるということ
+        self.assertEqual(expected, actual)
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+#### 4-6. unittestが通る場合
+```python: unittest(ok)
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+```
+
+#### unittestが落ちる場合
+
