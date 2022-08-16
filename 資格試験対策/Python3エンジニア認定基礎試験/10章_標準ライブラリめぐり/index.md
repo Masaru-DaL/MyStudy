@@ -280,6 +280,7 @@ print((now - birthday).days)
 
 #### 3-3. データの圧縮
 - `zlib`というライブラリを用いる
+- 他にも`gzip`, `bz2`, `lzma`, `zipfile`, `tarfile`などが用意されています。
   - `compress`は引数で指定したものを圧縮し返します
   - 圧縮率を指定できますが、圧縮率が高いほど時間はかかります
 ```python:zlib
@@ -288,6 +289,7 @@ import zlib
 sentence = "あいうえお" * 100
 print(len(sentence))
 
+# UTF-8に指定することでbyte型になる(compressの引数はbyte型である必要があります)
 after_file = zlib.compress(sentence.encode("UTF-8"))
 print(len(after_file))
 ```
@@ -295,3 +297,68 @@ print(len(after_file))
 36
 文字数が500から、36に圧縮されました。
 
+
+## 4. 標準ライブラリ Part.4
+#### 4-1. パフォーマンス計測
+- `timeit`というライブラリの`Timer`というクラスを用いる
+- 小さなプログラムのパフォーマンスを比較出来る
+- 構文
+  - `class timeit.Timer(stmt='pass', setup='pass', timer=<timer function>, globals=None)`
+
+```python: timeit
+from timeit import Timer
+
+print(Timer("t=a; a=b; b=t", "a=1; b=2").timeit())
+
+print(Timer("a,b = b,a", "a=1; b=2").timeit())
+```
+0.013437083005555905
+0.013737416004005354
+(上記はチュートリアルの式で、いまいちどういった式か分かってないのですが、(多分)setupパラメータの数値は同じで、stmt(statement?)が違うものを比較するというのが目的だと思われます)
+
+:::message alert
+どちらが早いというよりも、パフォーマンスを比較する際に使用されます。
+実行するたびに実行結果は変わります(その時のPCなどの状況によるため)
+:::
+
+#### 4-2. より大きな処理のパフォーマンス計測
+- `cProfile`というモジュールを用いる
+- ボトルネックになっている処理を特定する
+
+コマンドラインで
+`python -m cProfile -s cumulative [ファイル名]`
+実行結果から様々な情報が出力され、それを解析することでそのファイルのパフォーマンスを計測する事ができます。
+
+```python: os
+# OSというライブラリをインポートする
+import os
+
+# カレントディレクトリを返す
+print(os.getcwd())
+
+# カレントディレクトリを変更
+# 現在のディレクトリ内にsampleディレクトリを作成後
+os.chdir("./sample")
+
+# ディレクトリを作成するコマンドの実行
+# 上でディレクトリを変更しているのでsampleディレクトリ内にsample2ディレクトリが作成される
+os.system(('mkdir sample2'))
+```
+
+```python: example
+$ python -m cProfile -s cumulative os.py
+
+
+         7 function calls in 0.006 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.006    0.006 {built-in method builtins.exec}
+        1    0.000    0.000    0.006    0.006 os.py:1(<module>)
+        1    0.006    0.006    0.006    0.006 {built-in method posix.system}
+        1    0.000    0.000    0.000    0.000 {built-in method posix.getcwd}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 {built-in method posix.chdir}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+```
