@@ -463,7 +463,7 @@ Ran 1 test in 0.000s
 OK
 ```
 
-#### unittestが落ちる場合
+#### 4-7. unittestが落ちる場合
 ```python: unittest(for NG)
 import unittest
 from s43 import plus
