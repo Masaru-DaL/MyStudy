@@ -277,3 +277,21 @@ print((now - birthday).days)
 ```
 2022-08-16
 8263
+
+#### 3-3. データの圧縮
+- `zlib`というライブラリを用いる
+  - `compress`は引数で指定したものを圧縮し返します
+  - 圧縮率を指定できますが、圧縮率が高いほど時間はかかります
+```python:zlib
+import zlib
+
+sentence = "あいうえお" * 100
+print(len(sentence))
+
+after_file = zlib.compress(sentence.encode("UTF-8"))
+print(len(after_file))
+```
+500
+36
+文字数が500から、36に圧縮されました。
+
