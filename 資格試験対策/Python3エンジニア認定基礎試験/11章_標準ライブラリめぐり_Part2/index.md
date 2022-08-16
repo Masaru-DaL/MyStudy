@@ -74,7 +74,73 @@ deque(['task4', 'task1', 'task2', 'task3'])
 **ソートを毎回実行する必要がなくなる**
 
 - Good Point
+  - 短いコードで書く事が出来る
 - Bad Point
+  - ソート済みの必要がある
+  - 知らない人が多い
+
+```python: bisect
+import bisect
+
+# ソートしている場合
+scores1 = [1, 2, 4]
+bisect.insort(scores1, 3)
+print(scores1)
+
+# ソートしていない場合
+scores2 = [12, 11, 14]
+bisect.insort(scores2, 13)
+print(scores2)
+
+# 一度ソートする
+scores3 = [12, 11, 14]
+scores3.sort()
+bisect.insort(scores3, 13)
+print(scores3)
+```
+[1, 2, 3, 4]
+[12, 11, 13, 14]
+[11, 12, 13, 14]
+
+:::message
+`bisect.insort(a, x)`
+1. `bisect_right()`を実行して挿入箇所を特定する
+2. `a`に対して`insert()`メソッドを実行する
+3. ソート順を維持するために適切な位置に`x`を挿入する
+:::
+
+#### 1-6. ヒープ: heapq
+**最小値が常に位置ゼロに入る**
+特定の条件下で有効。汎用的ではない。
 
 - Good Point
+  - 完全なソートが不要
+  - 最小値へのアクセスが高速
 - Bad Point
+  - 効率面からソートの代替にならない
+
+#### 1-7. 10進数の浮動小数点計算
+**手計算と一致させる事が出来る**
+
+- Good Point
+  - 2進数の浮動小数点による計算誤差がなくなる
+  - 丸め規則を厳密に守る事が出来る
+:::message
+丸め規則とは、四捨五入などによって発生する実際の値との誤差を最小限にするための丸めをどうするか、というのを定めたもの
+:::
+
+```python: decimal
+from decimal import Decimal
+
+print(0.70 * 1.05)
+
+# round(式, 丸める桁数)
+# roundでの四捨五入では誤差が発生する
+print(round(0.70 * 1.05, 2))
+
+# decimalを用いて丸め規則に則って結果を出力する
+print(round(Decimal("0.70") * Decimal("1.05"), 2))
+```
+0.735
+0.73
+0.74
