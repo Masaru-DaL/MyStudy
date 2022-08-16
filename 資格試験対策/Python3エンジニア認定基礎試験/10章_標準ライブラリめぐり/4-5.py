@@ -9,6 +9,11 @@ class TestPlus(unittest.TestCase):
         # 確認事項 -> assertEqual(a, b)が a == bであるということ
         self.assertEqual(expected, actual)
 
+    def test02(self):
+        actual = plus(1, 1)
+        expected = 3
+        self.assertEqual(expected, actual)
+
 
 if __name__ == "__main__":
     unittest.main()

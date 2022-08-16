@@ -455,7 +455,7 @@ if __name__ == "__main__":
 ```
 
 #### 4-6. unittestが通る場合
-```python: unittest(ok)
+```python: unittest(OK)
 .
 ----------------------------------------------------------------------
 Ran 1 test in 0.000s
@@ -464,4 +464,36 @@ OK
 ```
 
 #### unittestが落ちる場合
+```python: unittest(for NG)
+import unittest
+from s43 import plus
 
+# unittestのTestCaseを使用してTestPlusクラスを作成する
+class TestPlus(unittest.TestCase):
+    def test01(self):
+        actual = plus(1, 1)
+        expected = 2
+        # 確認事項 -> assertEqual(a, b)が a == bであるということ
+        self.assertEqual(expected, actual)
+
+    # NG用に a == b が確認されない確認事項を記述する
+    def test02(self):
+        actual = plus(1, 1)
+        expected = 3
+        self.assertEqual(expected, actual)
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+```python: unittest(NG)
+[file path] line 15, in test02
+    self.assertEqual(expected, actual)
+AssertionError: 3 != 2
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+FAILED (failures=1)
+```
