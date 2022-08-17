@@ -202,3 +202,31 @@ print(culc(4, 5))
 ([1, 4], [1, 27])
 ([1, 4, 9], [1, 27, 64])
 ([1, 4, 9, 16], [1, 27, 64, 125])
+
+
+## 引数の指定
+- 問題
+```md:
+次の関数を呼び出す際に、引数の指定として正しいものはどれか。
+
+def location(city, state, country='Japan'):
+    print("I live in",country,".")
+    print("My company is located in",city,",",state,".")
+```
+- 間違った指定
+location(state='California', country='USA', 'San Francisco')
+`SyntaxError: positional argument follows keyword argument`のエラーになります。
+引数の指定に問題があるという文法エラーで、「**位置引数がキーワード引数に続いている**」という意味です。
+
+:::message alert
+キーワード引数の後に位置引数を書けない！
+というルールを覚えておかなくてはいけません。
+:::
+
+正しい引数の指定は、
+location('San Francisco', state='California', country='USA') となります。
+
+正当としては`location(state='Tokyo', city='chiyoda')`でした。
+:::message
+この引数の指定方法は、デフォルト引数が設定されているから可能です。デフォルト引数が設定されていない場合は、countryが指定されなくなるので、エラーになります。
+:::
