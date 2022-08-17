@@ -51,5 +51,9 @@ for i in range(-10, -30, -5):
 ```
 -10,-15,-20,-25
 
-`range(a, b, c)`は`a=初期値`, `b=終着値`, `c=取得幅`
-終着値自身は含まない点を覚えておく必要がある。
+:::message
+`range(a, b, c)` ->
+`a=start`, `b=stop`, `c=step`
+
+`start <= i < stop`、もしくは`start >= i > stop`という挙動になるので、stop値を含まない点に注意する必要があります。
+:::
