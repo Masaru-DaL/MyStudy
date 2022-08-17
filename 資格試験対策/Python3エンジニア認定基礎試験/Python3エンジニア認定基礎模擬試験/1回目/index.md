@@ -58,5 +58,48 @@ for i in range(-10, -30, -5):
 `start <= i < stop`、もしくは`start >= i > stop`という挙動になるので、stop値を含まない点に注意する必要があります。
 :::
 
+
 ## enumerate()
 `enumerate()`を使うと、forループの中でリストやタプルなどのいてらぶるオブジェクトの要素と同時にインデックス番号(カウント、順番)を取得できる。
+
+```python: for
+name_list = ['Alice', 'Bob', 'Charlie']
+
+# 通常のfor文
+for name in name_list:
+    print(name)
+```
+Alice
+Bob
+Charlie
+
+```python: enumerate
+name_list = ['Alice', 'Bob', 'Charlie']
+
+# enumerateを使用したfor文
+for i, name in enumerate(name_list):
+    print(i, name)
+```
+0 Alice
+1 Bob
+2 Charlie
+
+- 問題内容
+```md:
+次の結果を得たい場合、コードの2行目以降を代替するものとして正しいものはどれか。なお各選択肢の次の行には「 print(i, v) 」が記述されるものとする。
+
+[ 実行結果 ]
+0 Now
+1 is
+2 better
+3 than
+4 never
+
+[コード]
+Zen = ['Now','is','better','than','never']
+for i in range(len(Zen)):
+    print(i, Zen[i])
+```
+
+実行結果が、index番号, 要素となっていることから、
+これと同じ動作をさせたい場合は`enumerate()`を利用すれば良いことが分かる。
