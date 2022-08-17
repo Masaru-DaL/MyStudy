@@ -50,10 +50,13 @@ for i in range(-10, -30, -5):
     print(i, end=",")
 ```
 -10,-15,-20,-25
-
+(-10,-15,-20,-25,-30 -> X)
 :::message
 `range(a, b, c)` ->
 `a=start`, `b=stop`, `c=step`
 
 `start <= i < stop`、もしくは`start >= i > stop`という挙動になるので、stop値を含まない点に注意する必要があります。
 :::
+
+## enumerate()
+`enumerate()`を使うと、forループの中でリストやタプルなどのいてらぶるオブジェクトの要素と同時にインデックス番号(カウント、順番)を取得できる。
