@@ -1,7 +1,7 @@
-i = 1
-seat_list = []
+# i = 1
+# seat_list = []
 
-seat_list + str(i) = [1, 2, 3]
+# seat_list + str(i) = [1, 2, 3]
 # coding: utf-8
 # 自分の得意な言語で
 # Let's チャレンジ！！
@@ -45,7 +45,7 @@ for x in range(beside):
     sublist = []
     for y in range(vertical):
         sublist.append(x, y)
-     seat_list.append(sublist)
+        seat_list.append(sublist)
 print(seat_list)
 # for i in range(reserved_num):
 #     seat_number = list(map(int, input().split()))
