@@ -420,16 +420,40 @@ except Exception as f:
 ```
 1. `func(key)`の実行
    1. funcの引数は0で実行する
+
 2. `key == 0`が条件に当てはまるので、`raise_her_exception('Saya')`が実行される。
    1. raiseraise_her_exception関数の引数にSayaを指定して実行
    2. `Saya is a`が出力される
+
 3. 次の出力、`intelligent`を出力したい
    1. `print('intelligent')`は`OurException`(もしくは`e`)という例外処理が実行された時。
    2. `raise【A】`で発生させる例外は`OurException`という事が分かる。
+
 4. `OurException`の実行
    1. `intelligent`が出力される。
+
 5. 最後に`speedster.`を出力したい。
    1. `print('speedster.')`は`Exception`という例外が発生した時。
    2. `raise【B】`で発生させるのは`Exception`という事が分かる。
 
 正答: 【A】OurException　【B】Exception
+
+
+## クラス
+- クラスオブジェクトは2種類の操作をサポートする。
+1. 属性参照
+   1. [0. Python の基本的な注意点](http://www-mete.kugi.kyoto-u.ac.jp/zaki/db/lec0.html)
+   2. `object.name`の形式で行われる
+
+2. インスタンス化
+   1. `MyClass`が定義済みとした時、`instanceA = MyClass()`でMyClassの新しいインスタンスが生成され、`instanceA`に代入されます。
+
+- 問題
+  - クラスに__init__()メソッドが定義してあると、新規生成されたインスタンスに対して自動的に__init__()メソッドがコールされる。ただし__init__()メソッドに引数を与えることはできない。
+
+この説明は間違いです。
+`__init__()メソッドに引数を与えることはできない`という点が間違いです。
+`__init__()`には引数を与える事ができ、設定しておくことでクラスのインスタンス化を行う時に与える引数となる。
+(もちろん、__init__メソッドに引数を与える場合、引数を処理する記述は必要)
+
+
