@@ -457,3 +457,32 @@ except Exception as f:
 (もちろん、__init__メソッドに引数を与える場合、引数を処理する記述は必要)
 
 
+## コマンドライン引数
+- 問題
+```md:
+コマンドライン上で「python3 script.py one two three four five」を実行したときに、以下の結果を得たい。コード2行目の【A】に入るものとして正しいものはどれか。
+
+[ 実行結果 ]
+['one', 'two', 'three']
+
+[ コード ]
+import sys
+print(【A】)
+```
+- コマンドライン引数の処理
+  - **インタープリタがスクリプト名(スクリプトのファイル名)と続く引数群を知らせると、これらは文字列のリストとなり、sysモジュールの変数`argv`に割り当てられる。**
+  - `import sys`を実行することで、このリストにアクセスできる。
+
+`python3 script.py one two three four five`を読み解く。
+1. script.py
+   1. これはスクリプト名なので、コードのファイル名が`script.py`というファイル名ということ。
+
+2. `one two three four five`を参照するには
+   1. `print(sys.argv)`を実行してみる
+   2. `['script.py', 'one', 'two', 'three', 'four', 'five']`が出力される。
+
+3. 実行結果である、`['one', 'two', 'three']`を出力するには
+   1. リストで出力されるので、`sys.argv`のindex1~3を出力すれば良いことが分かる。
+   2. スライスで[1:4]でOK(index1~4の1個手前まで)
+
+`print(sys.argv[1:4])` -> `['one', 'two', 'three']`
