@@ -486,3 +486,61 @@ print(【A】)
    2. スライスで[1:4]でOK(index1~4の1個手前まで)
 
 `print(sys.argv[1:4])` -> `['one', 'two', 'three']`
+
+:::message
+1. sysモジュールをインポートすること
+2. argv(sys.argv)に引数群が割り当てられること
+:::
+
+
+## 正規表現
+- 問題
+```md:
+次の正規表現を用いたコードの【A】の部分に入れたときエラーとなるものはどれか。
+
+import re
+prog = re.compile('(K|S)us(a|u)n(a|o)(o|m)?g?i?(saya)?', re.IGNORECASE)
+【A】
+print(ret[0])
+```
+
+- import re
+  - 正規表現を操作するための`re`モジュール
+
+- re.compile
+  - [変数名] = re.compile(正規表現パターン文字列)
+    - [変数名] -> 変数に代入され、生成されたオブジェクト
+        -  正規表現に当てはまる文字列を検索するmatchメソッド
+        -  文字列を置換するsubメソッド
+        -  などを持ち、繰り返し使える
+
+- re.IGNORECASE
+  - 大文字、小文字の区別を行わなくなる
+```python: re.IGNORECASE
+# a-zの小文字全て、A-Zの大文字全て
+pattern = re.compile(r'[a-zA-Z]')
+
+# a-z(A-Z)でもOK
+pattern = re.compile(r'[a-z]', re.IGNORECASE)
+
+# A-Z(a-z)でもOK
+pattern = re.compile(r'[A-Z]', re.IGNORECASE)
+```
+
+後は、`(K|S)us(a|u)n(a|o)(o|m)?g?i?(saya)?'` これを読み解きます。
+
+- (K|S)
+  - KかS(小文字でも可)のどちらでもいいよ
+  - 1文字の入力に対して判定されるので、どちらかに一致した時点でもう片方は無視される
+
+- ?
+  - 直前の正規表現に0回か1回繰り返したものにマッチさせる結果の正規表現にする
+
+1. `ret = prog.search('SUSANOO')` の場合
+   1. `SUSANOO` は `(K|S)us(a|u)n(a|o)(o|m)`で検索出来たのでエラーにはなりません。
+
+2. `ret = prog.search('Kusaneiro')` の場合
+   1. `Kusane`と検索していくと、`(K|S)us(a|u)n(a|o)`の時点で一致しません。
+   2. `e`と`(a|o)`の部分でエラーとなります。
+
+正答: ret = prog.search('Kusaneiro')
