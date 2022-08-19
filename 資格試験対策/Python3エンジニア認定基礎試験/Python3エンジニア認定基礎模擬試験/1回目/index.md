@@ -354,3 +354,82 @@ SyntaxError: invalid syntax
 `while True`の後に`:`がないため、エラーになっています。
 `>>> while True: print('hello world')`
 と打ち込むとセカンダリプロンプトが表示されます。(エラーは起きません。)
+
+
+## 例外処理
+- 問題
+```md:
+次の実行結果を得たい場合、コードの【A】【B】に入る組み合わせとして適切なものはどれか。
+
+[ 実行結果 ]
+Saya is a
+intelligent
+speedster.
+
+[コード]
+class OurException(Exception):
+    pass
+def raise_her_exception(a):
+    print(a, 'is a')
+    raise 【A】
+    print('easygoing person.')
+def func(key: int):
+    try:
+        if key == 0:
+            raise_her_exception('Saya')
+    except OurException as e:
+        print('intelligent')
+        raise 【B】
+
+key = 0
+try:
+    func(key)
+except Exception as f:
+    print('speedster.')
+```
+
+- raiseとは？
+  - 意図的に例外を発生させる。
+
+- 処理の流れを追う
+```python:
+## 実行結果
+# Saya is a
+# intelligent
+# speedster.
+
+class OurException(Exception):
+    pass
+def raise_her_exception(a):
+    print(a, 'is a')                    # ...③
+    raise #【A】
+    print('easygoing person.')
+def func(key: int):
+    try:
+        if key == 0:
+            raise_her_exception('Saya') # ...②
+    except OurException as e:
+        print('intelligent')            # ...④
+        raise #【B】
+
+key = 0
+try:
+    func(key)                           # ...①
+except Exception as f:
+    print('speedster.')                 # ...⑤
+```
+1. `func(key)`の実行
+   1. funcの引数は0で実行する
+2. `key == 0`が条件に当てはまるので、`raise_her_exception('Saya')`が実行される。
+   1. raiseraise_her_exception関数の引数にSayaを指定して実行
+   2. `Saya is a`が出力される
+3. 次の出力、`intelligent`を出力したい
+   1. `print('intelligent')`は`OurException`(もしくは`e`)という例外処理が実行された時。
+   2. `raise【A】`で発生させる例外は`OurException`という事が分かる。
+4. `OurException`の実行
+   1. `intelligent`が出力される。
+5. 最後に`speedster.`を出力したい。
+   1. `print('speedster.')`は`Exception`という例外が発生した時。
+   2. `raise【B】`で発生させるのは`Exception`という事が分かる。
+
+正答: 【A】OurException　【B】Exception
