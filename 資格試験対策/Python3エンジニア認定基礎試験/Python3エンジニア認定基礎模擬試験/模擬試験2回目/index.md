@@ -494,4 +494,115 @@ print("名前{1:}です。{0:}歳。".format("Honda", 32))
 `format(引数1番目, 引数2番目)`が`{数値:}`の番号と連動しています。
 
 
+## 関数の中に関数がある時の処理の流れを理解する
+```python:
+def outer(a):
+    def inner(b):
+
+        print(b * 5)
+
+        return
+
+    return inner(a)
+
+
+outer(5)
+```
+実行結果 -> 25
+25になる流れを見ていきます。
+
+- def outer(a):
+  - この関数の引数は`a`です
+- def inner(b):
+  - outer関数の中にinner関数を定義しています。
+  - 引数は`b`です
+- print(b * 5)
+  - inner関数は引数`b`を5倍した数字を出力する
+- return inner(a)
+  - outer関数は戻り値としてinner関数を実行したものを返す
+
+これを元にコードが実行される順番を見ていきます。
+```python:
+def outer(a):               # 2
+    def inner(b):                   # 4
+
+        print(b * 5)                    # 5
+
+        return                              # 6
+
+    return inner(a)             # 3
+
+
+outer(5)                # 1
+```
+出力 -> 25                                      # 7
+
+1. `outer(5)`より上のコードは関数の定義だけなので、まず`# 1`が実行されます。
+2. `outer(5)`が実行されます
+3. `return inner(a)`が実行されます。
+   1. 　関数を戻り値とするというのは分かりづらいですが、やっていることは、inner関数の実行結果を返すというものです。
+4. `# 4`の`inner(b)`が実行されます。この時の引数はouter関数を実行した際の引数5です。
+5. `print(b * 5)`、つまり`5 * 5`を出力します。
+6. 5での実行結果を戻り値とします。
+
+よって`25`が出力されます。
+
+#### ここまでを踏まえて
+```md:
+次のコードの実行結果として正しいものはどれか。なお各選択肢内は改行されているものとして読み替えること。
+
+def scope():
+    loc = "init"
+    def do_local():
+        loc = "local"
+    def do_nonlocal():
+        nonlocal loc
+        loc = "nonlocal"
+    def do_global():
+        global loc
+        loc = "global"
+
+    do_local()
+    print("A:", loc)
+    do_nonlocal()
+    print("B:", loc)
+    do_global()
+    print("C:", loc)
+
+scope()
+print("D:", loc)
+```
+この問いを読み解いて行きます。
+
+- nonlocal
+  - 外側の関数で使える変数に出来る
+
+- global
+  - 関数の外で使える変数(グローバル変数)に出来る
+
+- local
+  - 関数の中で変数を宣言してもその関数の中でしか参照されない。
+
+- 問題のコード処理の流れ
+1. `scope()`の実行
+   1. `loc`に"init"が代入される
+   2. `do_local()`の実行
+      1. ` loc = "local"`はローカル変数のため外側には影響無し
+   3. `print("A:", loc)`の実行
+      1. `loc`は`init`が代入されている
+   4. `do_nonlocal()`の実行
+      1. `loc`が`nonlocal`変数になる
+      2. `loc`に"nonlocal"が代入される
+   5. `print("B:", loc)`の実行
+      1. `loc`には`nonlocal`が代入されている
+   6. `do_global()`の実行
+      1. `loc`が`global`変数になる
+      2. `loc`に"global"が代入される
+   7. `print("C:", loc)`の実行
+      1. `loc`には`global`が代入されている
+2. `print("D:", loc)`の実行
+   1. `loc`にはglobal変数として`global`が代入されている
+
+正答: A: init　B: nonlocal　C: nonlocal　D: global
+
 
