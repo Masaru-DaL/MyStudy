@@ -49,4 +49,17 @@ print(d)
 ```
 一見結合しそうですが、変数`d`に再代入していないので、変数`d`は最初に代入した値のまま出力されます。
 
+## 文字列の繰り返し
+```python:
+diver = [d * 2 for d in 'diver']
+
+print(diver)
+```
+['dd', 'ii', 'vv', 'ee', 'rr']
+`'diver'`の文字列のindex0から順に取り出される。
+index0 = d
+index1 = i
+...
+
+
 
