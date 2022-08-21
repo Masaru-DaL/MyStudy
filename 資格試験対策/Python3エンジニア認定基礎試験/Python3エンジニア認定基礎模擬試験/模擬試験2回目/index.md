@@ -606,3 +606,19 @@ print("D:", loc)
 正答: A: init　B: nonlocal　C: nonlocal　D: global
 
 
+## randomモジュール
+- random.sample()
+  - ランダムに複数の要素を選択(重複無し)
+- random.choices
+  - ランダムに複数の要素を選択(重複有り)
+
+- random.randint()
+  - 引数で指定した範囲から整数を返す(1つのみ)
+:::message alert
+random.rand()というものは存在しない
+:::
+
+- random.randrange()
+  - 引数の指定は(start, stop, step)が指定出来る
+  - start, stepは省略可能で、その場合は`start=0`, `step=1`となる
+  - `print(random.randrange(10))`の場合は、`0~9`(rangeと同じ)の中でランダムで数値が1つ返ってくる
