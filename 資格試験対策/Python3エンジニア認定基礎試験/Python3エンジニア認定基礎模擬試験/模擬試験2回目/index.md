@@ -239,6 +239,77 @@ elseの実行
 この事から、【A】に当てはまるのが**break**ということが分かる。
 
 
+## Pythonの可変長引数(*args, **kqargs)
+- 問題
+```md:
+次のコード1行目の【A】【B】に入る組み合わせとして正しいものはどれか。
+
+[ コード ]
+def shop(name,【A】, 【B】):
+    print("flowershop:", name)
+    keys = sorted(argsX.keys())
+    for kw in keys:
+        print(kw, ":", argsX[kw])
+    for Y in argsY:
+        print(Y)
+
+shop("Iris","Open: 9:30 am","Close: 10:30 pm","Monday and holidays are closed.",bouquet="Sunflower",plants="Pachira",dried="Rose")
+```
+
+ここで選択に出てくる`*~`と、`**~`が分からなかったので理解していきます。
+- `*args`
+  - 複数の引数をタプルとして受け取る
+- `**kqargs`
+  - 複数のキーワード引数を辞書として受け取る
+
+
+- `*args`, `**kwargs`というのは慣例として使われる事が多い。
+   - `*`と`**`が頭についていれば他の名前でも問題ない(モジュール名などではないという事)
+
+#### *args
+```python: *args
+def my_sum(*args):
+    return sum(args)
+
+print(my_sum(1))
+print(my_sum(1, 2))
+print(my_sum(1, 2, 3, 4))
+```
+1
+3
+10
+
+このように、関数の引数に`*`をつけて定義すると、任意の数の引数を指定する事が出来る。
+
+#### **kqargs
+```python: **kwargs
+def func_kwargs(**kwargs):
+    print('kwargs: ', kwargs)
+
+func_kwargs(key1=1,)
+func_kwargs(key1=1, two=2)
+```
+kwargs:  {'key1': 1}
+kwargs:  {'key1': 1, 'two': 2}
+
+このように、関数の引数に`**`をつけて定義すると、任意の数のキーワード引数を指定する事が出来る。
+
+更に細かく理解したい人: [Pythonの可変長引数（*args, **kwargs）の使い方](https://note.nkmk.me/python-args-kwargs-usage/)
+
+#### 問題を解く
+`shop("Iris","Open: 9:30 am","Close: 10:30 pm","Monday and holidays are closed.",bouquet="Sunflower",plants="Pachira",dried="Rose")`
+
+1. `"Iris`がまず`name`引数に入る。
+2. 続いて複数の引数を指定している。
+   1. `"Open: 9:30 am","Close: 10:30 pm","Monday and holidays are closed."`
+3. その後に続けてキーワード引数を指定している。
+   1. `bouquet="Sunflower",plants="Pachira",dried="Rose"`
+
+この事から、
+`def shop(name,【A】, 【B】):`は、
+`def shop(name, *args, **kwargs)`と言う事が分かる。
+
+
 ## 関数に関して
 #### docstring
 - 1行目はいつでも常に、オブジェクトの目的の短く簡潔な要約とすべきである。
