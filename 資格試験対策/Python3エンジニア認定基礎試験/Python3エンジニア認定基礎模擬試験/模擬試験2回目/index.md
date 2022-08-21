@@ -331,3 +331,81 @@ kwargs:  {'key1': 1, 'two': 2}
 
 これは間違いで、
 `-> value`, `:int`, `:str`がアノテーションに該当します。
+
+
+## zip()
+- 問題
+```md:
+次の実行結果を得たい場合に、コードの2行目（★印の行）を代替するものとして正しいものはどれか。
+
+[実行結果]
+[(1, 4, 8), (3, 9, 27), (5, 25, 125)]
+
+[コード]
+matrix = [[1, 3, 5], [4, 9, 25], [8, 27, 125]]
+power = [[row[i] for row in matrix] for i in range(3)] ★
+print(power)
+```
+
+- Point
+  - 2次元リスト -> リスト + タプル(中の要素)へ変換しているということ。
+
+#### タプルからリストへ変換する
+```python: list -> tuple
+# リストからタプルへ変換する
+language_list = ['Python', 'Java', 'C#']
+print(language_list)
+
+language_tuple = tuple(language_list)
+print(language_tuple)
+```
+['Python', 'Java', 'C#']
+('Python', 'Java', 'C#')
+期待した結果になっています。
+
+```python: list -> tuble
+# 2次元リストからタプルへ変換する
+language_list = [['Python', 'Java', 'C#'], ['C', 'PHP', 'Ruby'], ['Go', 'Dart', 'Perl']]
+print(language_list)
+
+language_tuple = tuple(language_list)
+print(language_tuple)
+```
+[['Python', 'Java', 'C#'], ['C', 'PHP', 'Ruby'], ['Go', 'Dart', 'Perl']]
+(['Python', 'Java', 'C#'], ['C', 'PHP', 'Ruby'], ['Go', 'Dart', 'Perl'])
+期待した結果ではなく、タプルの中にリストがある状態になっています。
+
+#### zip関数を使う
+zip関数は、2つ以上あるリスト型や辞書型、タプル型などの要素を変換出来ます。
+
+```python: zip
+# 2次元リストからタプルへ変換する
+language_list = [['Python', 'Java', 'C#'], ['C', 'PHP', 'Ruby'], ['Go', 'Dart', 'Perl']]
+print(language_list)
+
+language_tuple = list(zip(language_list))
+print(language_tuple)
+```
+[(['Python', 'Java', 'C#'],), (['C', 'PHP', 'Ruby'],), (['Go', 'Dart', 'Perl'],)]
+期待した通りに出力されません。
+
+`language_tuple = list(zip(language_list))`を`language_tuple = list(zip(*language_list))`に変えると期待した通りに出力されます。
+[('Python', 'C', 'Go'), ('Java', 'PHP', 'Dart'), ('C#', 'Ruby', 'Perl')]
+
+変更点は、zipの引数に`*`を付ける点です。
+
+- リスト自体に`*`を付けた時の処理を確認する
+```python: *list
+language_list = [['Python', 'Java', 'C#'], ['C', 'PHP', 'Ruby'], ['Go', 'Dart', 'Perl']]
+print(language_list)
+print(*language_list)
+```
+[['Python', 'Java', 'C#'], ['C', 'PHP', 'Ruby'], ['Go', 'Dart', 'Perl']]
+['Python', 'Java', 'C#'] ['C', 'PHP', 'Ruby'] ['Go', 'Dart', 'Perl']
+この時点で出力されている内容が違う事が分かります。
+
+`print(*language_list)`の出力は、
+`print(language_list[0], language_list[1], language_list[2])`と同じ出力である事が分かります。
+よって、`*list名`とする事で、リストの内容を別個に取り出して関数に渡しているということが分かりました。
+
+なので、`power = list(zip(matrix))`ではなく、`power = list(zip(*matrix))`が正答ということになります。
