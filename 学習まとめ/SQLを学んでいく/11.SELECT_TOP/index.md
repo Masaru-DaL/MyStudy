@@ -50,4 +50,18 @@ SELECT TOP 50 PERCENT * FROM Customers;
 91個中46個のレコードが出力されます。
 
 ## 11-4. WHERE句の追加
+- Customersテーブルから最初の3つのレコードを選択します。
+  - かつ、国名がGermanyの場合です
+```sql: SELECT TOP(WHERE)
+SELECT TOP 3 * FROM Customers
+WHERE Country='Germany';
+```
+![](2022-08-23-15-38-07.png)
+
+- MySQL(LIMIT)の場合
+```sql: LIMIT(WHERE)
+SELECT * FROM Customers
+WHERE Country='Germany'
+LIMIT 3;
+```
 
