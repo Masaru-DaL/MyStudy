@@ -23,3 +23,9 @@ SELECT SUM(column_name)
 FROM table_name
 WHERE condition;
 ```
+
+## 13-1. DemoDatabase
+https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all
+`select * from Products`に変更して実行してください。
+
+## 13-2. 
