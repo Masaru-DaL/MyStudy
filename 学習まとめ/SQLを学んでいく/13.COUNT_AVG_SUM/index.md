@@ -27,5 +27,34 @@ WHERE condition;
 ## 13-1. DemoDatabase
 https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all
 `select * from Products`に変更して実行してください。
+SUM()は、`SELECT * FROM OrderDetails;`で実行してください。
 
-## 13-2. 
+## 13-2. COUNT()
+- Productsテーブルから製品の数を検索します
+
+```sql: COUNT
+SELECT COUNT(ProductID)
+FROM Products;
+```
+![](2022-08-24-20-54-59.png)
+ProductIDが何個あるかの結果が出ます。
+
+## 13-3. AVG()
+- Productsテーブルから全ての製品の平均価格を見つけます
+
+```sql: AVG
+SELECT AVG(Price)
+FROM Products;
+```
+![](2022-08-24-20-56-39.png)
+
+## 13-4. SUM()
+- OrderDetailsからQuantityフィールドの合計を求めます
+
+```sql: SUM
+SELECT SUM(Quantity)
+FROM OrderDetails;
+```
+![](2022-08-24-21-00-42.png)
+
+
