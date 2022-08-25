@@ -21,3 +21,19 @@ AND or OR演算子を使用して、任意の数の条件を組み合わせる�
 ## 14-1. DemoDatabase
 https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all
 
+## 14-2. LIKEの実行
+#### 14-2-1. LIKE 'a%'
+- `a`で始まるCustomerNameを持つ全ての顧客を選択する
+
+```sql: LIKE.1
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%';
+```
+![](2022-08-26-07-41-33.png)
+
+#### 14-2-2. LIKE '%a'
+- `a`で終わるCustomerNameを持つ全ての顧客を選択する
+
+```sql: LIKE.2
+SELECT * FROM Customers
+
