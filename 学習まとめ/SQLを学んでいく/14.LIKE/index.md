@@ -36,4 +36,8 @@ WHERE CustomerName LIKE 'a%';
 
 ```sql: LIKE.2
 SELECT * FROM Customers
+WHERE CustomerName LIKE '%a';
+```
+![](2022-08-26-07-43-32.png)
+
 
