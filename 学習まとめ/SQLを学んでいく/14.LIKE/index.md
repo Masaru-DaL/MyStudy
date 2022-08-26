@@ -40,4 +40,13 @@ WHERE CustomerName LIKE '%a';
 ```
 ![](2022-08-26-07-43-32.png)
 
+#### 14-2-3. LIKE '%or%'
+- 任意の位置に「or」があるCustomerNameを持つ全ての顧客を選択する
 
+```sql: LIKE.3
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%or%';
+```
+![](2022-08-26-16-22-24.png)
+Antonio M**or**eno Taqueria
+Around the H**or**n などがヒットします。
