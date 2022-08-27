@@ -78,3 +78,12 @@ WHERE CustomerName LIKE 'a__%';
 ```
 ![](2022-08-27-12-03-54.png)
 
+#### 14-2-7. LIKE 'a%o'
+- `a`で始まり、`o`で終わるContactNameを持つ全ての顧客を選択する
+
+```sql: LIKE.7
+SELECT * FROM Customers
+WHERE ContactName LIKE 'a%o';
+```
+![](2022-08-27-12-06-44.png)
+
