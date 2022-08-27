@@ -14,4 +14,11 @@ https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all
 ## 15-2. % ワイルドカードの使用
 - Cityが`ber`で始まる全ての顧客を選択する
 
+```sql: %
+SELECT * FROM Customers
+WHERE City LIKE 'ber%'
+```
+![](2022-08-27-12-51-30.png)
+~で始まるという指定は`%`より前に任意の文字列を指定する
+
 
