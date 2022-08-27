@@ -41,7 +41,7 @@ WHERE CustomerName LIKE '%a';
 ![](2022-08-26-07-43-32.png)
 
 #### 14-2-3. LIKE '%or%'
-- 任意の位置に「or」があるCustomerNameを持つ全ての顧客を選択する
+- 任意の位置に`or`があるCustomerNameを持つ全ての顧客を選択する
 
 ```sql: LIKE.3
 SELECT * FROM Customers
@@ -60,4 +60,11 @@ WHERE CustomerName LIKE '_r%'
 ```
 ![](2022-08-27-10-05-29.png)
 
+#### 14-2-5. LIKE 'a__%'
+- `a`で始まり、長さが3文字以上のCustomerNameを持つ全ての顧客を選択する
 
+```sql: LIKE.5
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a__%'
+```
+![](2022-08-27-10-07-44.png)
