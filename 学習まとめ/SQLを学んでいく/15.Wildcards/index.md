@@ -80,10 +80,14 @@ WHERE City LIKE '[a-c]%';
 ## 15-5-1. [!charlist] ワイルドカードの使用
 - Cityが`b`, `s`, `p`で始まらない全ての顧客を選択する
 
-```sql: [!charlist]
+```sql: [!charlist] LIKE
 SELECT * FROM Customers
 WHERE City LIKE '[!bsp]%';
 ```
+または:
+```sql: [!charlist] NOT LIKE
+SELECT * FROM Customers
+WHERE City NOT LIKE '[!bsp]%';
+```
 ![](2022-08-27-21-01-03.png)
 
-## 15-5-2. [!charlist] ワイルドカードの使用
