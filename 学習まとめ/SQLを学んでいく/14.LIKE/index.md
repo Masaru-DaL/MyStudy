@@ -68,3 +68,5 @@ SELECT * FROM Customers
 WHERE CustomerName LIKE 'a__%'
 ```
 ![](2022-08-27-10-07-44.png)
+
+#### 14-2-6. LIKE 
