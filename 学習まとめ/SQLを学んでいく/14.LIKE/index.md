@@ -50,3 +50,14 @@ WHERE CustomerName LIKE '%or%';
 ![](2022-08-26-16-22-24.png)
 Antonio M**or**eno Taqueria
 Around the H**or**n などがヒットします。
+
+#### 14-2-4. LIKE '_r%'
+- 2番目の位置に`r`を持つCustomerNameを持つ全ての顧客を選択する
+
+```sql: LIKE.4
+SELECT * FROM Customers
+WHERE CustomerName LIKE '_r%'
+```
+![](2022-08-27-10-05-29.png)
+
+
