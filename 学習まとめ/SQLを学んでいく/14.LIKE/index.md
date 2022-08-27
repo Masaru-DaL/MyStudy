@@ -56,7 +56,7 @@ Around the H**or**n などがヒットします。
 
 ```sql: LIKE.4
 SELECT * FROM Customers
-WHERE CustomerName LIKE '_r%'
+WHERE CustomerName LIKE '_r%';
 ```
 ![](2022-08-27-10-05-29.png)
 
@@ -65,8 +65,16 @@ WHERE CustomerName LIKE '_r%'
 
 ```sql: LIKE.5
 SELECT * FROM Customers
-WHERE CustomerName LIKE 'a__%'
+WHERE CustomerName LIKE 'a__%';
 ```
 ![](2022-08-27-10-07-44.png)
 
-#### 14-2-6. LIKE 
+#### 14-2-6. LIKE
+- `a`で始まり、長さが3文字以上のCustomerNameを持つ全ての顧客を選択する
+
+```sql: LIKE.6
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a__%';
+```
+![](2022-08-27-12-03-54.png)
+
