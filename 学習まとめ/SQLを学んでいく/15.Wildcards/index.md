@@ -59,3 +59,31 @@ WHERE City LIKE 'L_n_on';
 ![](2022-08-27-13-04-44.png)
 検索条件を細かくするとヒットするものも狭まる。
 
+## 15-4-1. [charlist] ワイルドカードの使用
+- Cityが`b`, `s`, `p`のいずれかで始まる全ての顧客を選択する
+
+```sql: [charlist]
+SELECT * FROM Customers
+WHERE City LIKE '[bsp]%';
+```
+![](2022-08-27-20-56-36.png)
+
+## 15-4-2. [charlist] ワイルドカードの使用
+- Cityが`a`, `b`, `c`のいずれかで始まる全ての顧客を選択する
+
+```sql: [charlist]
+SELECT * FROM Customers
+WHERE City LIKE '[a-c]%';
+```
+![](2022-08-27-20-58-36.png)
+
+## 15-5-1. [!charlist] ワイルドカードの使用
+- Cityが`b`, `s`, `p`で始まらない全ての顧客を選択する
+
+```sql: [!charlist]
+SELECT * FROM Customers
+WHERE City LIKE '[!bsp]%';
+```
+![](2022-08-27-21-01-03.png)
+
+## 15-5-2. [!charlist] ワイルドカードの使用
