@@ -87,3 +87,11 @@ WHERE ContactName LIKE 'a%o';
 ```
 ![](2022-08-27-12-06-44.png)
 
+#### 14-2-8. NOT LIKE 'a%'
+- `a`で始まらないCustomerNameを持つ全ての顧客を選択する
+
+```sql: NOT LIKE
+SELECT * FROM Customers
+WHERE CustomerName NOT LIKE 'a%';
+```
+![](2022-08-27-12-09-24.png)
