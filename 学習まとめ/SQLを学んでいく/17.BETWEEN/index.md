@@ -58,3 +58,12 @@ ORDER BY ProductName;
 今回指定しているのは`人名`です。
 1と2の間の、というのはアルファベット順で1〜2の間の人のデータを取ってきています。(1と2も含む)
 :::
+
+```sql: BETWEEN(text)
+SELECT * FROM Products
+WHERE ProductName BETWEEN "Carnarvon Tigers" AND "Chef Anton's Cajun Seasoning"
+ORDER BY ProductName;
+```
+![](2022-08-28-22-23-44.png)
+こっちの方が分かりやすいですね
+
