@@ -46,4 +46,15 @@ AND CategoryID NOT IN (1, 2, 3);
 ![](2022-08-28-22-16-12.png)
 
 ## 17-5. BETWEEN (テキスト値)
+- `Carnarvon Tigers`と`Mozzarella di Giovanni`の間のProductNameを持つ全ての製品を選択する
 
+```sql: BETWEEN(text)
+SELECT * FROM Products
+WHERE ProductName BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni'
+ORDER BY ProductName;
+```
+![](2022-08-28-22-18-43.png)
+:::message
+今回指定しているのは`人名`です。
+1と2の間の、というのはアルファベット順で1〜2の間の人のデータを取ってきています。(1と2も含む)
+:::
