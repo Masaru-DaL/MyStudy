@@ -80,4 +80,22 @@ ORDER BY ProductName;
 注目すべきはProductID60と30の間が抜けていることです。
 :::
 
+## 17-7. DemoDatabase
+`SELECT * FROM Orders;`を実行してください。
+Ordersテーブルを使用します。
+
+## 17-8. BETWEEN (日付)
+- OrderDataが'01-July-1996' から '31-July-1996' の間のすべての注文を選択します。
+
+```sql: BETWEEN(Date)
+SELECT * FROM Orders
+WHERE OrderDate BETWEEN #07/01/1996# AND #07/31/1996#;
+```
+または:
+```sql: BETWEEN(Date)
+SELECT * FROM Orders
+WHERE OrderDate BETWEEN '1996-07-01' AND '1996-07-31';
+```
+![](2022-08-28-22-33-13.png)
+同じ結果が得られます。
 
