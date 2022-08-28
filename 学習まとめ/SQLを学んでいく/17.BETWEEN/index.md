@@ -67,3 +67,17 @@ ORDER BY ProductName;
 ![](2022-08-28-22-23-44.png)
 こっちの方が分かりやすいですね
 
+## 17-6. NOT BETWEEN (テキスト値)
+- `17-5`ではない結果を表示します。
+
+```sql: NOT BETWEEN
+SELECT * FROM Products
+WHERE ProductName NOT BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni'
+ORDER BY ProductName;
+```
+![](2022-08-28-22-26-52.png)
+:::message
+注目すべきはProductID60と30の間が抜けていることです。
+:::
+
+
