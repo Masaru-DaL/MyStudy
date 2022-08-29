@@ -50,3 +50,27 @@ SELECT CustomerName, Address + ', ' + PostalCode + ' ' + City + ', ' + Country A
 FROM Customers;
 ```
 ![](2022-08-29-12-50-20.png)
+
+- MySQLの場合
+```sql: Aliases(MySQL)
+SELECT CustomerName, CONCAT(Address,', ',PostalCode,', ',City,', ',Country) AS Address
+FROM Customers;
+```
+
+## 18-3. Aliases (Table)
+- Customersテーブルを`c`, Ordersテーブルを`o`という名前でエイリアスを付ける。
+  - CustomerID=4の条件に合うものを表示する
+
+```sql: AliasesTable
+SELECT o.OrderID, o.OrderDate, c.CustomerName
+FROM Customers AS c, Orders AS o
+WHERE c.CustomerName='Around the Horn' AND c.CustomerID=o.CustomerID;
+```
+![](2022-08-29-12-56-24.png)
+
+- 上記と同じだが、エイリアスを付けない場合
+```sql: not Aliases
+SELECT Orders.OrderID, Orders.OrderDate, Customers.CustomerName
+FROM Customers, Orders
+WHERE Customers.CustomerName='Around the Horn' AND Customers.CustomerID=Orders.CustomerID;
+```
