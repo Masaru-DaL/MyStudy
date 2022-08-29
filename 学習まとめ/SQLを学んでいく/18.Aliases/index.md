@@ -28,16 +28,25 @@ CustomersTable & OrdersTableの2つを使用
 SELECT CustomerID AS ID, CustomerName AS Customer
 FROM Customers;
 ```
+![](2022-08-29-12-49-39.png)
 
-## 18-2-2. Aliases (列)
+## 18-2-2. Aliases (スペースを含む場合)
 - CustomerNameをCustomerに、ContactNameをContact Personに変更して、表示する
 
 ```sql: Aliases
 SELECT CustomerName AS Customer, ContactName AS [Contact Person]
 FROM Customers;
 ```
+![](2022-08-29-12-49-59.png)
 :::message
 エイリアス名にスペースを含む場合は二重引用符、または角括弧が必要です。
 :::
 
+## 18-2-3. Aliases (結合)
+- Address, PostalCode, City, Countryの4つの列を結合し、Addressという名前で作成し、表示する。
 
+```sql: Aliases
+SELECT CustomerName, Address + ', ' + PostalCode + ' ' + City + ', ' + Country AS Address
+FROM Customers;
+```
+![](2022-08-29-12-50-20.png)
