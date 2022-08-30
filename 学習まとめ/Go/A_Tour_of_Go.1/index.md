@@ -121,3 +121,35 @@ a [3]int
 
 `func add(x int, y int)`
 -> `func add(x, y int)`
+
+## 1-6. Multiple results
+```go:
+func swap(x, y string) (string, string) {
+	return y, x
+}
+```
+戻り値の第一引数と第二引数を交換するには、戻り値を交換するだけで簡単にできる
+`return y, x`
+
+## 1-7. Named return values
+戻り値となる変数に名前をつけることができる
+
+```go: Named return values
+func split(sum int) (x, y int) {
+	x = sum * 4 / 9
+	y = sum - x
+	return
+}
+```
+`split(sum int)`で関数を定義
+`(x, y int)`で`x`, `y`という名前を戻り値に付けている。
+
+- 変数に名前を付けなかった場合
+```go: not Named return values
+func split(sum int) (int, int) {
+	return sum * 4 / 9, sum - (sum * 4 / 9)
+}
+```
+
+実際に書いてみて分かったが、変数名に`x`, `y`と付ける事で、`y`の戻り値の計算が楽に書けていたことがわかった。(`y = sum - x`)
+変数名を付ける事で可読性も上がるため、実務には必須な技術と思われる。
