@@ -155,4 +155,9 @@ func split(sum int) (int, int) {
 変数名を付ける事で可読性も上がるため、実務には必須な技術と思われる。
 
 ## 1-8. Variables
+`var ~`で変数を宣言することができる
 
+`var c, python, java bool`
+このように複数の変数名+最後に型を宣言する
+結果、`c, python, java`の3つが全てbool型となる。
+int型の場合は`var a, b int`とする。
