@@ -1,6 +1,4 @@
-# A Tour of Go Lesson.1
-Goチュートリアルの最初のレッスン
-
+# A Tour of Go Basics
 ## 1-1. Packages
 Goのプログラムは、**パッケージ(package)で構成される。
 
@@ -161,3 +159,14 @@ func split(sum int) (int, int) {
 このように複数の変数名+最後に型を宣言する
 結果、`c, python, java`の3つが全てbool型となる。
 int型の場合は`var a, b int`とする。
+
+## 1-9. Variables with initializers
+initializers -> 初期化子
+変数名に初期値を設定できるという解釈で良さそう。
+
+`var i, j int = 1, 2` -> `var i, j = 1, 2`
+このように初期値を数値で指定することで、型宣言(int)を省略する事ができる。
+
+## 1-10. Short variable declarations
+短い変数宣言
+**関数**の中では、`var`宣言の代わりに、`:=`の代入文を使い、暗黙的な型宣言ができる
