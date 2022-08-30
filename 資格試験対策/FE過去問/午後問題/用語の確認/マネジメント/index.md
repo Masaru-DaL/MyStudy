@@ -25,4 +25,15 @@
 Computer Telephony Integration
 電話やFAXとコンピュータシステムを統合・連携したシステムのこと
 
-## 
+## SMS
+**サービスマネジメントシステム**: Service Management System
+顧客へのITサービスを管理・提供しているサービス提供者のサービスマネジメントの活動を指揮し、管理する仕組みのこと
+
+## SLA
+**サービスレベル合意書**: Service Level Agreement
+提供するサービスの内容や範囲、品質を明確にして保証し、文書化したもの
+
+## SPOC
+**単一窓口**: Single Point Of Contact
+問合せを受け付ける窓口を一本化したもの
+サービスデスクを利用する人が連絡先を選別する手間を省くことができる
