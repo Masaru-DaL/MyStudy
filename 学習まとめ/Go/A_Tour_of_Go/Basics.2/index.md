@@ -114,3 +114,42 @@ func main() {
 	fmt.Println(Sqrt(2))
 }
 ```
+
+***
+
+- 4, 5をクリアする
+4は`z := 1.0`の値を変更して確認する。
+-> `x`, `x/2`に変更しても問題無し。
+
+5はmainの出力で`z`, `math.Sqrt`と同時に出力して比較する。
+
+```go:
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func Sqrt(x float64) float64 {
+	// 1. 初期値の設定
+	z := 1.0
+
+	// 2. 10回繰り返し, zの出力
+	for i := 1; i <= 10; i++ {
+		z -= (z*z - x) / (2*z)
+		fmt.Println(i, "回目の計算値は", z, "です。")
+		if z == math.Sqrt(x) {
+			break;
+		}
+	}
+	return z
+}
+
+func main() {
+	x := 2.
+
+	fmt.Println("zの結果は: ", Sqrt(x))
+	fmt.Println("math関数の結果は: ", math.Sqrt(x))
+}
+```
