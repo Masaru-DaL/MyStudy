@@ -153,3 +153,25 @@ func main() {
 	fmt.Println("math関数の結果は: ", math.Sqrt(x))
 }
 ```
+
+## 2-9. Switch
+`switch`ステートメントは、`if-else`ステートメントのシーケンスを短く書ける！
+`case`は定数である必要はなく、整数だけでなく文字列でも指定することができる。
+
+- 書き方例
+```go: switch
+n := 1
+
+switch n {
+  case 3:
+    fmt.Println("n is", n)
+  case 2:
+    fmt.Println("n is", n)
+  case 1:
+    fmt.Println("n is", n)
+}
+```
+この場合、`case 1`が該当し、`n is 1`が出力される。
+
+## 2-10. Switch evaluation order
+
