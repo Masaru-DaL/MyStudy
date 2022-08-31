@@ -158,6 +158,10 @@ func main() {
 `switch`ステートメントは、`if-else`ステートメントのシーケンスを短く書ける！
 `case`は定数である必要はなく、整数だけでなく文字列でも指定することができる。
 
+## 2-10. Switch evaluation order
+Switchにおける`case`は、上から下へ`case`を評価する。
+`case`の条件が一致すれば、そこで停止(自動的にbreak)する。
+
 - 書き方例
 ```go: switch
 n := 1
@@ -173,5 +177,8 @@ switch n {
 ```
 この場合、`case 1`が該当し、`n is 1`が出力される。
 
-## 2-10. Switch evaluation order
+## 2-11. Switch with no condition
+条件のないswitch -> `switch true`と書くことと同じ
+いまいち良く分かりませんが、`default`と書く事を指していると思う。要質問。
 
+`default` == `else`
