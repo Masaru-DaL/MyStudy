@@ -258,3 +258,10 @@ var u unit = uint(f)
 var i int = 42 -> `i := 42`
 var f float64 = float64(i) -> `f := float64(i)`
 var u unit = uint(f) -> `u := unit(f)`
+
+## 1-14. Type inference
+どんな型か？は**右側の値(変数、または代入する値)**から推論できる。
+
+`i := 42` -> 整数を代入しているのでint型
+`i := 3.142` -> 小数点を代入しているのでfloat型
+`i := 0.867 + 0.5i` -> complex型
