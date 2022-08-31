@@ -191,3 +191,38 @@ func main() {
 Hello World
 [Hello World]
 [2 3 5 7 11 13]
+
+## 3-7. Slices
+スライス(の概念)はpythonと同じ感じ
+
+## 3-8. Slices are like references to arrays
+```go: slice
+package main
+
+import "fmt"
+
+func main() {
+	names := [4]string{
+		"John",
+		"Paul",
+		"George",
+		"Ringo",
+	}
+	fmt.Println(names)
+
+	a := names[0:2]
+	b := names[1:3]
+	fmt.Println(a, b)
+
+	b[0] = "XXX"
+	fmt.Println(a, b)
+	fmt.Println(names)
+}
+```
+[John Paul George Ringo]
+[John Paul] [Paul George]
+[John XXX] [XXX George]
+[John XXX George Ringo]
+
+スライスで取得した部分の要素の変更が可能。
+`b := names[1:3]` -> `b[0] = "XXX"`
