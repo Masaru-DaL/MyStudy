@@ -69,3 +69,25 @@ struct(構造体)
 
 `type Person`で定義して、人は名前や性別、年齢、身長など様々な要素(フィールド)がある。
 structはフィールドの集まり。という説明はなんとなく理解できる。
+
+```go: struct
+package main
+
+import "fmt"
+
+type Person struct {
+	Name string
+	Sex string
+	Age int
+	Height int
+	Weight int
+}
+
+func main() {
+	fmt.Println(Person{"Musashi", "男", 27, 182, 74})
+}
+```
+引数の順番は、フィールドを定義した順番と同じ
+
+## 3-3. Struct Fields
+structのフィールドには、ドット`.`を用いてアクセスする。
