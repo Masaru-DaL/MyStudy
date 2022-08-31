@@ -87,7 +87,28 @@ func main() {
 	fmt.Println(Person{"Musashi", "男", 27, 182, 74})
 }
 ```
+{Musashi 男 27 182 74}
 引数の順番は、フィールドを定義した順番と同じ
 
 ## 3-3. Struct Fields
 structのフィールドには、ドット`.`を用いてアクセスする。
+
+```go: struct(.)
+package main
+
+import "fmt"
+
+type Person struct {
+	Name string
+	Sex string
+	Age int
+	Height int
+	Weight int
+}
+
+func main() {
+	Musashi := Person{"Musashi", "男", 27, 182, 74}
+	fmt.Println(Musashi.Name)
+}
+```
+Musashi
