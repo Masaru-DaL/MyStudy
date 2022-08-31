@@ -182,3 +182,48 @@ switch n {
 いまいち良く分かりませんが、`default`と書く事を指していると思う。要質問。
 
 `default` == `else`
+
+## 2-12. Defer
+`defer`ステートメントは、`defer`へ渡した関数の実行を、呼び出し元の関数の終わり(returnする)まで遅延させる。
+
+```go: defer
+package main
+
+import "fmt"
+
+func main() {
+	defer fmt.Println("world")
+
+	fmt.Println("hello")
+}
+```
+hello
+world
+
+## 2-13. Stacking defers
+`defer`へ渡した関数が複数ある場合、その呼び出しはスタックされる。
+
+```go: Stacking defers
+package main
+
+import "fmt"
+
+func main() {
+  // ①
+  fmt.Println("counting")
+
+  // ③
+  for i := 0; i < 10; i++ {
+    defer fmt.Println(i)
+  }
+
+  // ②
+  fmt.Println("done")
+}
+```
+1. counting
+2. done
+3. 9 8 7 ... 0
+
+`i`は0~9とカウントが上がっていくが、`defer`で渡した後は9~0と出力されている。
+スタックと同じように`LIFO(Last In First Out)`で実行されることがわかる。
