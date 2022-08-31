@@ -240,3 +240,58 @@ func main() {
 `[4]string` -> `[]string`にしても良いということ。
 
 実務においては何個入る配列かを明示的にしたほうがいいシーンもあるかもしれない。
+
+## 3-10. Slice defaults
+pythonと同様
+
+## 3-11. Slice length and capacity
+length -> 実際の要素の個数
+capacity -> 基底配列の長さ, 最大収納量
+```go: Slice length and capacity
+package main
+
+import "fmt"
+
+func main() {
+	// 1
+	s := []int{2, 3, 5, 7, 11, 13}
+	printSlice(s)
+
+	// 2
+	// Slice the slice to give it zero length.
+	s = s[:0]
+	printSlice(s)
+
+	// 3
+	// Extend its length.
+	s = s[:4]
+	printSlice(s)
+
+	// 4
+	// Drop its first two values.
+	s = s[2:]
+	printSlice(s)
+}
+
+func printSlice(s []int) {
+	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+}
+```
+- 前提知識
+配列の容量が不足した場合、新しい配列を大きなサイズでメモリ確保して元データ参照範囲をコピーする。
+
+1. 配列の宣言と要素の格納(最初に6個格納しているのでこれがcapとなる)
+
+2. 1の基底配列から取得しているので、実際の個数は0、capは6
+
+3. ここが一番のキモ！
+2の配列から取りたい、となった時に要素が何も入っていないため、1の配列から要素を取ってくるという流れになります。
+なので、1の配列のindex0, 1, 2, 3を取ってくるため、len4, cap6となる。
+参考: [Go言語「A Tour of Go」のsliceでわからないことがあります](https://teratail.com/questions/155045)
+
+4. 3から取得します。
+3の配列は[2 3 5 7]
+len4、cap4です。
+`[2:]`を指定すると5, 7が取得され、len2, cap4となります。
+
+## 3-12. Nil slices
