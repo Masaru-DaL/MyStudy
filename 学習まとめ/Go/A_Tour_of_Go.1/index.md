@@ -224,3 +224,37 @@ int32のエイリアス(-2147483648 ～ 2147483647)
 実数部・虚数部をfloatで表現する複素数
 難しそうなので一旦後回し。参考サイトだけ貼り付け。
 [虚数とは何か？複素数とは何か？が一気に分かりやすくなる記事](https://atarimae.biz/archives/500)
+
+## 1-12. Zero values
+変数に初期値を与えずに宣言すると、ゼロ値が与えられる。
+
+```go: Zero values
+var (
+  i int
+  f float64
+  b bool
+  s string
+)
+```
+int, float -> 0
+bool -> false
+string -> "" (空文字列)
+
+## 1-13. Type conversions
+**型変換**が可能
+
+```go: Type conversions
+# iをintで宣言
+var i int = 42
+
+# iの値をfloatへ変換
+var f float64 = float64(i)
+
+# fの値をuintへ変換
+var u unit = uint(f)
+```
+
+- よりシンプルに記述可能
+var i int = 42 -> `i := 42`
+var f float64 = float64(i) -> `f := float64(i)`
+var u unit = uint(f) -> `u := unit(f)`
