@@ -112,3 +112,33 @@ func main() {
 }
 ```
 Musashi
+
+## 3-4. Pointers to structs
+structのフィールドは、structのポインタを通してアクセスすることもできる。
+
+```go: Pointers to structs
+package main
+
+import "fmt"
+
+type Person struct {
+	Name string
+	Sex string
+	Age int
+	Height int
+	Weight int
+}
+
+func main() {
+	Musashi := Person{"Musashi", "男", 27, 182, 74}
+	p := &Musashi
+	p.Age = 1e9
+	fmt.Println(Musashi)
+}
+```
+{Musashi 男 1000000000 182 74}
+
+- 1e9
+  - よく小数点を省略する時に使う記法と同じで、1の後に0を9個付けるという意味
+
+文字列へのアクセスはまた別途理解が必要。
