@@ -600,3 +600,56 @@ func main() {
 5. key(Answer)に対する要素があるか確認する
 `map[]`
 `The value: 0 Present? false` (key(Answer)に対する要素が存在しないのでfalseと出力される)
+
+## 3-23. Exercise Maps
+
+## 3-24. Function values
+**関数も変数である**
+**他の変数と同じように、関数を渡すことができる**
+- 前提知識
+`math.pow` -> べき乗を計算できる
+`math.sqrt` -> 平方根を計算できる
+
+```go: Function values
+import (
+	"fmt"
+	"math"
+)
+
+// 1.
+func compute(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
+}
+
+func main() {
+
+	// 2.
+	hypot := func(x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+
+	// 3.
+	fmt.Println(hypot(5, 12))
+
+	// 4.
+	fmt.Println(compute(hypot))
+
+	// 5.
+	fmt.Println(compute(math.Pow))
+}
+```
+1. compute関数を定義
+引数: `(float64, float64)`を引数に、`float64`を返す関数
+戻り値: `float64`
+らしいのですが、良く意味がわかりません。
+そもそもの書き方が分かってないかもしれん...
+`func compute(fn func(float64, float64) float64) float64{return fn(3, 4)}`
+compute関数の引数に関数を入れているということでした。
+
+
+2. `hypot`にcompute関数を渡している。
+戻り値が引数に指定した計算結果を平方根に計算する
+
+3. (5*5 + 12*12)の平方根
+
+4. (3*3 + 4*4)
