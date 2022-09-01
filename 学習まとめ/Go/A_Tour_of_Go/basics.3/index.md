@@ -589,6 +589,14 @@ func main() {
 `map[Answer:42]`
 `The value: 42`
 
-3. 
+3. Key(Answer)のvalueを、48に更新
 `map[Answer:48]`
 `The value: 48`
+
+4. key(Answer)を削除
+`map[]`
+`The value: 0`
+
+5. key(Answer)に対する要素があるか確認する
+`map[]`
+`The value: 0 Present? false` (key(Answer)に対する要素が存在しないのでfalseと出力される)
