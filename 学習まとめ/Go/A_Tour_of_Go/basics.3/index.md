@@ -410,3 +410,17 @@ func printSlice(s []int) {
 なぜcap=6となるのか？
 
 ## 3-16. Range
+- 前提知識
+`fmt.Printf("2**%d = %d\n", i, v`
+`fmt.Printf`は、フォーマットを指定して引数を出力できる。
+`%d`は数値
+`%d`が2つあり、引数に`i`, `v`があるので、`2**%d`に`i`が入り、`= %d_n`に`v`が入る。
+
+- range
+rangeはforループに利用する。
+スライスやマップをひとつずつ反復処理するために使用する。
+スライスをrangeで繰り返す場合、rangeは反復毎に2つの変数を返す(1. index番号, 2. indexの場所の要素のコピー)
+
+`for index番号, indexの場所の要素のコピー := range スライス {}`
+
+## 3-17. Range continued
