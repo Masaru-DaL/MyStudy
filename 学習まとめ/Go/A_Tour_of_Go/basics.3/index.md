@@ -295,3 +295,118 @@ len4、cap4です。
 `[2:]`を指定すると5, 7が取得され、len2, cap4となります。
 
 ## 3-12. Nil slices
+スライスのゼロ値は`nil`である。
+
+`var s []int` (空のリスト)
+`if s == nil`が成立する。
+
+## 3-13. Creating a slice with make
+`make`(組み込み関数)でスライスを作成することができる。
+`make(型, len, cap)`
+第2引数に指定するとlenになり、第3引数は省略可能
+
+```go: Creating a slice with make
+package main
+
+import "fmt"
+
+func main() {
+	// 1.
+	a := make([]int, 5)
+	printSlice("a", a)
+
+	// 2.
+	b := make([]int, 0, 5)
+	printSlice("b", b)
+
+	// 3.
+	c := b[:2]
+	printSlice("c", c)
+
+	// 4.
+	d := c[2:5]
+	printSlice("d", d)
+}
+
+func printSlice(s string, x []int) {
+	fmt.Printf("%s len=%d cap=%d %v\n",
+		s, len(x), cap(x), x)
+}
+```
+1. 空のリストの宣言
+`make([], 5)` -> len=5
+出力結果: len=5 cap=5 [0 0 0 0 0]
+
+2. 空のリストの宣言
+`make([]int, 0, 5)` -> len=0, cap=5
+出力結果: len=0 cap=5 []
+
+3. lenが0の配列からスライスする
+その場合、cap=5に合わせてゼロ値がある配列からスライスをすることになる。
+`[0, 0, 0, 0, 0]` これに対して`[:2]`
+-> index0, 1をスライス
+`[0, 0]`
+len=2, cap=5(2の基底配列を引き継ぐ)
+
+4. 3の`len=2 cap=2 [0, 0]`から`[2:5]`のスライスをする
+なぜcap=3になるのかが不明。
+
+## 3-14. Slices of slices
+多次元スライスの中のスライスの型をそれぞれ違う型に出来るか要確認。
+
+```go: slice
+board := [][]string{
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
+	}
+```
+
+## 3-15. Appending to a slice
+スライスへ新しい要素を追加するには`append`を使用する。
+`append(追加先スライス, 追加する要素)`
+
+```go: append
+package main
+
+import "fmt"
+
+func main() {
+	// 1.
+	var s []int
+	printSlice(s)
+
+	// 2.
+	// append works on nil slices.
+	s = append(s, 0)
+	printSlice(s)
+
+	// 3.
+	// The slice grows as needed.
+	s = append(s, 1)
+	printSlice(s)
+
+	// 4.
+	// We can add more than one element at a time.
+	s = append(s, 2, 3, 4)
+	printSlice(s)
+}
+
+func printSlice(s []int) {
+	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+}
+```
+1. 空のスライスを作成 -> `s`
+`len=0 cap=0 []`
+
+2. `s`に0値を追加
+`len=1 cap=1 [0]`
+
+3. 2の`s`に1値を追加
+`len=2 cap=2 [0, 1]`
+
+4. 3の`s`に複数の値を追加
+`len=5 cap=6 [0, 1, 2, 3, 4]`
+なぜcap=6となるのか？
+
+## 3-16. Range
