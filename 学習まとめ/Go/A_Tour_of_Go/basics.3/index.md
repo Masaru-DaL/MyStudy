@@ -474,23 +474,121 @@ Show関数の中に答えがあるようです。
 0値 -> 完全な青, 255 -> 完全な白
 
 ...その他は分かったような分からないような。
+時間取られそうなので一旦保留。
 
-3. Pic関数にdx, dyの処理を実装する
+## 3-19. Maps
+`make`関数を使用して、mapを生成することができる。
+`make(map[キーの型]値の型)`
 
-3-1. make 関数で長さ dy の [][]uint8 型スライスを作成
-```go:
-func Pic(dx, dy int) [][]uint8 {
-	s := make([][]uint8, dy)
-	return s
+```go: map
+package main
+
+import "fmt"
+
+func main() {
+    m := make(map[string]int)
+
+    fmt.Println(m)
+
+    m["key1"] = 10
+    m["key2"] = 20
+
+    fmt.Println(m)
 }
 ```
+map[]
+map[key1:10 key2:20]
 
-3-2. 
-```go:
-func Pic(dx, dy int) [][]uint8 {
-	s := make([][]uint8, dy)
-	for x := range s {
+- 上記を踏まえた上で
+```go: map(Tour)
+package main
+
+import "fmt"
+
+type Vertex struct {
+	Lat, Long float64
+}
+
+var m map[string]Vertex
+
+func main() {
+  // 1.
+	m = make(map[string]Vertex)
+	fmt.Println(m)
+
+	m["Bell Labs"] = Vertex{
+		40.68433, -74.39967,
 	}
-	return s
+
+  // 2.
+	fmt.Println(m)
+
+  // 3.
+	fmt.Println(m["Bell Labs"])
 }
 ```
+map[]
+map[Bell Labs:{40.68433 -74.39967}]
+{40.68433 -74.39967}
+
+1. make関数で作成すると初期化して使用可能な状態になる。
+
+2. key: `Bell Labs`, value: `{40.68433 -74.39967}`だと分かる。
+
+3. keyを指定すると、対応したvalueが出力される。
+
+## 3-20. Map literals
+mapはkey, valueをセットなので、valueのみは不可
+
+## 3-21. Map literals continued
+mapに渡すトップレベルの型が単純な型名の場合は、リテラルの要素から推定できるので、その型名を省略することができる。
+※何が省略できて、できないか。頭の片隅に置いておく
+
+## 3-22. Mutating Maps
+挿入, 更新 -> `m[key] = elem`
+取得 -> `elem = m[key]`
+削除 -> `delete(m, key)`
+keyに対する要素が存在するかの確認 -> `elem, ok = m[key]`
+(もし`m`にkeyがあれば変数`ok`は`true`, 存在しなければ`false`となる)
+
+```go: Mutating Maps
+package main
+
+import "fmt"
+
+func main() {
+	// 1.
+	m := make(map[string]int)
+	fmt.Println(m)
+
+	// 2.
+	m["Answer"] = 42
+	fmt.Println(m)
+	fmt.Println("The value:", m["Answer"])
+
+	// 3.
+	m["Answer"] = 48
+	fmt.Println(m)
+	fmt.Println("The value:", m["Answer"])
+
+	// 4.
+	delete(m, "Answer")
+	fmt.Println(m)
+	fmt.Println("The value:", m["Answer"])
+
+	// 5.
+	v, ok := m["Answer"]
+	fmt.Println(m)
+	fmt.Println("The value:", v, "Present?", ok)
+}
+```
+1. mapの作成
+`map[]`
+
+2. key -> Answer, value -> 42 で挿入
+`map[Answer:42]`
+`The value: 42`
+
+3. 
+`map[Answer:48]`
+`The value: 48`
