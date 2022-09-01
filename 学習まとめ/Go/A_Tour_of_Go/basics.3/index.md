@@ -424,3 +424,73 @@ rangeはforループに利用する。
 `for index番号, indexの場所の要素のコピー := range スライス {}`
 
 ## 3-17. Range continued
+rangeを使用した場合2つの変数が返されるが、アンダーバー`_`へ代入することで捨てることができる。
+
+1. index番号を捨てる場合
+`for _, value := range slice`
+
+2. 要素を捨てる場合
+`for i, _ := range slice`
+
+3. indexだけ必要な場合、2つの値を省略できる
+`for i := range slice`
+
+## 3-18. Exercise: Slices
+- 条件の洗い出し
+Goal -> pic関数の実装, 画像の表示
+  - 生成する画像は好きにして良い
+	- 長さ dy のsliceに、各要素が8bitのunsigned int型で長さ dx のsliceを割り当てたものを返すように実装する必要がある
+
+1. 最初のコードの意味を理解する
+```go:
+package main
+
+// パッケージのインポート(pic.Show関数が定義)
+import "golang.org/x/tour/pic"
+
+// Pic関数の定義
+func Pic(dx, dy int) [][]uint8 {
+}
+
+// pic.Show関数の呼び出し
+func main() {
+	pic.Show(Pic)
+}
+```
+
+2. pic.Show関数の振る舞いの理解
+`golang.org/x/tour/pic`をググってみる。
+[Go pic](https://pkg.go.dev/golang.org/x/tour/pic)
+
+`func Sh​​ow(f func(dx, dy int ) [][] uint8 )`
+- Showは、実行されると**関数f**(Show(Pic)のpicのことを指す)によって定義された画像を表示する。
+  - `func Pic(dx, dy int) [][]uint8 {}`で定義された画像を表示するという意味
+
+- Pic関数の引数`dx`, `dy`は何を受け取るものか？
+Show関数の中に答えがあるようです。
+[pic.go](https://cs.opensource.google/go/x/tour/+/refs/tags/v0.1.0:pic/pic.go)
+
+`const`で`dx = 256`, `dy = 256`と指定してます。
+0値 -> 完全な青, 255 -> 完全な白
+
+...その他は分かったような分からないような。
+
+3. Pic関数にdx, dyの処理を実装する
+
+3-1. make 関数で長さ dy の [][]uint8 型スライスを作成
+```go:
+func Pic(dx, dy int) [][]uint8 {
+	s := make([][]uint8, dy)
+	return s
+}
+```
+
+3-2. 
+```go:
+func Pic(dx, dy int) [][]uint8 {
+	s := make([][]uint8, dy)
+	for x := range s {
+	}
+	return s
+}
+```
