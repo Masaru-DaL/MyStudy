@@ -71,6 +71,6 @@
   - 手動での改善は困難を極める
 
 
-![picture 1](../../images/c2a7bef61be741f52a5685a1b13dc2729f19b6557b3d8b357b25a7ba30f2eb48.png)
+![picture 1](../images/c2a7bef61be741f52a5685a1b13dc2729f19b6557b3d8b357b25a7ba30f2eb48.png)
 
-![picture 2](../../images/3ee18568cde2fb64a4e517d4bf909eb789d1bf14d4285d869f16358a99aa18fd.png)
+![picture 2](../images/3ee18568cde2fb64a4e517d4bf909eb789d1bf14d4285d869f16358a99aa18fd.png)

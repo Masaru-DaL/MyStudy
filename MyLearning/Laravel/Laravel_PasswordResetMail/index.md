@@ -12,13 +12,13 @@
 ## mailhogを使ったテスト!
 ### mailhogの導入
 docker-compose.ymlに追加
-![picture 2](../../images/6258f2836c505f54dfd88f4d9e61bada7f2ab2fcdd82952a91644a9208fe8596.png)
+![picture 2](../images/6258f2836c505f54dfd88f4d9e61bada7f2ab2fcdd82952a91644a9208fe8596.png)
 
 
-[picture 1](../../images/9c5b80d64aaec4b9361851ce6baf9c9a40683a90052fc40a6bba81c618725052.png)
+[picture 1](../images/9c5b80d64aaec4b9361851ce6baf9c9a40683a90052fc40a6bba81c618725052.png)
 
 ### src/.envに記述
-![picture 3](../../images/d617132488bb32cc8e035c66822b6249bef58932c573ac33cd700ef729c6fff1.png)
+![picture 3](../images/d617132488bb32cc8e035c66822b6249bef58932c573ac33cd700ef729c6fff1.png)
 
 MAIL_FROM_ADDRESS は何でも良い。
 
