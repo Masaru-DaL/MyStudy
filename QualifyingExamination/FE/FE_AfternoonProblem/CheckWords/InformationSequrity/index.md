@@ -19,3 +19,8 @@ SQLでのプレースホルダ
 https://lets.postgresql.jp/documents/tutorial/with_php/against_sql_injection/placeholder/1
 SQL文と埋め込む値を別にしておくというのが根本的な考え方
 プレースホルダとして確保した場所にSQL文を入力されたとしてもSQL文+SQL文となって実行できないということになる。
+
+- エスケープ処理
+  - `'`, `;`などをただの文字列として扱うように予め設定しておく。
+
+
