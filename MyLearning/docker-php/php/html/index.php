@@ -3,9 +3,10 @@
 <body>
 
 <p>掲示板</p>
-
+<p>・ユーザ名</p>
 <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>">
 <input type="text" name="personal_name"><br><br>
+<p>・投稿する内容</p>
 <textarea name="contents" rows="8" cols="40">
 </textarea><br><br>
 <input type="submit" name="btn1" value="投稿する">

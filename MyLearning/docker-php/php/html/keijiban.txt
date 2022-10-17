@@ -1,1 +1,1 @@
-<hr><p>投稿者:ユーザ1</p><p>内容:</p><p>初めての掲示板を使用しました。</p>
+<hr><p>投稿者:User2</p><p>内容:</p><p><s>test</s></p><hr><p>投稿者:Hacker</p><p>内容:</p><p><script>alert(document.cookie)</script></p><hr><p>投稿者:User3</p><p>内容:</p><p>おしゃべり相手募集中</p><hr><p>投稿者:User3</p><p>内容:</p><p>おしゃべり相手募集中</p><hr><p>投稿者:User3</p><p>内容:</p><p>おしゃべり相手募集中</p>
