@@ -232,4 +232,65 @@ date: Wed, 19 Oct 2022 04:55:10 GMT
 server: Google Frontend
 via: 1.1 google
 alt-svc: h3=":443"; ma=2592000, h3-29=":443"; ma=2592000
+
+```
+
+- `curl -v https://raretech.site | head -c 20`
+
+```shell:
+-> curl -v https://raretech.site | head -c 20                           main
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 34.149.182.233:443...
+* Connected to raretech.site (34.149.182.233) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*  CAfile: /etc/ssl/cert.pem
+*  CApath: none
+
+# スリーウェイハンドシェイク
+* (304) (OUT), TLS handshake, Client hello (1):
+} [318 bytes data]
+* (304) (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* (304) (IN), TLS handshake, Unknown (8):
+{ [15 bytes data]
+* (304) (IN), TLS handshake, Certificate (11):
+{ [4207 bytes data]
+* (304) (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* (304) (IN), TLS handshake, Finished (20):
+{ [36 bytes data]
+* (304) (OUT), TLS handshake, Finished (20):
+} [36 bytes data]
+
+* SSL connection using TLSv1.3 / AEAD-CHACHA20-POLY1305-SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=raretech.site
+*  start date: Sep 11 03:10:00 2022 GMT
+*  expire date: Dec 10 03:09:59 2022 GMT
+*  subjectAltName: host "raretech.site" matched cert's "raretech.site"
+*  issuer: C=US; O=Google Trust Services LLC; CN=GTS CA 1D4
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multiplexing
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x137812200)
+> GET / HTTP/2
+> Host: raretech.site
+> user-agent: curl/7.79.1 # アクセス元
+> accept: */*
+>
+< HTTP/2 200
+< x-powered-by: Next.js
+< content-type: text/html; charset=utf-8
+< cache-control: private, no-cache, no-store, max-age=0, must-revalidate
+< vary: Accept-Encoding
+< date: Wed, 19 Oct 2022 05:08:13 GMT
+< server: Google Frontend
+< via: 1.1 google
+< alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+# 以下省略
 ```
