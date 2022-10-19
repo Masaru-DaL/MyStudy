@@ -47,4 +47,8 @@ dictは辞書検索用のプロトコル
 
 ディレクトリ一覧の取得後、GETで指定のWebページを取得する。
 
-7. FTPSサーバからファイルを取得する。
+7. ファイルにダウンロード
+ `curl -o thatpage.html http://www.example.com/`
+
+カレントディレクトリにthatpage.htmlでファイルが保存される。
+指定Webページのhtmlファイルと同じ。
