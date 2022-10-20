@@ -27,13 +27,15 @@ nginx: 2割弱
 
 Server ≒ WebServer
 Sever, WebServer: ハードウェアを指す場合もあるし、ソフトウェアを指す場合もある
-
-### 2-1. Apache
-
-### 2-2. nginx
-
-### 2-3. IIS(Internet Information Services)
+肌感的にはServer=ハードウェア, WebServer=ソフトウェアを指す感じはする。
+基本的にWebサーバはソフトウェアを指すものとする。
 
 ## 3. WebServerの種類
+
+### 3-1. Apache
+
+### 3-2. nginx
+
+### 3-3. IIS(Internet Information Services)
 
 ## 4. CloudにおけるWebServer
