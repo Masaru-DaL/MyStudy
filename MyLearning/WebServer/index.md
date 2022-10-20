@@ -16,12 +16,17 @@
 
 * **1991年8月にWWWとWebサーバがデビューした**
 * **1992~1993年で一般に急速に広まった**
-  + この時点でのWebサーバの主役は「CERN httpd」「NCSA HTTPd」
-  + 改修がが進まないという不満が募り、「NCSA HTTPd」に修正を加えるためのパッチを集積するプロジェクトが始まった
-  + このプロジェクトに「**Apache Group**」という名前が付けられた
-  + このプロジェクトでNCSA HTTPdのメンテを主目的としたNCSA HTTPdの派生版の「**Apache HTTP Server**」が誕生し、こちらに主役を移すことになった。
+この時点でのWebサーバの主役は「CERN httpd」「NCSA HTTPd」だったが、改修が進まないという不満が募り、「NCSA HTTPd」に修正を加えるためのパッチを集積するプロジェクトが始まった。そして、このプロジェクトに「**Apache Group**」という名前が付けられた。このプロジェクトでNCSA HTTPdのメンテを主目的としたNCSA HTTPdの派生版の「**Apache HTTP Server**」が誕生し、こちらに主役を移すことになった。
+
+* 2015年時点のWebServerの市場
+Apache(派生版含む): 4割
+IIO(MicroSoft): 3割
+nginx: 2割弱
 
 ## 2. Server と WebServer
+
+Server ≒ WebServer
+Sever, WebServer: ハードウェアを指す場合もあるし、ソフトウェアを指す場合もある
 
 ### 2-1. Apache
 
