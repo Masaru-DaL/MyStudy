@@ -22,6 +22,19 @@ Cookieとは、HTTPにおけるブラウザとサーバの間で用いられる*
 
 参照: [HTTP Cookie](https://ja.wikipedia.org/wiki/HTTP_cookie)
 
+### 2-1. Cookieの特徴
+
+#### 2-1-1. サーバからブラウザへレスポンスする時
+
+1. サーバからブラウザへ、HTTPレスポンスのヘッダを利用して小さな情報を送る
+「name=値」の組み合わせ。
+
+#### 2-1-2. ブラウザからサーバへリクエストする時
+
+* Webアプリケーション側では、リクエストヘッダに含まれたCookieを調べることでアクセスした相手を知ることが出来る。
+
+* Cookieは、サーバにアクセスする度に自動送信される
+
 ## 3. Session
 
-参照: [Session](https://ja.wikipedia.org/wiki/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF))
+Sessionは**WebServerで保持する**。
