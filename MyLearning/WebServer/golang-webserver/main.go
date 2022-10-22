@@ -1,15 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 )
 
-func handler(w http.ResponseWriterm r *http.Request) {
-	fmt.Fprintf(w, "Hello, World")
-}
-
 func main() {
-	http.HandlerFunc("/", handler)
-	http.ListenAndServer(":8000", nil)
+	/* ディレクトリを指定する */
+	fs := http.FileServer(http.Dir("static"))
+	/* /にアクセスがきたら指定したディレクトリのコンテンツを表示 */
+	http.Handle("/", fs)
+
+	log.Println("Listening...")
+	http.ListenAndServe(":3000", nil)
 }
