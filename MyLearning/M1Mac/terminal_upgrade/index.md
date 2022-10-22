@@ -9,40 +9,23 @@
 
 * 以下のコードを`.zshrc`に追加
 
+
+
+## 4. bat
+
+catの代替コマンド(catを叩くとbatが効くようにする)
+ `$ brew install bat`
+
 ```c: .zshrc
-if [[ ! -n $TMUX && $- == *l* ]]; then
-  # get the IDs
-  ID=" `tmux list-sessions` "
-  if [[ -z "$ID" ]]; then
-
-    tmux new-session
-
-  fi
-  create_new_session="Create New Session"
-  ID="$ID\n${create_new_session}:"
-  ID=" `echo $ID | peco | cut -d: -f1` "
-  if [[ "$ID" = "${create_new_session}" ]]; then
-
-    tmux new-session
-
-  elif [[ -n "$ID" ]]; then
-
-    tmux attach-session -t "$ID"
-
-  else
-
-    :  # Start terminal normally
-
-  fi
-fi
+alias cat="bat"
 ```
 
-## 2. mycli
+## 5. exa
 
-sql操作における、補完や検索機能などの強化をしてくれる。
+lsの代替コマンド(lsを叩くとexaが効くようにする)
+ `$ brew install exa`
 
- `$ brew install mycli`
-
-## 3. tig
-
-gitのためのCLIツールi
+```c: .zshrc
+alias ls="exa -FG"
+alias ll="exa -al"
+```
