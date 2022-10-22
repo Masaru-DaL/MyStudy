@@ -247,6 +247,31 @@ golangより簡単。
 
 -> python -m http.server 8000
 Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+
 ```
 
 ### 5-3. PHP
+
+* PHP5.4.0から簡易WebServerを立ち上げる機能が追加された。
+  + 「ビルドインウェブサーバー」
+
+`.html` を読み込むために、例えば以下のように記述する。
+
+```php:
+<?php
+  $filepath = $_SERVER["SCRIPT_NAME"];
+
+  if( !preg_match( "/\.html$/", $filepath ) ){
+    return false;
+  }
+
+  chdir( dirname( substr( $filepath, 1 ) ) );
+  require_once( $filepath );
+  return true;
+?>
+```
+
+作業ディレクトリで上のファイルを明示的に指定して実行する。
+ `php -S 127.0.0.1:8080 router.php`
+
+PHPの簡易ウェブサーバは、htmlファイル内にphpのスクリプト
