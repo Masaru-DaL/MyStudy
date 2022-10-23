@@ -83,4 +83,11 @@ WebStorageはJavaScriptのみで使用する事が出来るので、JavaScript�
 
 * sessionStorage
   + ページをブラウザが開いている間に使用可能な[オリジン](https://riotz.works/articles/lopburny/2019/09/06/introduction-and-use-of-web-storage/#:~:text=%E3%80%8C%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%B3%E3%80%8D%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E5%B0%91%E3%81%97%E5%85%B7%E4%BD%93%E7%9A%84%E3%81%AB%E8%AA%AC%E6%98%8E%E3%81%99%E3%82%8B%E3%81%A8%E3%80%81)ごとに区切られた保存領域を管理する。
-  +
+  + データはブラウザが閉じられるまで保存される。
+  + データがサーバに転送されることはない。
+  + ストレージの制限はCookieより大きい(最大5MB)
+
+* localStorage
+  + ブラウザを閉じて、再び開いても持続する。
+  + 有効期限無しでデータを保存し、JavaScriptを介してクリアされる。または、ブラウザのキャッシュorローカルに保存したデータのクリアによってクリアされる。
+  + ストレージ制限は
