@@ -14,7 +14,10 @@
     - [3-2-2. sessionStorage](#3-2-2-sessionstorage)
     - [3-2-3. localStorage](#3-2-3-localstorage)
     - [3-2-4. WebStorageの用途](#3-2-4-webstorageの用途)
-    - [3-2-5. Cookieとの違いは？](#3-2-5-cookieとの違いは)
+  - [3-3. Cookieとの違いは？](#3-3-cookieとの違いは)
+    - [3-3-1. 仕組み](#3-3-1-仕組み)
+    - [3-3-2. 操作](#3-3-2-操作)
+- [4. Session](#4-session)
 
 ## 1. CookieとSessionの概要
 
@@ -119,9 +122,22 @@ WebStorageはJavaScriptのみで使用する事が出来るので、JavaScript�
 * クライアント側の使用状況をまとめてサーバに送信するための一時保管(エラーIDをまとめてログサーバに送信)
 * サーバとのデータ不整合を防止するためのバージョン情報
 
-#### 3-2-5. Cookieとの違いは？
+### 3-3. Cookieとの違いは？
 
-* Cookieは以下の通り
-[2-1-2. Cookie発行までの流れ](#2-1-2-cookie発行までの流れ)
+#### 3-3-1. 仕組み
 
-* WebStorage
+* Cookieの仕組みは以下の通り
+[2. Cookie](#2-cookie)
+
+* WebStorageの仕組み
+**サーバとの通信は関係なく、クライアント側(ブラウザ)でのみデータを保持する**。
+
+#### 3-3-2. 操作
+
+* 通常、CookieもWebStorageもJavaScriptで操作が可能。
+CookieはXSSなどの対策でhttponly属性を付ける事でJavaScriptから操作することを無効化することができる。そうするとJavaScript経由で中身を見る事は出来なくなる。一方、WebStorageにそのような機能はない。
+
+* Cookieの方が挙動を細かく制御することが可能。
+Cookieクッキーには様々な属性(domain, path, 有効期限など)が用意されている。
+
+## 4. Session
