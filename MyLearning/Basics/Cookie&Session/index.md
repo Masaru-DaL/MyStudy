@@ -64,12 +64,23 @@ Cookieとは、情報を発行する仕組み・またはそのデータを指�
 
 * HTML5でCookieに代わるデータ保存の仕組みとして「**Web Storage**」と呼ばれる機能が利用できるようになった。
 WebStorageには、ブラウザ側でKey-Value型でデータ保存する機能がある。また、WebStorageには「
- Session Storage」と「LocalStorage」の2種類がある。CookieとWebStorageの大まかな違いは以下の表の通り。
+ session Storage」と「localStorage」の2種類がある。CookieとWebStorageの大まかな違いは以下の表の通り。
 
 |                | 別Windowでのデータ共有 | データの有効期限           | データ量の上限     | サーバへのデータ送信           | 操作  |
 | -------------- | -------------- | ------------------ | ----------- | -------------------- | --- |
 | Cookie         | ○              | 指定期限まで有効(任意に設定が可能) | 4KB         | サーバへアクセスするたびに毎回自動送信  | サーバサイド言語が多い(phpなど)    |
-| SessionStorage | ×              | ウィンドウやタブを閉じるまで有効   | 1オリジンあたり5MB | 必要時のみスクリプトやフォームなどで送信 | JSのみ    |
-| LocalStorage   | ○              | 永続的に有効             | 1オリジンあたり5MB | 必要時のみスクリプトやフォームなどで送信 | JSのみ    |
+| sessionStorage | ×              | ウィンドウやタブを閉じるまで有効   | 1オリジンあたり5MB | 必要時のみスクリプトやフォームなどで送信 | JSのみ    |
+| localStorage   | ○              | 永続的に有効             | 1オリジンあたり5MB | 必要時のみスクリプトやフォームなどで送信 | JSのみ    |
 
-### 3-2. CookieとWebStorageの比較検討
+### 3-2. WebStorage
+
+#### 3-2-1. WebStorageの概要
+
+1. WebStorageの仕様をサポートするブラウザでWebStorageAPIが使える。
+WebStorageはJavaScriptのみで使用する事が出来るので、JavaScriptでこのAPIを使用するとWebStorageにアクセス出来るということ。
+
+2. sessionStorageとlocalStorageの2種類がある。
+
+* sessionStorage
+  + ページをブラウザが開いている間に使用可能な[オリジン](https://riotz.works/articles/lopburny/2019/09/06/introduction-and-use-of-web-storage/#:~:text=%E3%80%8C%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%B3%E3%80%8D%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E5%B0%91%E3%81%97%E5%85%B7%E4%BD%93%E7%9A%84%E3%81%AB%E8%AA%AC%E6%98%8E%E3%81%99%E3%82%8B%E3%81%A8%E3%80%81)ごとに区切られた保存領域を管理する。
+  +
