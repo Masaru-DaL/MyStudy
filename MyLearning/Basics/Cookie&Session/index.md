@@ -1,4 +1,20 @@
-# CookieとSessionの違いとは
+- [1. CookieとSessionの概要](#1-cookieとsessionの概要)
+  - [1-1. なぜCookieとSessionが存在するのか](#1-1-なぜcookieとsessionが存在するのか)
+  - [1-2. CookieとSessionの関係](#1-2-cookieとsessionの関係)
+- [2. Cookie](#2-cookie)
+  - [2-1. Cookieの特徴](#2-1-cookieの特徴)
+    - [2-1-1. そもそもCookieって何を指すの？](#2-1-1-そもそもcookieって何を指すの)
+    - [2-1-2. Cookie発行までの流れ](#2-1-2-cookie発行までの流れ)
+    - [2-1-3. ブラウザからサーバへ Cookieの送信について](#2-1-3-ブラウザからサーバへ-cookieの送信について)
+    - [2-1-4. Cookieの取り扱い](#2-1-4-cookieの取り扱い)
+- [3. Storage](#3-storage)
+  - [3-1. ブラウザで保存する仕組みの種類](#3-1-ブラウザで保存する仕組みの種類)
+  - [3-2. WebStorage](#3-2-webstorage)
+    - [3-2-1. WebStorageの概要](#3-2-1-webstorageの概要)
+    - [3-2-2. sessionStorage](#3-2-2-sessionstorage)
+    - [3-2-3. localStorage](#3-2-3-localstorage)
+    - [3-2-4. WebStorageの用途](#3-2-4-webstorageの用途)
+    - [3-2-5. Cookieとの違いは？](#3-2-5-cookieとの違いは)
 
 ## 1. CookieとSessionの概要
 
@@ -74,20 +90,38 @@ WebStorageには、ブラウザ側でKey-Value型でデータ保存する機能�
 
 ### 3-2. WebStorage
 
+sessionStorageとlocalStorageの2種類があるが、一般的にlocalStorageを利用するケースが多いようです。
+
 #### 3-2-1. WebStorageの概要
 
-1. WebStorageの仕様をサポートするブラウザでWebStorageAPIが使える。
+* WebStorageの仕様をサポートするブラウザでWebStorageAPIが使える。
 WebStorageはJavaScriptのみで使用する事が出来るので、JavaScriptでこのAPIを使用するとWebStorageにアクセス出来るということ。
 
-2. sessionStorageとlocalStorageの2種類がある。
+#### 3-2-2. sessionStorage
 
-* sessionStorage
-  + ページをブラウザが開いている間に使用可能な[オリジン](https://riotz.works/articles/lopburny/2019/09/06/introduction-and-use-of-web-storage/#:~:text=%E3%80%8C%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%B3%E3%80%8D%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E5%B0%91%E3%81%97%E5%85%B7%E4%BD%93%E7%9A%84%E3%81%AB%E8%AA%AC%E6%98%8E%E3%81%99%E3%82%8B%E3%81%A8%E3%80%81)ごとに区切られた保存領域を管理する。
-  + データはブラウザが閉じられるまで保存される。
-  + データがサーバに転送されることはない。
-  + ストレージの制限はCookieより大きい(最大5MB)
+* ページをブラウザが開いている間に使用可能な[オリジン](https://riotz.works/articles/lopburny/2019/09/06/introduction-and-use-of-web-storage/#:~:text=%E3%80%8C%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%B3%E3%80%8D%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E5%B0%91%E3%81%97%E5%85%B7%E4%BD%93%E7%9A%84%E3%81%AB%E8%AA%AC%E6%98%8E%E3%81%99%E3%82%8B%E3%81%A8%E3%80%81)ごとに区切られた保存領域を管理する。
+* データはブラウザが閉じられるまで保存される。
+* データがサーバに転送されることはない。
+* ストレージの制限はCookieより大きい(最大5MB)
 
-* localStorage
-  + ブラウザを閉じて、再び開いても持続する。
-  + 有効期限無しでデータを保存し、JavaScriptを介してクリアされる。または、ブラウザのキャッシュorローカルに保存したデータのクリアによってクリアされる。
-  + ストレージ制限は
+#### 3-2-3. localStorage
+
+* ブラウザを閉じて、再び開いても持続する。
+* 有効期限無しでデータを保存し、JavaScriptを介してクリアされる。または、ブラウザのキャッシュorローカルに保存したデータのクリアによってクリアされる。
+* ストレージ制限は一番大きい。
+
+#### 3-2-4. WebStorageの用途
+
+ユースケースが多いものをピックアップする。
+
+* 表示に関する各種設定情報(通知表示の有無など)
+* ユーザの操作やアクションに関する情報(お気に入り、閲覧したページ、商品)
+* クライアント側の使用状況をまとめてサーバに送信するための一時保管(エラーIDをまとめてログサーバに送信)
+* サーバとのデータ不整合を防止するためのバージョン情報
+
+#### 3-2-5. Cookieとの違いは？
+
+* Cookieは以下の通り
+[2-1-2. Cookie発行までの流れ](#2-1-2-cookie発行までの流れ)
+
+* WebStorage
