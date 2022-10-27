@@ -69,3 +69,37 @@
   + データ量が膨大になる
   + 同時に複数人で迅速かつ安全にデータの利用が可能
   + クエリ実行には複雑な論理と言語を使用する(つまり、難易度が高い)
+
+## 5. データベースの種類
+
+- RDB(Relational DataBase)
+  - リレーショナルデータベース。
+  - 列と行を持つテーブルの集合して編成される。
+  - 構造化された情報にアクセスするのに適する
+
+- ODB(Object Database) / OODB(Object Oriented DataBase)
+  - オプジェクトデータベース = オブジェクト指向データベース
+  - OODBに保存した情報はオブジェクト指向プログラミングの場合と同様に、オブジェクトとして扱われる。
+
+- DDB(Distributed DataBase)
+  - 分散データベース
+  - 2つ以上のファイルで構成される。
+  - 物理的に同じ場所にある複数のコンピュータに格納可能
+  - さまざまなネットワークにわたって分散配置することも可能
+
+- DWH(Data Ware House)
+  - データウェアハウス
+  - 様々なシステムからデータを集めて整理する「データの倉庫」
+  - データが時系列で保存される
+    - 過去のデータ履歴を確認できる
+    - システムごとのデータを集約して全体のデータとして活用できる
+  - 高速なクエリと分析に特化して設計された
+
+- NoSQL(Not Only SQL)
+  - 
+- GDB(Graph DataBase)
+- OSSDB(Open Source Software DataBase)
+- CDB(Cloud DataBase)
+- MMDB(Multi-Model DataBase)
+- DocumentDB / JsonDB
+- ADB(Autonomous DataBase)
