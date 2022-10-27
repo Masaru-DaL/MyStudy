@@ -153,4 +153,10 @@
   - GUIが備わっている
   - 場合によって独自のDBを構築できる。
 
+## 7. データベース管理システム（DBMS）とは
 
+[Oracle Database](https://www.oracle.com/jp/database/what-is-database/)
+
+> 多くの場合、データベースには、データベースの包括的なソフトウェア・プログラムであるデータベース管理システム（DBMS）が必要です。DBMSは、データベースとそのエンド・ユーザーまたはプログラムとの間でインターフェイスとして機能し、情報の編成方法と最適化方法をユーザーが取得、更新、および管理できるようにします。また、DBMSはデータベースの監視と制御を容易にし、パフォーマンスの監視、チューニング、バックアップとリカバリなどのさまざまな管理操作を可能にします。
+
+> 広く使用されているデータベース・ソフトウェア（DBMS）の例として、MySQL、Microsoft Access、Microsoft SQL Server、FileMaker Pro、Oracle Database、dBASEがあります。
