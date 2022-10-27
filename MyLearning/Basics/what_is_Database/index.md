@@ -164,3 +164,11 @@
   - SQLを用いて操作する
 
 > 広く使用されているデータベース・ソフトウェア（DBMS）の例として、MySQL、Microsoft Access、Microsoft SQL Server、FileMaker Pro、Oracle Database、dBASEがあります。
+
+## 8. MySQL Databaseとは
+
+[Oracle Database](https://www.oracle.com/jp/database/what-is-database/)
+
+> MySQL は、SQLに基づくオープン・ソースのリレーショナル・データベース管理システムです。Webアプリケーション用に設計および最適化されており、どのプラットフォーム上でも実行できます。新しい多彩な要件がインターネットで求められるようになるに伴い、Web開発者とWebベースのアプリケーションにとってMySQLが最適なプラットフォームになっています。数百万件のクエリと数千件のトランザクションを処理するように設計されているMySQLは、複数の送金を管理する必要があるeコマース・ビジネスで盛んに利用されています。MySQLで目立つ特徴はオンデマンドの柔軟性です。
+
+> Airbnb、Uber、LinkedIn、Facebook、Twitter、YouTubeをはじめとして、世界中に多数の利用者を持つWebサイトやWebベース・アプリケーションをDBMSとしてMySQLが支えています。
