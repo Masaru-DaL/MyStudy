@@ -18,7 +18,7 @@
 
 ## 2. SQLとは
 
-[SQL Wikipedia](https://ja.wikibooks.org/wiki/SQL#:~:text=English%E3%81%AE%E9%83%A8%E5%88%86%E3%82%92%E9%99%A4%E3%81%84, %E3%81%8C%E7%94%9F%E3%81%BF%E5%87%BA%E3%81%95%E3%82%8C%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82)
+[SQL Wikipedia](https://ja.wikibooks.org/wiki/SQL#:~:text=English%E3%81%AE%E9%83%A8%E5%88%86%E3%82%92%E9%99%A4%E3%81%84,%E3%81%8C%E7%94%9F%E3%81%BF%E5%87%BA%E3%81%95%E3%82%8C%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82)
 
 > SQLは、RDBMSへの要求（Query、クエリー）を行う為に定義された言語である。SQLの正式名称はSQLそのままであり略称ではない。 しかしながら1970年代に、IBM社のSanJose研究所において初のRDBMSプロトタイプSystem Rが発表された際に定義されたSEQUEL (Structured English QUEry Language) が他社商標との衝突を回避する為に、SQLと改名されました。Englishの部分を除いたSQL (Structured Query Language) として広く知れ渡る事になった背景があります。
 
