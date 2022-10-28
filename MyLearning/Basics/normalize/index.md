@@ -54,7 +54,7 @@
 
 - 正規化される前のテーブルを作成する。
 
-1. データベースの作成(normalize_dbと名付ける)
+1. データベースの作成(normalize_dbとしてデータベースを作成する)
 
 ```sql:
 mysql> create database normalize_db;
@@ -77,7 +77,27 @@ mysql> use normalize_db;
 Database changed
 ```
 
+2. tableの作成(results_sheetとしてテーブルを作成する)
 
+```sql;
+mysql> create table normalize_db.results_sheet (
+    -> id int,
+    -> student_code int,
+    -> student_name varchar(10),
+    -> subject_code varchar(10),
+    -> subject_name varchar(10),
+    -> academic_year int,
+    -> results varchar(5));
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> show tables;
++------------------------+
+| Tables_in_normalize_db |
++------------------------+
+| results_sheet          |
++------------------------+
+1 row in set (0.00 sec)
+```
 
 ### 3-2. 第1正規形
 
@@ -88,3 +108,7 @@ Database changed
 5. Subject Name(string)
 6. Academic Year(int)
 7. Results (string)
+
+(id int, name varchar(10));
+
+insert into user values (1, 'Yamada', 'Tokyo');
