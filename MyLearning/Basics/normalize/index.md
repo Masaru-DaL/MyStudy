@@ -159,7 +159,6 @@ mysql> select * from results_sheet;
   - student_name
 
 - subject
-  - id(primary key)
   - subject_code(primary key)
   - subject_name
 
@@ -191,6 +190,7 @@ mysql> show tables;
 +------------------------+
 3 rows in set (0.01 sec)
 
+-- サンプルデータ挿入 --
 insert into student values (1001, 'Masaru');
 insert into student values (1002, 'Terralian');
 insert into student values (1003, 'Yuu');
@@ -200,12 +200,79 @@ insert into subject values (2, 'K02', 'Math');
 insert into subject values (3, 'K03', 'English');
 insert into subject values (4, 'K04', 'Community');
 
-insert into subject values (1, 2015, 'Good');
-insert into subject values (2, 2015, 'Nice');
-insert into subject values (3, 2015, 'Great');
-insert into subject values (4, 2015, 'Good');
-insert into subject values (5, 2015, 'Nice');
-insert into subject values (6, 2015, 'Great');
-insert into subject values (7, 2015, 'Good');
-insert into subject values (8, 2015, 'Nice');
-insert into subject values (9, 2015, 'Great');
+insert into result values (1, 2015, 'Good');
+insert into result values (2, 2015, 'Nice');
+insert into result values (3, 2015, 'Great');
+insert into result values (4, 2016, 'Good');
+insert into result values (5, 2016, 'Nice');
+insert into result values (6, 2016, 'Great');
+insert into result values (7, 2017, 'Good');
+insert into result values (8, 2017, 'Nice');
+insert into result values (9, 2017, 'Great');
+-- 挿入ここまで --
+
+-- 主キーの設定 --
+alter table student add primary key (student_code);
+alter table subject add primary key (subject_code);
+
+-- 外部キーの設定 --
+alter table result add foreign key fk_subject_code(subject_code) references subject(subject_code);
+alter table result add foreign key fk_student_code(student_code) references student(student_code);
+
+-- データの確認 --
+mysql> select * from student;
++--------------+--------------+
+| student_code | student_name |
++--------------+--------------+
+|         1001 | Masaru       |
+|         1002 | Terralian    |
+|         1003 | Yuu          |
++--------------+--------------+
+
+mysql> select * from subject;
++--------------+--------------+
+| subject_code | subject_name |
++--------------+--------------+
+| K01          | Japanese     |
+| K02          | Math         |
+| K03          | English      |
+| K04          | Community    |
++--------------+--------------+
+
+mysql> select * from subject;
++--------------+--------------+
+| subject_code | subject_name |
++--------------+--------------+
+| K01          | Japanese     |
+| K02          | Math         |
+| K03          | English      |
+| K04          | Community    |
++--------------+--------------+
+
+-- カラムの確認(主キー, 外部キー) --
+mysql> show columns from student;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| student_code | int         | NO   | PRI | NULL    |       |
+| student_name | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+mysql> show columns from subject;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| subject_code | varchar(10) | NO   | PRI | NULL    |       |
+| subject_name | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+mysql> show columns from result;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id            | int         | YES  |     | NULL    |       |
+| student_code  | int         | YES  | MUL | NULL    |       |
+| subject_code  | varchar(10) | YES  | MUL | NULL    |       |
+| academic_year | int         | YES  |     | NULL    |       |
+| results       | varchar(5)  | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
