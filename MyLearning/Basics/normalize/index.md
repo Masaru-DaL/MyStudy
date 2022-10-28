@@ -45,8 +45,46 @@
 
 ## 3. 正規化の例
 
-[データベースの正規化の基礎](https://learn.microsoft.com/ja-jp/office/troubleshoot/access/database-normalization-description)
+[データベースの正規化の基礎](https://learn.microsoft.com/ja-jp/office/troubleshoot/access/database-normalization-description)を参考にしながら、自分で実際にデータベースとテーブルを作成して行ってみる。
+使用先 -> [Envader](https://envader.plus/)
 
-[正規化における時点の名前](https://breezegroup.co.jp/wp-content/uploads/2020/04/%E6%AD%A3%E8%A6%8F%E5%8C%96%E3%81%AE%E7%A8%AE%E9%A1%9E-1-1024x275.png)
+[正規化における時点の名前](https://breezegroup.co.jp/wp-content/uploads/2020/04/%E6%AD%A3%E8%A6%8F%E5%8C%96%E3%81%AE%E7%A8%AE%E9%A1%9E-1-1024x275.png)で、何となくイメージは掴んでおく。
 
-### 3-1. 第1正規形
+### 3-1. 非正規系
+
+- 正規化される前のテーブルを作成する。
+
+1. データベースの作成(normalize_dbと名付ける)
+
+```sql:
+mysql> create database normalize_db;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| food_app           |
+| information_schema |
+| mysql              |
+| normalize_db       |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> use normalize_db;
+Database changed
+```
+
+
+
+### 3-2. 第1正規形
+
+1. ID
+2. Student Code(int)
+3. Student Name(string)
+4. Subject Code(英語+int)
+5. Subject Name(string)
+6. Academic Year(int)
+7. Results (string)
