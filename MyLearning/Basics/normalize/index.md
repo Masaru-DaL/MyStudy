@@ -309,12 +309,31 @@ mysql> select * from result;
 最後に**第3正規化**を行い、**第3正規形**にします。
 項目同士が既存関係を持っているもの(推移的従属関係)も、別テーブルにっきり出す。(=成績テーブルの作成)
 
-![](2022-10-28-17-43-43.png)
+![](2022-10-28-18-16-34.png)
 
 最終テーブル数は4つ。
 
 
 ```sql:
+-- テーブルの作成 --
+mysql> create table normalize_db.student (student_code int, student_name varchar(10));
+
+mysql> create table normalize_db.subject (subject_code varchar(10), subject_name varchar(10));
+
+mysql> create table normalize_db.score (id int, academic_year int, results varchar(5));
+
+mysql> create table normalize_db.user (student_code int, tell_number int, subject_name varchar(10), results varchar(5));
+
+-- 主キーの設定 --
+alter table student add primary key (student_name);
+alter table subject add primary key (subject_name);
+alter table score add primary key (results);
+
+-- 外部キーの設定 --
+alter table result add foreign key fk_student_name(student_name) references student(student_name);
+alter table result add foreign key fk_subject_name(subject_name) references subject(subject_name);
+alter table result add foreign key fk_results(results) references score(results);
+
 -- サンプルデータの挿入 --
 insert into student values (1001, 'Masaru');
 insert into student values (1002, 'Terralian');
@@ -325,13 +344,23 @@ insert into subject values ('K02', 'Math');
 insert into subject values ('K03', 'English');
 insert into subject values ('K04', 'Community');
 
-insert into result values (1, 1001, 'K01', 2015, 'Great');
-insert into result values (2, 1001, 'K02', 2015, 'Nice');
-insert into result values (3, 1001, 'K03', 2015, 'Good');
-insert into result values (4, 1001, 'K04', 2016, 'Great');
-insert into result values (5, 1002, 'K01', 2017, 'Nice');
-insert into result values (6, 1002, 'K03', 2016, 'Good');
-insert into result values (7, 1003, 'K02', 2017, 'Great');
+insert into score values (1, 2015, 'Good');
+insert into score values (2, 2015, 'Nice');
+insert into score values (3, 2015, 'Great');
+insert into score values (4, 2016, 'Good');
+insert into score values (5, 2016, 'Nice');
+insert into score values (6, 2016, 'Great');
+insert into score values (7, 2017, 'Good');
+insert into score values (8, 2017, 'Nice');
+insert into score values (9, 2017, 'Great');
 
--- 主キーの設定 --
-alter table student add primary key (student_code);
+insert into result values (1, 'Masaru', 'Japanese', 'Nice');
+
+-- 結果テーブルの確認 --
+mysql> select * from result;
++------+--------------+--------------+---------+
+| id   | student_name | subject_name | results |
++------+--------------+--------------+---------+
+|    1 | Masaru       | Japanese     | Nice    |
++------+--------------+--------------+---------+
+```
