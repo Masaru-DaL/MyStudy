@@ -112,3 +112,11 @@ mysql> show tables;
 (id int, name varchar(10));
 
 insert into user values (1, 'Yamada', 'Tokyo');
+
+insert into user values (1, 1001, 'Masaru', 'K01', 'Japanese', 2015, 'Great');
+insert into user values (2, 1001, 'Masaru', 'K02', 'Math', 2015, 'Nice');
+insert into user values (3, 1001, 'Masaru', 'K03', 'English', 2015, 'Good');
+insert into user values (4, 1001, 'Masaru', 'K04', 'Community', 2015, 'Great');
+insert into user values (5, 1002, 'Terallian', 'K01', 'Japanese', 2015, 'Nice');
+insert into user values (6, 1002, 'Terallian', 'K03', 'English', 2015, 'Good');
+insert into user values (7, 1003, 'Yuu', 'K02', 'Math', 2015, 'Great');
