@@ -119,8 +119,8 @@ mysql> select * from results_sheet;
 |    2 |         1001 | Masaru       | K02          | Math         |          2015 | Nice    |
 |    3 |         1001 | Masaru       | K03          | English      |          2015 | Good    |
 |    4 |         1001 | Masaru       | K04          | Community    |          2016 | Great   |
-|    5 |         1002 | Terallian    | K01          | Japanese     |          2017 | Nice    |
-|    6 |         1002 | Terallian    | K03          | English      |          2016 | Good    |
+|    5 |         1002 | Terralian    | K01          | Japanese     |          2017 | Nice    |
+|    6 |         1002 | Terralian    | K03          | English      |          2016 | Good    |
 |    7 |         1003 | Yuu          | K02          | Math         |          2017 | Great   |
 +------+--------------+--------------+--------------+--------------+---------------+---------+
 7 rows in set (0.00 sec)
@@ -133,5 +133,79 @@ mysql> select * from results_sheet;
 まずは**第1正規化**を行い、**第1正規形**にします。
 第1正規化では重複する情報がない状態にします。
 
+1. results_sheetの情報を確認する。
+最初に作成されたテーブルには、3つの情報があります。
+生徒の情報、科目の情報、結果の情報です。
+
+2. 3つのテーブルに分割する。
+
+- student
+  - student_code
+  - student_name
+
+- subject
+  - subject_code
+  - subject_name
+
+- result
+  - subject_code
+  - academic_year
+  - results
+
+3. 参照先を設定する
+
+- student
+  - student_code(primary key)
+  - student_name
+
+- subject
+  - id(primary key)
+  - subject_code(primary key)
+  - subject_name
+
+- result
+  - id(primary key)
+  - student_code(foreign key)
+  - subject_code(foreign key)
+  - academic_year
+  - results
+
+(若干理解が怪しいので従属関係が間違っている可能性もあり)
 
 ![](2022-10-28-13-21-57.png)
+
+```sql:
+mysql> create table normalize_db.student (student_code int, student_name varchar(10));
+
+mysql> create table normalize_db.subject (id int, subject_code varchar(10), subject_name varchar(10));
+
+mysql> create table normalize_db.result (id int, student_code int, subject_code varchar(10), academic_year int, results varchar(5));
+
+mysql> show tables;
++------------------------+
+| Tables_in_normalize_db |
++------------------------+
+| result                 |
+| student                |
+| subject                |
++------------------------+
+3 rows in set (0.01 sec)
+
+insert into student values (1001, 'Masaru');
+insert into student values (1002, 'Terralian');
+insert into student values (1003, 'Yuu');
+
+insert into subject values (1, 'K01', 'Japanese');
+insert into subject values (2, 'K02', 'Math');
+insert into subject values (3, 'K03', 'English');
+insert into subject values (4, 'K04', 'Community');
+
+insert into subject values (1, 2015, 'Good');
+insert into subject values (2, 2015, 'Nice');
+insert into subject values (3, 2015, 'Great');
+insert into subject values (4, 2015, 'Good');
+insert into subject values (5, 2015, 'Nice');
+insert into subject values (6, 2015, 'Great');
+insert into subject values (7, 2015, 'Good');
+insert into subject values (8, 2015, 'Nice');
+insert into subject values (9, 2015, 'Great');
