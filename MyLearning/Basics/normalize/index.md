@@ -99,6 +99,26 @@ mysql> show tables;
 1 row in set (0.00 sec)
 ```
 
+3. 非正規系としてサンプルデータを挿入する。
+
+```sql:
+mysql> select * from results_sheet;
++------+--------------+--------------+--------------+--------------+---------------+---------+
+| id   | student_code | student_name | subject_code | subject_name | academic_year | results |
++------+--------------+--------------+--------------+--------------+---------------+---------+
+|    1 |         1001 | Masaru       | K01          | Japanese     |          2015 | Great   |
+|    2 |         1001 | Masaru       | K02          | Math         |          2015 | Nice    |
+|    3 |         1001 | Masaru       | K03          | English      |          2015 | Good    |
+|    4 |         1001 | Masaru       | K04          | Community    |          2016 | Great   |
+|    5 |         1002 | Terallian    | K01          | Japanese     |          2017 | Nice    |
+|    6 |         1002 | Terallian    | K03          | English      |          2016 | Good    |
+|    7 |         1003 | Yuu          | K02          | Math         |          2017 | Great   |
++------+--------------+--------------+--------------+--------------+---------------+---------+
+7 rows in set (0.00 sec)
+```
+
+これが同じ内容が繰り返し格納されてしまう、**格納効率の悪い、使いにくい非正規化のテーブルデータ**です。
+
 ### 3-2. 第1正規形
 
 1. ID
@@ -113,10 +133,12 @@ mysql> show tables;
 
 insert into user values (1, 'Yamada', 'Tokyo');
 
-insert into user values (1, 1001, 'Masaru', 'K01', 'Japanese', 2015, 'Great');
-insert into user values (2, 1001, 'Masaru', 'K02', 'Math', 2015, 'Nice');
-insert into user values (3, 1001, 'Masaru', 'K03', 'English', 2015, 'Good');
-insert into user values (4, 1001, 'Masaru', 'K04', 'Community', 2015, 'Great');
-insert into user values (5, 1002, 'Terallian', 'K01', 'Japanese', 2015, 'Nice');
-insert into user values (6, 1002, 'Terallian', 'K03', 'English', 2015, 'Good');
-insert into user values (7, 1003, 'Yuu', 'K02', 'Math', 2015, 'Great');
+insert into results_sheet values (1, 1001, 'Masaru', 'K01', 'Japanese', 2015, 'Great');
+
+insert into results_sheet values (2, 1001, 'Masaru', 'K02', 'Math', 2015, 'Nice');
+
+insert into results_sheet values (3, 1001, 'Masaru', 'K03', 'English', 2015, 'Good');
+insert into results_sheet values (4, 1001, 'Masaru', 'K04', 'Community', 2015, 'Great');
+insert into results_sheet values (5, 1002, 'Terallian', 'K01', 'Japanese', 2015, 'Nice');
+insert into results_sheet values (6, 1002, 'Terallian', 'K03', 'English', 2015, 'Good');
+insert into results_sheet values (7, 1003, 'Yuu', 'K02', 'Math', 2015, 'Great');
