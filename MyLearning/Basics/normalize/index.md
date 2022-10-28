@@ -45,10 +45,19 @@
 
 ## 3. 正規化の例
 
-[データベースの正規化の基礎](https://learn.microsoft.com/ja-jp/office/troubleshoot/access/database-normalization-description)を参考にしながら、自分で実際にデータベースとテーブルを作成して行ってみる。
-使用先 -> [Envader](https://envader.plus/)
+[データベースの正規化の基礎](https://learn.microsoft.com/ja-jp/office/troubleshoot/access/database-normalization-description)を参考にしながら、自分で実際にデータベースとテーブルを作成して行ってみる。サンプル用のテーブル作成や正規化の流れは[データの正規化](https://basics.k-labo.work/2017/10/30/%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E6%AD%A3%E8%A6%8F%E5%8C%96/)を参考にする。
+
+使用環境 -> [Envader](https://envader.plus/)
 
 [正規化における時点の名前](https://breezegroup.co.jp/wp-content/uploads/2020/04/%E6%AD%A3%E8%A6%8F%E5%8C%96%E3%81%AE%E7%A8%AE%E9%A1%9E-1-1024x275.png)で、何となくイメージは掴んでおく。
+
+| **状態** | **内容** |
+| --- | --- |
+| **非正規化状態** | 全く正規化が行われていない状態のテーブル |
+| **第一正規形** | 非正規形のテーブルを、繰り返し現れる列がない状態 |
+| **第二正規形** | 主キー
+となる列の値が決まれば、他の従属する値が決まるようにテーブルを分割した状態 |
+| **第三正規形** | 主キーとなる列以外の値によって、他の非主キー列の値が決まることがない状態にテーブルを分割した状態 |
 
 ### 3-1. 非正規系
 
@@ -117,28 +126,6 @@ mysql> select * from results_sheet;
 7 rows in set (0.00 sec)
 ```
 
-これが同じ内容が繰り返し格納されてしまう、**格納効率の悪い、使いにくい非正規化のテーブルデータ**です。
+これが同じ内容が繰り返し格納されてしまう、**格納効率の悪い、使いにくい非正規化のサンプル用テーブルデータ**です。
 
 ### 3-2. 第1正規形
-
-1. ID
-2. Student Code(int)
-3. Student Name(string)
-4. Subject Code(英語+int)
-5. Subject Name(string)
-6. Academic Year(int)
-7. Results (string)
-
-(id int, name varchar(10));
-
-insert into user values (1, 'Yamada', 'Tokyo');
-
-insert into results_sheet values (1, 1001, 'Masaru', 'K01', 'Japanese', 2015, 'Great');
-
-insert into results_sheet values (2, 1001, 'Masaru', 'K02', 'Math', 2015, 'Nice');
-
-insert into results_sheet values (3, 1001, 'Masaru', 'K03', 'English', 2015, 'Good');
-insert into results_sheet values (4, 1001, 'Masaru', 'K04', 'Community', 2015, 'Great');
-insert into results_sheet values (5, 1002, 'Terallian', 'K01', 'Japanese', 2015, 'Nice');
-insert into results_sheet values (6, 1002, 'Terallian', 'K03', 'English', 2015, 'Good');
-insert into results_sheet values (7, 1003, 'Yuu', 'K02', 'Math', 2015, 'Great');
