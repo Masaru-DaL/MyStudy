@@ -62,6 +62,17 @@
 ### 3-1. 非正規形
 
 - 正規化される前のテーブルを作成する。
+テーブルは行列の調整が出来ないので図で。
+
+![](2022-10-28-17-14-17.png)
+
+1つのstudent_code, student_nameに対して複数の項目が繰り替えし存在しているため、非正規化に該当する。
+
+### 3-2. 第1正規形
+
+上記の非正規形に対し、**第1正規化**を行い、**第1正規形**にする。
+
+![](2022-10-28-17-31-42.png)
 
 1. データベースの作成(normalize_dbとしてデータベースを作成する)
 
@@ -108,7 +119,7 @@ mysql> show tables;
 1 row in set (0.00 sec)
 ```
 
-3. 非正規系としてサンプルデータを挿入する。
+3. 第1正規形としてサンプルデータを挿入する。
 
 ```sql:
 mysql> select * from results_sheet;
@@ -126,12 +137,12 @@ mysql> select * from results_sheet;
 7 rows in set (0.00 sec)
 ```
 
-これが同じ内容が繰り返し格納されてしまう、**格納効率の悪い、使いにくい非正規化のサンプル用テーブルデータ**です。
+### 3-3. 第2正規形
 
-### 3-2. 第1正規形
+次に**第2正規化**を行い、**第2正規形**にします。
+第2正規化では従属関係を作成する。
 
-まずは**第1正規化**を行い、**第1正規形**にします。
-第1正規化では重複する情報がない状態にします。
+![](2022-10-28-17-30-42.png)
 
 1. results_sheetの情報を確認する。
 重複してるものを洗い出すと、student, subjectが重複してるのでその2つのテーブルを作成と、最終的な結果(result)のテーブルの全部で3つのテーブルが必要です。
@@ -277,3 +288,50 @@ mysql> select * from subject;
 | K03          | English      |
 | K04          | Community    |
 +--------------+--------------+
+
+-- 最終結果 --
+mysql> select * from result;
++----+--------------+--------------+---------------+---------+
+| id | student_code | subject_code | academic_year | results |
++----+--------------+--------------+---------------+---------+
+|  1 |         1001 | K01          |          2015 | Great   |
+|  2 |         1001 | K02          |          2015 | Nice    |
+|  3 |         1001 | K03          |          2015 | Good    |
+|  4 |         1001 | K04          |          2016 | Great   |
+|  5 |         1002 | K01          |          2017 | Nice    |
+|  6 |         1002 | K03          |          2016 | Good    |
+|  7 |         1003 | K02          |          2017 | Great   |
++----+--------------+--------------+---------------+---------+
+```
+
+### 3-4. 第3正規形
+
+最後に**第3正規化**を行い、**第3正規形**にします。
+項目同士が既存関係を持っているもの(推移的従属関係)も、別テーブルにっきり出す。(=成績テーブルの作成)
+
+![](2022-10-28-17-43-43.png)
+
+最終テーブル数は4つ。
+
+
+```sql:
+-- サンプルデータの挿入 --
+insert into student values (1001, 'Masaru');
+insert into student values (1002, 'Terralian');
+insert into student values (1003, 'Yuu');
+
+insert into subject values ('K01', 'Japanese');
+insert into subject values ('K02', 'Math');
+insert into subject values ('K03', 'English');
+insert into subject values ('K04', 'Community');
+
+insert into result values (1, 1001, 'K01', 2015, 'Great');
+insert into result values (2, 1001, 'K02', 2015, 'Nice');
+insert into result values (3, 1001, 'K03', 2015, 'Good');
+insert into result values (4, 1001, 'K04', 2016, 'Great');
+insert into result values (5, 1002, 'K01', 2017, 'Nice');
+insert into result values (6, 1002, 'K03', 2016, 'Good');
+insert into result values (7, 1003, 'K02', 2017, 'Great');
+
+-- 主キーの設定 --
+alter table student add primary key (student_code);
