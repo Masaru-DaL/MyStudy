@@ -51,4 +51,4 @@ mysqlを起動してから。
 `status`
 
 - MySQLの文字コード変更
-`/etc/mysql/mysql.conf.d/mysqld.cnf`に[mysqld]を入れる必要がある。
+`/etc/mysql/mysql.conf.d/mysqld.cnf`に[mysqld]を入れてから文字コードの設定を書く必要がある。
