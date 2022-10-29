@@ -47,4 +47,8 @@ selectと絡めなければテーブルとカラムを指定する感じなの�
 mysqlを起動してから。
 `SELECT VERSION();`
 
-- 
+- MySQLの状態を表示
+`status`
+
+- MySQLの文字コード変更
+`/etc/mysql/mysql.conf.d/mysqld.cnf`に[mysqld]を入れる必要がある。
