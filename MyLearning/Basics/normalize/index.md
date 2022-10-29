@@ -64,7 +64,7 @@
 - 正規化される前のテーブルを作成する。
 テーブルは行列の調整が出来ないので図で。
 
-![](2022-10-28-17-14-17.png)
+![](2022-10-28-19-37-00.png)
 
 1つのstudent_code, student_nameに対して複数の項目が繰り替えし存在しているため、非正規化に該当する。
 
@@ -309,7 +309,7 @@ mysql> select * from result;
 最後に**第3正規化**を行い、**第3正規形**にします。
 項目同士が既存関係を持っているもの(推移的従属関係)も、別テーブルにっきり出す。(=成績テーブルの作成)
 
-![](2022-10-28-18-16-34.png)
+![](2022-10-29-13-31-38.png)
 
 最終テーブル数は4つ。
 
@@ -322,17 +322,16 @@ mysql> create table normalize_db.subject (subject_code varchar(10), subject_name
 
 mysql> create table normalize_db.score (id int, academic_year int, results varchar(5));
 
-mysql> create table normalize_db.user (student_code int, tell_number int, subject_name varchar(10), results varchar(5));
+mysql> create table normalize_db.user_score (student_code int, subject_code varchar(10), academic_year int, results varchar(5));
 
 -- 主キーの設定 --
-alter table student add primary key (student_name);
-alter table subject add primary key (subject_name);
-alter table score add primary key (results);
+alter table student add primary key (student_code);
+alter table subject add primary key (subject_code);
+alter table score add primary key (id);
 
 -- 外部キーの設定 --
-alter table result add foreign key fk_student_name(student_name) references student(student_name);
-alter table result add foreign key fk_subject_name(subject_name) references subject(subject_name);
-alter table result add foreign key fk_results(results) references score(results);
+alter table user_score add foreign key fk_student_code(student_code) references student(student_code);
+alter table user_score add foreign key fk_subject_code(subject_code) references subject(subject_code);
 
 -- サンプルデータの挿入 --
 insert into student values (1001, 'Masaru');
@@ -354,13 +353,28 @@ insert into score values (7, 2017, 'Good');
 insert into score values (8, 2017, 'Nice');
 insert into score values (9, 2017, 'Great');
 
-insert into result values (1, 'Masaru', 'Japanese', 'Nice');
+insert into user_score values (1001, 'K01', 2015, 'Great');
+insert into user_score values (1001, 'K02', 2015, 'Nice');
+insert into user_score values (1001, 'K03', 2015, 'Good');
+insert into user_score values (1001, 'K04', 2016, 'Great');
+insert into user_score values (1001, 'K01', 2015, 'Nice');
+insert into user_score values (1002, 'K01', 2015, 'Nice');
+insert into user_score values (1002, 'K03', 2015, 'Good');
+insert into user_score values (1003, 'K02', 2015, 'Great');
+
 
 -- 結果テーブルの確認 --
-mysql> select * from result;
-+------+--------------+--------------+---------+
-| id   | student_name | subject_name | results |
-+------+--------------+--------------+---------+
-|    1 | Masaru       | Japanese     | Nice    |
-+------+--------------+--------------+---------+
+mysql> select * from user_score;
++--------------+--------------+---------------+---------+
+| student_code | subject_code | academic_year | results |
++--------------+--------------+---------------+---------+
+|         1001 | K01          |          2015 | Great   |
+|         1001 | K02          |          2015 | Nice    |
+|         1001 | K03          |          2015 | Good    |
+|         1001 | K04          |          2016 | Great   |
+|         1001 | K01          |          2015 | Nice    |
+|         1002 | K01          |          2015 | Nice    |
+|         1002 | K03          |          2015 | Good    |
+|         1003 | K02          |          2015 | Great   |
++--------------+--------------+---------------+---------+
 ```
