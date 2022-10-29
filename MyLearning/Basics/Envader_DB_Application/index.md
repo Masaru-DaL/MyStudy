@@ -13,3 +13,9 @@
 
 ## 2. 集約
 
+- GROUP BY
+
+対象columnの数をカウントしたい場合(全て)
+`select <対象column>, count(*) from <table名> group by <対象column>`
+
+
