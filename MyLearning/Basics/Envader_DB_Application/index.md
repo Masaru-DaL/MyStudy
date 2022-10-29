@@ -11,3 +11,5 @@
 - 使い方
 `select count(<対象columns>) from <table名> where <条件>`
 
+## 2. 集約
+
