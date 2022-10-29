@@ -18,4 +18,7 @@
 対象columnの数をカウントしたい場合(全て)
 `select <対象column>, count(*) from <table名> group by <対象column>`
 
+2つ目は理解できてない。
+結合をしっかり学んだほうが良さそう。
+
 
