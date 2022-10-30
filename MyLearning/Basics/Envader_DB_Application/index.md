@@ -147,3 +147,21 @@ FLUSH PRIVILEGES;
 
 `grep "^CHANGE MASTER" dump.sql`
 MASTER_LOG_FILEとMASTER_LOG_POSの値が出力
+
+9. セカンダリDB上で
+
+```sql:
+# 接続するプライマリを指定する。
+CHANGE MASTER TO
+	MASTER_HOST="db.envader.local",
+	MASTER_USER="repl",
+	MASTER_PASSWORD="repl_pass",
+	MASTER_LOG_FILE="上のgrepで出力されたファイル名",
+	MASTER_LOG_POS=上のgrepで出力されたログファイルの位置;
+
+# セカンダリをスタートする。
+START SLAVE;
+
+# セカンダリの稼働状態を確認する。
+SHOW SLAVE STATUS\G
+```
