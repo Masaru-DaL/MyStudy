@@ -53,4 +53,10 @@
 1. `venv`でFLASKを実行する
 localhost:5000でHello World!
 
-2. 
+2. tests.pyでテストファイルを作成する
+
+3. CircleCI設定ファイルを追加
+`.circleci`ディレクトリを作成
+`config.yml`を作成
+
+4. GitHubにpush
