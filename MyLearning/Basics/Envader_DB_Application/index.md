@@ -100,3 +100,21 @@ mysqlコマンドのオプションが大事。
 server-id=1 # 各MySQLインスタンスに割り振る固有のID
 log-bin=mysql-bin # MySQLでの変更履歴を記録しておくログを保管するファイル名
 ```
+
+2. 設定の反映
+`sudo service mysql restart`
+
+3. プライマリ上でレプリケーションに接続する専用のユーザを作成する
+プライマリのDBに接続後。
+
+```sql:
+# replという名前のユーザを作成
+CREATE USER 'repl'@'%' IDENTIFIED BY 'repl_pass';
+
+# replにレプリケーション用の権限を付与
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';
+
+# 変更を反映
+FLUSH PRIVILEGES;
+```
+
