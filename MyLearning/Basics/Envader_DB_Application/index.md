@@ -94,6 +94,7 @@ mysqlコマンドのオプションが大事。
 元から存在していたデータを別のMySQLに複製すること。
 
 1. プライマリ上でレプリケーション化のための設定を行う
+`ssh ~`
 
 ```cnf: /etc/mysql/mysql.conf.d/mysqld.cnf
 [mysqld]
@@ -119,9 +120,10 @@ FLUSH PRIVILEGES;
 ```
 
 4. プライマリからフルバックアップを取得する。
+セカンダリに戻る？
 `mysqldump -u <ユーザ名> -h <プライマリのipアドレス> -p --all-databases --master-data > dump.sql`
 
-5. セカンダリ上でレプリケーション化のための設定を行う
+1. セカンダリ上でレプリケーション化のための設定を行う
 
 ```sql: /etc/mysql/mysql.conf.d/mysqld.cnf
 [mysqld]
@@ -133,4 +135,4 @@ server-id=2
 
 7. セカンダリのDBに接続する
 
-8. 
+8.
