@@ -48,4 +48,9 @@
 
 ## 1-4. CI/CDを実際にやってみる
 
+[GitHub CI/CD チュートリアル: 継続的インテグレーションのセットアップ](https://circleci.com/ja/blog/setting-up-continuous-integration-with-github/)
 
+1. `venv`でFLASKを実行する
+localhost:5000でHello World!
+
+2. 
