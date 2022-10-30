@@ -62,6 +62,29 @@
 4. コードベースをGitHubにプッシュ
 5. 作成したGitHubリポジトリとCircleCIの接続を確認
 
+- 違う記事でもやってみる
+  - CircleCIでHello World
+
+```yml: .circle/config.yml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:4.8.2
+    steps:
+      - checkout
+      - run: echo "hello world"
+```
+
+1. `circleci/node:4.8.2`というイメージを利用したDocker環境を立ち上げ
+2. CircleCIがGitHubリポジトリをチェックアウトして上記Docker環境にリポジトリをクローン
+3. `echo "hello world"
+4. 新規リポジトリにプッシュし、CircleCIでリポジトリを連携させる
+5. 自動ビルド？
+6. 詳細を見てみると`echo "hello world"が実行されている。
+
+つまり、CircleCIとリポジトリを連携させると、自動でテストされる事が分かった。
+
 ## 1-5. CI/CDのフロー
 
 1. ソースコードがGitへコミットされるとCIによって自動的に各種テストが行われる
