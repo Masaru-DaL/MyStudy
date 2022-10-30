@@ -50,13 +50,22 @@
 
 [GitHub CI/CD チュートリアル: 継続的インテグレーションのセットアップ](https://circleci.com/ja/blog/setting-up-continuous-integration-with-github/)
 
-1. `venv`でFLASKを実行する
-localhost:5000でHello World!
+既存のリポジトリにディレクトリ作成してはだめだった。
+リポジトリ1個につき、プロジェクト1個？
+新しくリポジトリ作成したら無事GitHubとCircleCIを連携できた。
 
-2. tests.pyでテストファイルを作成する
+- 大まかな流れ
 
-3. CircleCI設定ファイルを追加
-`.circleci`ディレクトリを作成
-`config.yml`を作成
+1. pythonアプリをセットアップ
+2. テストを作成
+3. CircleCIの設定ファイルを作成(`.circleci/config.yml`)
+4. コードベースをGitHubにプッシュ
+5. 作成したGitHubリポジトリとCircleCIの接続を確認
 
-4. GitHubにpush
+## 1-5. CI/CDのフロー
+
+1. ソースコードがGitへコミットされるとCIによって自動的に各種テストが行われる
+「コードにエラーがないか」、「既存の機能を破壊してないか」
+
+2. 次にCDによってコードがブランチにマージされ、ビルドが行われる
+CDによってビルドされたアプリケーションは、自動でテスト用のサーバにデリバリーされる。
