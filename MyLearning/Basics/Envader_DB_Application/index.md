@@ -88,3 +88,15 @@ mysqlコマンドのオプションが大事。
 2. sql命令
 3. sql命令
 4. `rollback;`: トランザクション取消
+
+## 9. レプリケーション
+
+元から存在していたデータを別のMySQLに複製すること。
+
+1. プライマリ上でレプリケーション化のための設定を行う
+
+```cnf: /etc/mysql/mysql.conf.d/mysqld.cnf
+[mysqld]
+server-id=1 # 各MySQLインスタンスに割り振る固有のID
+log-bin=mysql-bin # MySQLでの変更履歴を記録しておくログを保管するファイル名
+```
