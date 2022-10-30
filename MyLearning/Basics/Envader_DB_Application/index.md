@@ -52,3 +52,12 @@ mysqlを起動してから。
 
 - MySQLの文字コード変更
 `/etc/mysql/mysql.conf.d/mysqld.cnf`に[mysqld]を入れてから文字コードの設定を書く必要がある。
+
+## 6. バックアップの取得
+
+`mysqldump`はMySQLの外で打つ。
+mysqlコマンドのオプションが大事。
+
+## 7. ビュー
+
+
