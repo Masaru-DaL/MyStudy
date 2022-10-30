@@ -123,7 +123,7 @@ FLUSH PRIVILEGES;
 セカンダリに戻る？
 `mysqldump -u <ユーザ名> -h <プライマリのipアドレス> -p --all-databases --master-data > dump.sql`
 
-1. セカンダリ上でレプリケーション化のための設定を行う
+5. セカンダリ上でレプリケーション化のための設定を行う
 
 ```sql: /etc/mysql/mysql.conf.d/mysqld.cnf
 [mysqld]
@@ -135,4 +135,15 @@ server-id=2
 
 7. セカンダリのDBに接続する
 
-8.
+```sql:
+# dump.sqlという名前のバックアップを反映させる。
+source dump.sql
+
+# 変更結果を反映する
+FLUSH PRIVILEGES;
+```
+
+8. 指定する際に必要な情報を取得する
+
+`grep "^CHANGE MASTER" dump.sql`
+MASTER_LOG_FILEとMASTER_LOG_POSの値が出力
