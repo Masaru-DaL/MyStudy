@@ -121,7 +121,7 @@ FLUSH PRIVILEGES;
 4. プライマリからフルバックアップを取得する。
 `mysqldump -u <ユーザ名> -h <プライマリのipアドレス> -p --all-databases --master-data > dump.sql`
 
-1. セカンダリ上でレプリケーション化のための設定を行う
+5. セカンダリ上でレプリケーション化のための設定を行う
 
 ```sql: /etc/mysql/mysql.conf.d/mysqld.cnf
 [mysqld]
@@ -130,3 +130,7 @@ server-id=2
 
 6. セカンダリの設定を反映
 `sudo service mysql restart`
+
+7. セカンダリのDBに接続する
+
+8. 
