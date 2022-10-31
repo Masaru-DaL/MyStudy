@@ -5,6 +5,7 @@
   - [3. 図を理解する](#3-図を理解する)
     - [3-1. Entities(Enterprise Business Rules)](#3-1-entitiesenterprise-business-rules)
     - [3-2. Use Cases(Application Business Rules)](#3-2-use-casesapplication-business-rules)
+    - [3-3.](#3-3)
 # クリーンアーキテクチャ
 
 参照: [実装クリーンアーキテクチャ](https://qiita.com/nrslib/items/a5f902c4defc83bd46b8)
@@ -64,3 +65,10 @@
 細かいビジネスロジックもEntitiesに含まれる。同じく、図で言う所の**Primary Course**にあるそれぞれ番号が書かれている処理のこと。これを番号ごとに関数で実施するイメージ。
 
 ### 3-2. Use Cases(Application Business Rules)
+
+赤色の円部分(Use Cases)では、**細かいビジネスロジックをまとめて一連の流れとして実行する**。
+具体的には**Primary Course**にあるそれぞれ番号が書かれている処理を、**1~4で順番に並べて実行するような関数を作る**。
+
+例えば、人事システムを作るとしたら、「従業員を雇う」や「従業員を解雇する」とかの単位がUse Casesで実行される。
+
+### 3-3. 
