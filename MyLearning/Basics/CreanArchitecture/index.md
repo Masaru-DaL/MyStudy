@@ -8,6 +8,7 @@
     - [3-3. Controllers, Gateways, Presenters(Interface Adapters)](#3-3-controllers-gateways-presentersinterface-adapters)
     - [3-4. Devices, Web, UI, DB, External Interfaces(Frameworks & Drivers)](#3-4-devices-web-ui-db-external-interfacesframeworks--drivers)
     - [3-5. 円の左側から内側に向かっている矢印](#3-5-円の左側から内側に向かっている矢印)
+    - [3-6. 依存関係を守らない場合](#3-6-依存関係を守らない場合)
 # クリーンアーキテクチャ
 
 参照: [実装クリーンアーキテクチャ](https://qiita.com/nrslib/items/a5f902c4defc83bd46b8)
@@ -92,3 +93,15 @@ Devices, Web, UI, DB, External Interfacesが**ビジネスロジックから切�
 - 赤と黄の依存関係も同じ。
 
 **この依存関係を守ることで、クリーンアーキテクチャが完成する**。
+
+### 3-6. 依存関係を守らない場合
+
+どうしても内側から外側に参照しなければならない箇所が生じた場合、[右下の図](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F293368%2F3f64e75c-c34d-6230-4646-7ea7d2acbaf2.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=0b34503c398e5d118728b430258b1448)のことを行う。この図はは以下の流れで行なっている処理を指す。
+
+1. `UserController`が`IUserCreateUseCase`に入力データを伝える。
+2. `IUserCreateUseCase`の実態である`UserCreateInteractor`に処理が移譲される
+3. `UserCreateInteractor`は処理を行い、その結果を`IUserCreatePresenter`に出力データを伝える
+4. `IUserCreatePresenter`の実態である`UserCreatePresenter`に処理が移譲される
+5. `UserCreatePresenter`は表示を行う
+
+ここはいまいち理解できてない...
