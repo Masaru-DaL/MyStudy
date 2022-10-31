@@ -72,6 +72,7 @@ jobs:
 1. `CI-CD-Process`という名前で新規リポジトリの作成
 
 2. Flaskでファイルの作成
+venvで仮想環境を作成。
 
 ```shell:
 -> tree
@@ -95,3 +96,49 @@ def hello():
 ```txt: requirements.txt
 Flask
 ```
+
+3. `localhost:5000`でHello World!が表示。
+
+4. テストの作成
+
+```python: tests.py
+from hello import app
+with app.test_client() as c:
+    response = c.get('/')
+    assert response.data == b'Hello World!'
+    assert response.status_code == 200
+
+print("test success") # 標準出力にも分かるように出す。
+```
+
+5. CircleCI設定ファイルを追加する。
+
+```yml: .circleci/config.yml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
+      - run:
+          name: テストの実行
+          command: |
+            . venv/bin/activate
+            python3 tests.py
+      - store_artifacts:
+          path: test-reports/
+          destination: python_app
+```
+
