@@ -53,3 +53,18 @@ jobs:
 
 6. Pipeline(Hello-World) > build(1) をクリック
 
+## 3. CI/CDプロセス
+
+参考: [GitHub CI/CD チュートリアル: 継続的インテグレーションのセットアップ](https://circleci.com/ja/blog/setting-up-continuous-integration-with-github/)
+
+- 流れ
+
+1. Flaskを使用したPythonアプリケーションの作成
+2. アプリケーションのテスト
+3. config.ymlファイルの作成
+4. GitHubにプッシュ
+5. CircleCIを構成する
+6. バッジでREADMEを更新する
+7. プルリクエストを作成してCircleCIの動作を確認する
+
+
