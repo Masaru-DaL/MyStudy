@@ -7,6 +7,7 @@
     - [3-2. Use Cases(Application Business Rules)](#3-2-use-casesapplication-business-rules)
     - [3-3. Controllers, Gateways, Presenters(Interface Adapters)](#3-3-controllers-gateways-presentersinterface-adapters)
     - [3-4. Devices, Web, UI, DB, External Interfaces(Frameworks & Drivers)](#3-4-devices-web-ui-db-external-interfacesframeworks--drivers)
+    - [3-5. 円の左側から内側に向かっている矢印](#3-5-円の左側から内側に向かっている矢印)
 # クリーンアーキテクチャ
 
 参照: [実装クリーンアーキテクチャ](https://qiita.com/nrslib/items/a5f902c4defc83bd46b8)
@@ -80,4 +81,14 @@
 
 ### 3-4. Devices, Web, UI, DB, External Interfaces(Frameworks & Drivers)
 
+一番外の青色部分。
+Devices, Web, UI, DB, External Interfacesが**ビジネスロジックから切り離されている点**が重要。
 
+### 3-5. 円の左側から内側に向かっている矢印
+
+この矢印は**依存関係**を示している。
+
+- 緑 -> 赤は参照できるが、赤 -> 緑はだめ。
+- 赤と黄の依存関係も同じ。
+
+**この依存関係を守ることで、クリーンアーキテクチャが完成する**。
