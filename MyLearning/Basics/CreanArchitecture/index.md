@@ -5,7 +5,8 @@
   - [3. 図を理解する](#3-図を理解する)
     - [3-1. Entities(Enterprise Business Rules)](#3-1-entitiesenterprise-business-rules)
     - [3-2. Use Cases(Application Business Rules)](#3-2-use-casesapplication-business-rules)
-    - [3-3. Interface Adapters(Controllers, Gateways, Presenters)](#3-3-interface-adapterscontrollers-gateways-presenters)
+    - [3-3. Controllers, Gateways, Presenters(Interface Adapters)](#3-3-controllers-gateways-presentersinterface-adapters)
+    - [3-4. Devices, Web, UI, DB, External Interfaces(Frameworks & Drivers)](#3-4-devices-web-ui-db-external-interfacesframeworks--drivers)
 # クリーンアーキテクチャ
 
 参照: [実装クリーンアーキテクチャ](https://qiita.com/nrslib/items/a5f902c4defc83bd46b8)
@@ -71,10 +72,12 @@
 
 例えば、人事システムを作るとしたら、「従業員を雇う」や「従業員を解雇する」とかの単位がUse Casesで実行される。
 
-### 3-3. Interface Adapters(Controllers, Gateways, Presenters)
+### 3-3. Controllers, Gateways, Presenters(Interface Adapters)
 
-緑色の円部分(Interface Adapters)では、**WebやDBに関する処理が書かれる**。(Webシステムを使いたい場合)
+緑色の円部分(Controllers, Gateways, Presenters)では、**WebやDBに関する処理が書かれる**。(Webシステムを使いたい場合)
 
 具体的には、DBに接続して保存する処理、Web APIの処理などが書かれる。
+
+### 3-4. Devices, Web, UI, DB, External Interfaces(Frameworks & Drivers)
 
 
