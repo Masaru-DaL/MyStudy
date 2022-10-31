@@ -73,6 +73,15 @@ jobs:
 
 2. Flaskでファイルの作成
 
+```shell:
+-> tree
+.
+├── __pycache__
+└── venv
+├── hello.py
+└── requirements.txt
+```
+
 ```python: hello.py
 from flask import Flask
 
@@ -81,4 +90,8 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return "Hello World!"
+```
+
+```txt: requirements.txt
+Flask
 ```
