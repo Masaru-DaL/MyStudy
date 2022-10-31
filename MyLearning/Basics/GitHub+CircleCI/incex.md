@@ -67,4 +67,18 @@ jobs:
 6. バッジでREADMEを更新する
 7. プルリクエストを作成してCircleCIの動作を確認する
 
+### 3-1. GitHubにプッシュまで
 
+1. `CI-CD-Process`という名前で新規リポジトリの作成
+
+2. Flaskでファイルの作成
+
+```python: hello.py
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+```
