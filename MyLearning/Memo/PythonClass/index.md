@@ -234,6 +234,23 @@ instance2.greeting()
 - インスタンス変数
 インスタンス変数は、**インスタンス化したインスタンスオブジェクトごとに定義された変数のこと**です。インスタンスオブジェクトごとに定義した変数は、**インスタンスごとに異なる値を変数に指定**することができます。
 
+```python:
+class TestClass:
+    # コンストラクタ
+    def __init__(self, greeting):
+        # 引数greetingの値をインスタンス変数の初期値とする
+        self.greeting = greeting
 
+# 引数greetingに「Hello!!」を渡す
+instance1 = TestClass("Hello!!")
+print(instance1.greeting)
+
+# 引数greetingに「Good Evening!!」を渡す
+instance2 = TestClass("Good Evening!!")
+print(instance2.greeting)
+
+# 実行結果: Hello!!
+# 実行結果: Good Evening!!
+```
 
 > 各クラスインスタンスは、その状態を保持するための属性を持つことができます。
