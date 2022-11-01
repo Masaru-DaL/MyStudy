@@ -184,3 +184,5 @@ print(instance.greeting)
 # 出力結果: 2022
 # 出力結果: Hello Constructor!!
 ```
+
+`greeting`の初期値を設定していますが、インスタンス化して最終的に出力された`greeting`はコンストラクタで格納した値になっています。これは、**インスタンスが呼び出された時点（`instance.greeting`が実行された時点）で自動的にコンストラクタが実行される**からです。
