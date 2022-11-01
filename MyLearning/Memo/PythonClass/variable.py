@@ -1,10 +1,13 @@
 class TestClass:
-    morning = "Good Morning!!" # クラス変数
-    def greeting(self):
-        print(self.greeting)
+    # コンストラクタ
+    def __init__(self, greeting):
+        self.greeting = greeting
 
-instance1 = TestClass()
-instance1.greeting()
+instance1 = TestClass("Hello!!")
+print(instance1.greeting)
 
-instance2 = TestClass()
-instance2.greeting()
+instance2 = TestClass("Good Evening!!")
+print(instance2.greeting)
+
+# 実行結果: Hello!!
+# 実行結果: Good Evening!!
