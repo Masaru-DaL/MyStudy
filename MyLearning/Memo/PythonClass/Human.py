@@ -1,7 +1,9 @@
 class TestClass:
 
-    print("Hello World!!")
+    pass
 
 
 test1 = TestClass()
-test1
+
+print(type(TestClass))
+print(type(test1))
