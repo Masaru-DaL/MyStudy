@@ -152,12 +152,21 @@ def __init__(self, <引数1>, <引数1>, <引数n>)
 
 ```python:
 class TestClass:
-    print("Hello World!!")
+    def __init__(self):
+        self.year = 2022
+        self.greeting = "Hello World"
 
-# インスタンスの作成
-test1 = TestClass()
+instance = TestClass()
 
-# インスタンスの実行
-test1 # 実行結果: Hello World!!
+print(instance.year)
+print(instance.greeting)
+
+# 出力結果: 2022
+# 出力結果: Hello World
 ```
+
+メソッド定義にコンストラクタを使用していますが、この時点ではコンストラクタである必要はありませんが理解のためにコンストラクタを使用しています。
+コンストラクタで`year`と`greeting`を宣言し、その中身を表示する内容です。インスタンスが作成された時点で変数に値が格納されています。
+次に、以下のコードを見てみましょう。
+
 

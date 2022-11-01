@@ -1,8 +1,12 @@
 class TestClass:
-    print("Hello World!!")
+    def __init__(self):
+        self.year = 2022
+        self.greeting = "Hello World"
 
-# インスタンスの作成
-test1 = TestClass()
+instance = TestClass()
 
-# インスタンスの実行
-test1 # 実行結果: Hello World!!
+print(instance.year)
+print(instance.greeting)
+
+# 出力結果: 2022
+# 出力結果: Hello World
