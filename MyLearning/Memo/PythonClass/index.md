@@ -62,11 +62,8 @@ def average(name, japanese, english):
     average_point = (japanese + english) / 2
     print(name, "の平均点は", average_point, "です。")
 
-man1 = "Bob"
-female1 = "Lisa"
-
-average(man1, 60, 90)
-average(female1, 100, 70)
+average("Bob", 60, 90)
+average("Lisa", 100, 70)
 
 # 出力結果
 # Bob の平均点は 75.0 です。
@@ -101,7 +98,7 @@ female1.average("Lisa", 100, 70) #
 
 クラス内の関数に`self`という見慣れないものがあると思いますが、今は気にしないでください。後で説明していきます。これがクラスを使用した例です。
 
-実際にクラスを使ってみて何となく雰囲気は掴めたと思います。次に、「クラスを使用するメリット・使い所」について説明していきます。
+実際にクラスを使ってみて何となく雰囲気は掴めたと思いますので、次に、「クラスを使用するメリット・使い所」について説明していきます。
 
 ## クラスを使用するメリット・使い所
 
@@ -244,11 +241,11 @@ instance.test_class_method()
 
 ```python:
 class TestClass:
-    # test_method1: 引数messageの値を表示する
+    # ①test_method1: 引数messageの値を表示する
     def test_method1(self, message):
         print(message)
 
-    # test_method2: test_method1を呼び出す
+    # ②test_method2: test_method1を呼び出す
     def test_method2(self):
         self.test_method1("Hello self!!")
 
@@ -261,12 +258,12 @@ instance.test_method2()
 # 出力 -> Hello self!!
 ```
 
-上の`test_method1`は第1引数に`self`を指定し、2つ目の引数に`message`を指定し、その`message`を出力する処理を定義しています。
+①の`test_method1`は第1引数に`self`を指定し、2つ目の引数に`message`を指定し、その`message`を出力する処理を定義しています。
 
-下の`test_method2`は、先ほど定義した`test_method1`を呼び出すメソッドを定義しています。実行する処理に注目して頂きたいのですが、`self.test_method1("Hello self!!")`の部分です。
+②の`test_method2`は、先ほど定義した`test_method1`を呼び出すメソッドを定義しています。`self.test_method1("Hello self!!")`の部分の実行する処理に注目してください。
 メソッドの呼び出しには必ず「`インスタンス名 .メソッド名()`」という形でインスタンを指定する必要があります。インスタンス化するのはクラスを基にして行うので、**クラス内ではまだインスタンスが作成されていません**。そこで、**クラス内で別のメソッドを呼び出したい時に仮のインスタンスとして役割を担うのが`self`です**。つまり、`self`はそのクラス自身を表しているということです。
 
-`self.test_method1("Hello self!!")`を分かりやすく説明すると、このクラスの中の、`test_method1`の引数に`"Hello self!!`を指定して呼び出す。ということになります。
+`self.test_method1("Hello self!!")`を分かりやすく説明すると、`self`（TestClass）`.`（の）`test_method1`の引数に`"Hello self!!`を指定して、呼び出す、ということです。
 
 ## コンストラクタ
 
