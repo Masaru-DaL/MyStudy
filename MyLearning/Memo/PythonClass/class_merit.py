@@ -19,9 +19,9 @@
 # average("Bob", 60, 90)
 # average("Lisa", 100, 70)
 
-# クラスを定義する
+# ①クラスを定義する
 class Average():
-    # クラス内に関数を定義します
+    # ②クラス内に処理を実装する
     def __init__(self):
         self.name = ""
         self.japanese = 0
@@ -31,6 +31,22 @@ class Average():
     def average_call(self):
         self.average = (self.japanese + self.english) / 2
 
-
+# ③man1, female1という変数にクラスを実装する
+man1 = Average()
 female1 = Average()
-female1.average(100, 70)
+
+# ④man1, female1に中身を実装していく
+man1.name = "Bob"
+man1.japanese = 60
+man1.english = 90
+female1.name = "Lisa"
+female1.japanese = 100
+female1.english = 70
+
+# ⑤平均を出す関数を実行してそれぞれの平均点を出す
+man1.average_call()
+female1.average_call()
+
+# ⑥実行結果
+print(man1.name, "の平均点は", man1.average, "です。")
+print(female1.name, "の平均点は", female1.average, "です。")

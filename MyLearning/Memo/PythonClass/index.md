@@ -71,34 +71,47 @@ average("Lisa", 100, 70)
 ```
 
 関数を使う事でだいぶスッキリしました。名前と点数の項目だけ実装すれば良いことになり、人を増やした拡張性も高くなりました。
-そして、ここからクラスを使用してみます。まだクラスが分からないと思いますが、コード内にコメントを入れますので、なんとなく雰囲気だけ掴めればOKです。
+そして、ここからクラスを使用してみます。コード内にコメントを入れますので、なんとなく雰囲気だけ掴めればOKです。
 
-3. クラスを使用した場合
+1. クラスを使用した場合
 
 ```python:
-# ①クラスを定義する(Averageと名前を付ける)
+# ①クラスを定義する
 class Average():
-    # ② クラス内に関数を記述する
-    def average(self, name, japanese, english):
-        average_point = (japanese + english) / 2
-        print(name, "の平均点は", average_point, "です。")
+    # ②クラス内に処理を実装する
+    def __init__(self):
+        self.name = ""
+        self.japanese = 0
+        self.english = 0
+        self.average = 0
 
-# ③man1, female1にAverageクラスを実装する
+    def average_call(self):
+        self.average = (self.japanese + self.english) / 2
+
+# ③man1, female1という変数にクラスを実装する
 man1 = Average()
 female1 = Average()
 
-# ④それぞれの関数を実行する
-man1.average("Bob", 60, 90)
-female1.average("Lisa", 100, 70) #
+# ④man1, female1に中身を実装していく
+man1.name = "Bob"
+man1.japanese = 60
+man1.english = 90
+female1.name = "Lisa"
+female1.japanese = 100
+female1.english = 70
 
-# 出力結果
-# Bob の平均点は 75.0 です。
-# Lisa の平均点は 85.0 です。
+# ⑤平均を出す関数を実行してそれぞれの平均点を出す
+man1.average_call()
+female1.average_call()
+
+# ⑥実行結果
+print(man1.name, "の平均点は", man1.average, "です。")
+print(female1.name, "の平均点は", female1.average, "です。")
 ```
 
-クラス内の関数に`self`という見慣れないものがあると思いますが、今は気にしないでください。後で説明していきます。これがクラスを使用した例です。
-
-実際にクラスを使ってみて何となく雰囲気は掴めたと思いますので、次に、「クラスを使用するメリット・使い所」について説明していきます。
+クラス内の関数に`__init__`や`self`という見慣れないものがあると思いますが、今は気にしないでください。後で説明していきます。これがクラスを使用した例です。
+関数の時より長くなっているじゃないか！と思うかもしれませんが、今回は**カプセル化**という処理を施しました。一旦雰囲気だけ掴めればOKです。順を追って説明していきます。
+次に、今回のカプセル化も合わせて、「クラスを使用するメリット・使い所」について説明していきます。
 
 ## クラスを使用するメリット・使い所
 
