@@ -12,17 +12,30 @@
 # print(female1, "の平均点は", female1_average, "です。")
 
 # 平均点を出す関数
-def average(name, japanese, english):
-    average_point = (japanese + english) / 2
-    print(name, "の平均点は", average_point, "です。")
+# def average(name, japanese, english):
+#     average_point = (japanese + english) / 2
+#     print(name, "の平均点は", average_point, "です。")
 
-man1 = "Bob"
-man1_japanese = 60
-man1_english = 90
+# man1 = "Bob"
+# man1_japanese = 60
+# man1_english = 90
 
-female1 = "Lisa"
-female1_japanese = 100
-female1_english = 70
+# female1 = "Lisa"
+# female1_japanese = 100
+# female1_english = 70
 
-average(man1, man1_japanese, man1_english)
-average(female1, female1_japanese, female1_english)
+# average(man1, man1_japanese, man1_english)
+# average(female1, female1_japanese, female1_english)
+
+# クラスを定義する
+class Average():
+    # クラス内に関数を定義します
+    def average(self, name, japanese, english):
+        average_point = (japanese + english) / 2
+        print(name, "の平均点は", average_point, "です。")
+
+man1 = Average() # 変数man1にAverageクラスを実装する
+man1.average("Bob", 60, 90)
+
+female1 = Average()
+female1.average("Lisa", 100, 70)
