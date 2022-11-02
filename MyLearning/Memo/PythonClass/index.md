@@ -2,8 +2,6 @@
   - [キーワード](#キーワード)
 - [Python クラス入門](#python-クラス入門-1)
   - [クラスを利用するメリット](#クラスを利用するメリット)
-  - [クラスとは](#クラスとは)
-  - [クラスの定義方法](#クラスの定義方法)
   - [インスタンスの作成（インスタンス化）と実行](#インスタンスの作成インスタンス化と実行)
   - [オブジェクトの種類](#オブジェクトの種類)
   - [メソッド](#メソッド)
@@ -55,6 +53,34 @@ print(female1, "の平均点は", female1_average, "です。")
 
 2. 上記の内容を関数に実装した場合
 
+```python:
+# 平均点を出す関数
+def average(name, japanese, english):
+    average_point = (japanese + english) / 2
+    print(name, "の平均点は", average_point, "です。")
+
+man1 = "Bob"
+man1_japanese = 60
+man1_english = 90
+
+female1 = "Lisa"
+female1_japanese = 100
+female1_english = 70
+
+average(man1, man1_japanese, man1_english)
+average(female1, female1_japanese, female1_english)
+
+# 出力結果
+# Bob の平均点は 75.0 です。
+# Lisa の平均点は 85.0 です。
+```
+
+関数を使う事でだいぶスッキリしました。名前と点数の項目だけ実装すれば良いことになり、人を増やした拡張性も高くなりました。
+そして、ここからクラスを使用してみます。まだクラスが分からないと思いますが、コード内にコメントを入れますので、なんとなく雰囲気だけ掴めればOKです。
+
+3. クラスを使用した場合
+
+```python:
 
 
 
