@@ -1,20 +1,13 @@
 class TestClass:
-    # コンストラクタ
-    def __init__(self):
-        # 引数greetingの値をインスタンス変数の初期値とする
-        print("Hello World!!")
+    morning = "Good Morning!!" # クラス変数
+    def greeting(self):
+        print(self.morning)
 
-    def wave_hands(self):
-        print("手を振る")
+instance1 = TestClass()        # インスタンス1
+instance1.greeting()
 
-    def walk(self):
-        print("歩く")
+instance2 = TestClass()        # インスタンス2
+instance2.greeting()
 
-instance1 = TestClass() # インスタンス化
-# ここで実行するとコンストラクタの"Hello World!!"のみが出力する
-
-instance1.wave_hands()  # instance1が手を振るようになる
-# この時点で実行すると"Hello World!!"と"手を振る"が出力される
-
-instance1.walk()        # instance1がさらに歩くようになる
-# 最終的に"Hello World!!"、"手を振る"、"歩く"が出力される
+# 実行結果: Good Morning!!
+# 実行結果: Good Morning!!
