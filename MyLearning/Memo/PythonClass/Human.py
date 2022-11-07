@@ -1,13 +1,10 @@
-class TestClass:
-    morning = "Good Morning!!" # クラス変数
-    def greeting(self):
-        print(self.morning)
+class Human:
+    pass
 
-instance1 = TestClass()        # インスタンス1
-instance1.greeting()
+human = Human()
 
-instance2 = TestClass()        # インスタンス2
-instance2.greeting()
+human.name = "Mike"
+human.age = 20
+human.height = 180
 
-# 実行結果: Good Morning!!
-# 実行結果: Good Morning!!
+print("名前:", human.name, "年齢:", human.age, "身長:", dog.height, "cm")
