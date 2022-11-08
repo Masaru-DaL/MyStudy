@@ -18,6 +18,26 @@
   - FDD
   - スクラム
 
+## アジャイル開発の4つの価値観
+
+> Individuals and interactions over processes and tools
+
+（プロセスやツールよりも**個人と対話**を）
+
+> Working software over comprehensive documentation
+
+（包括的なドキュメントよりも**動くソフトウェア**を）
+
+> Customer collaboration over contract negotiation
+
+（契約交渉よりも**顧客との協調**を）
+
+> Responding to change over following a plan
+
+（計画に従うことよりも**変化への対応**を）
+
+
+
 ## ソフトウェア開発方法論の歴史をさらっと
 
 「ソフトウェア開発方法論」はSDM（Software Development Methodology）を訳したもので、SDMをこうするという枠を決めたものをSDMフレームワークと言い、それがアジャイルなどを指している。
@@ -99,5 +119,3 @@ PBLとは、学習者自ら課題を見つけて解決していく中で、解�
 3. 生活に役立つ応用力が養われる
 4. 情報リテラシーが身につきやすい
 5. 表現力が養われる
-
-
