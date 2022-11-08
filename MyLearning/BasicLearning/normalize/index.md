@@ -62,6 +62,17 @@
 ### 3-1. 非正規形
 
 - 正規化される前のテーブルを作成する。
+テーブルは行列の調整が出来ないので図で。
+
+![](2022-10-28-19-37-00.png)
+
+1つのstudent_code, student_nameに対して複数の項目が繰り替えし存在しているため、非正規化に該当する。
+
+### 3-2. 第1正規形
+
+上記の非正規形に対し、**第1正規化**を行い、**第1正規形**にする。
+
+![](2022-10-28-17-31-42.png)
 
 1. データベースの作成(normalize_dbとしてデータベースを作成する)
 
@@ -108,7 +119,7 @@ mysql> show tables;
 1 row in set (0.00 sec)
 ```
 
-3. 非正規系としてサンプルデータを挿入する。
+3. 第1正規形としてサンプルデータを挿入する。
 
 ```sql:
 mysql> select * from results_sheet;
@@ -126,16 +137,15 @@ mysql> select * from results_sheet;
 7 rows in set (0.00 sec)
 ```
 
-これが同じ内容が繰り返し格納されてしまう、**格納効率の悪い、使いにくい非正規化のサンプル用テーブルデータ**です。
+### 3-3. 第2正規形
 
-### 3-2. 第1正規形
+次に**第2正規化**を行い、**第2正規形**にします。
+第2正規化では従属関係を作成する。
 
-まずは**第1正規化**を行い、**第1正規形**にします。
-第1正規化では重複する情報がない状態にします。
+![](2022-10-28-17-30-42.png)
 
 1. results_sheetの情報を確認する。
-最初に作成されたテーブルには、3つの情報があります。
-生徒の情報、科目の情報、結果の情報です。
+重複してるものを洗い出すと、student, subjectが重複してるのでその2つのテーブルを作成と、最終的な結果(result)のテーブルの全部で3つのテーブルが必要です。
 
 2. 3つのテーブルに分割する。
 
@@ -148,6 +158,7 @@ mysql> select * from results_sheet;
   - subject_name
 
 - result
+  - id
   - subject_code
   - academic_year
   - results
@@ -174,12 +185,23 @@ mysql> select * from results_sheet;
 ![](2022-10-28-13-21-57.png)
 
 ```sql:
+-- テーブルの作成 --
 mysql> create table normalize_db.student (student_code int, student_name varchar(10));
 
-mysql> create table normalize_db.subject (id int, subject_code varchar(10), subject_name varchar(10));
+mysql> create table normalize_db.subject (subject_code varchar(10), subject_name varchar(10));
+
+-- 主キーの設定 --
+alter table student add primary key (student_code);
+alter table subject add primary key (subject_code);
+alter table result add primary key (id);
 
 mysql> create table normalize_db.result (id int, student_code int, subject_code varchar(10), academic_year int, results varchar(5));
 
+-- 外部キーの設定 --
+alter table result add foreign key fk_subject_code(subject_code) references subject(subject_code);
+alter table result add foreign key fk_student_code(student_code) references student(student_code);
+
+-- テーブルの確認 --
 mysql> show tables;
 +------------------------+
 | Tables_in_normalize_db |
@@ -190,34 +212,52 @@ mysql> show tables;
 +------------------------+
 3 rows in set (0.01 sec)
 
+-- カラムの確認(主キー, 外部キー) --
+mysql> show columns from student;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| student_code | int         | NO   | PRI | NULL    |       |
+| student_name | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+mysql> show columns from subject;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| subject_code | varchar(10) | NO   | PRI | NULL    |       |
+| subject_name | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+mysql> show columns from result;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id            | int         | NO   | PRI | NULL    |       |
+| student_code  | int         | YES  | MUL | NULL    |       |
+| subject_code  | varchar(10) | YES  | MUL | NULL    |       |
+| academic_year | int         | YES  |     | NULL    |       |
+| results       | varchar(5)  | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
 -- サンプルデータ挿入 --
 insert into student values (1001, 'Masaru');
 insert into student values (1002, 'Terralian');
 insert into student values (1003, 'Yuu');
 
-insert into subject values (1, 'K01', 'Japanese');
-insert into subject values (2, 'K02', 'Math');
-insert into subject values (3, 'K03', 'English');
-insert into subject values (4, 'K04', 'Community');
+insert into subject values ('K01', 'Japanese');
+insert into subject values ('K02', 'Math');
+insert into subject values ('K03', 'English');
+insert into subject values ('K04', 'Community');
 
-insert into result values (1, 2015, 'Good');
-insert into result values (2, 2015, 'Nice');
-insert into result values (3, 2015, 'Great');
-insert into result values (4, 2016, 'Good');
-insert into result values (5, 2016, 'Nice');
-insert into result values (6, 2016, 'Great');
-insert into result values (7, 2017, 'Good');
-insert into result values (8, 2017, 'Nice');
-insert into result values (9, 2017, 'Great');
+insert into result values (1, 1001, 'K01', 2015, 'Great');
+insert into result values (2, 1001, 'K02', 2015, 'Nice');
+insert into result values (3, 1001, 'K03', 2015, 'Good');
+insert into result values (4, 1001, 'K04', 2016, 'Great');
+insert into result values (5, 1002, 'K01', 2017, 'Nice');
+insert into result values (6, 1002, 'K03', 2016, 'Good');
+insert into result values (7, 1003, 'K02', 2017, 'Great');
 -- 挿入ここまで --
-
--- 主キーの設定 --
-alter table student add primary key (student_code);
-alter table subject add primary key (subject_code);
-
--- 外部キーの設定 --
-alter table result add foreign key fk_subject_code(subject_code) references subject(subject_code);
-alter table result add foreign key fk_student_code(student_code) references student(student_code);
 
 -- データの確認 --
 mysql> select * from student;
@@ -249,30 +289,92 @@ mysql> select * from subject;
 | K04          | Community    |
 +--------------+--------------+
 
--- カラムの確認(主キー, 外部キー) --
-mysql> show columns from student;
-+--------------+-------------+------+-----+---------+-------+
-| Field        | Type        | Null | Key | Default | Extra |
-+--------------+-------------+------+-----+---------+-------+
-| student_code | int         | NO   | PRI | NULL    |       |
-| student_name | varchar(10) | YES  |     | NULL    |       |
-+--------------+-------------+------+-----+---------+-------+
+-- 最終結果 --
+mysql> select * from result;
++----+--------------+--------------+---------------+---------+
+| id | student_code | subject_code | academic_year | results |
++----+--------------+--------------+---------------+---------+
+|  1 |         1001 | K01          |          2015 | Great   |
+|  2 |         1001 | K02          |          2015 | Nice    |
+|  3 |         1001 | K03          |          2015 | Good    |
+|  4 |         1001 | K04          |          2016 | Great   |
+|  5 |         1002 | K01          |          2017 | Nice    |
+|  6 |         1002 | K03          |          2016 | Good    |
+|  7 |         1003 | K02          |          2017 | Great   |
++----+--------------+--------------+---------------+---------+
+```
 
-mysql> show columns from subject;
-+--------------+-------------+------+-----+---------+-------+
-| Field        | Type        | Null | Key | Default | Extra |
-+--------------+-------------+------+-----+---------+-------+
-| subject_code | varchar(10) | NO   | PRI | NULL    |       |
-| subject_name | varchar(10) | YES  |     | NULL    |       |
-+--------------+-------------+------+-----+---------+-------+
+### 3-4. 第3正規形
 
-mysql> show columns from result;
-+---------------+-------------+------+-----+---------+-------+
-| Field         | Type        | Null | Key | Default | Extra |
-+---------------+-------------+------+-----+---------+-------+
-| id            | int         | YES  |     | NULL    |       |
-| student_code  | int         | YES  | MUL | NULL    |       |
-| subject_code  | varchar(10) | YES  | MUL | NULL    |       |
-| academic_year | int         | YES  |     | NULL    |       |
-| results       | varchar(5)  | YES  |     | NULL    |       |
-+---------------+-------------+------+-----+---------+-------+
+最後に**第3正規化**を行い、**第3正規形**にします。
+項目同士が既存関係を持っているもの(推移的従属関係)も、別テーブルにっきり出す。(=成績テーブルの作成)
+
+![](2022-10-29-13-31-38.png)
+
+最終テーブル数は4つ。
+
+
+```sql:
+-- テーブルの作成 --
+mysql> create table normalize_db.student (student_code int, student_name varchar(10));
+
+mysql> create table normalize_db.subject (subject_code varchar(10), subject_name varchar(10));
+
+mysql> create table normalize_db.score (id int, academic_year int, results varchar(5));
+
+mysql> create table normalize_db.user_score (student_code int, subject_code varchar(10), academic_year int, results varchar(5));
+
+-- 主キーの設定 --
+alter table student add primary key (student_code);
+alter table subject add primary key (subject_code);
+alter table score add primary key (id);
+
+-- 外部キーの設定 --
+alter table user_score add foreign key fk_student_code(student_code) references student(student_code);
+alter table user_score add foreign key fk_subject_code(subject_code) references subject(subject_code);
+
+-- サンプルデータの挿入 --
+insert into student values (1001, 'Masaru');
+insert into student values (1002, 'Terralian');
+insert into student values (1003, 'Yuu');
+
+insert into subject values ('K01', 'Japanese');
+insert into subject values ('K02', 'Math');
+insert into subject values ('K03', 'English');
+insert into subject values ('K04', 'Community');
+
+insert into score values (1, 2015, 'Good');
+insert into score values (2, 2015, 'Nice');
+insert into score values (3, 2015, 'Great');
+insert into score values (4, 2016, 'Good');
+insert into score values (5, 2016, 'Nice');
+insert into score values (6, 2016, 'Great');
+insert into score values (7, 2017, 'Good');
+insert into score values (8, 2017, 'Nice');
+insert into score values (9, 2017, 'Great');
+
+insert into user_score values (1001, 'K01', 2015, 'Great');
+insert into user_score values (1001, 'K02', 2015, 'Nice');
+insert into user_score values (1001, 'K03', 2015, 'Good');
+insert into user_score values (1001, 'K04', 2016, 'Great');
+insert into user_score values (1001, 'K01', 2015, 'Nice');
+insert into user_score values (1002, 'K01', 2015, 'Nice');
+insert into user_score values (1002, 'K03', 2015, 'Good');
+insert into user_score values (1003, 'K02', 2015, 'Great');
+
+
+-- 結果テーブルの確認 --
+mysql> select * from user_score;
++--------------+--------------+---------------+---------+
+| student_code | subject_code | academic_year | results |
++--------------+--------------+---------------+---------+
+|         1001 | K01          |          2015 | Great   |
+|         1001 | K02          |          2015 | Nice    |
+|         1001 | K03          |          2015 | Good    |
+|         1001 | K04          |          2016 | Great   |
+|         1001 | K01          |          2015 | Nice    |
+|         1002 | K01          |          2015 | Nice    |
+|         1002 | K03          |          2015 | Good    |
+|         1003 | K02          |          2015 | Great   |
++--------------+--------------+---------------+---------+
+```
