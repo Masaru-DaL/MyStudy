@@ -1,5 +1,15 @@
 # Git
 
+- 基礎知識
+  - originとは
+    - リモートリポジトリのアクセス先に対してGitがデフォルトで付ける名前のこと
+      - `git remote- v`
+        - `origin  git@github.com:Masaru-DaL/Lifelong-Learning.git (fetch)`
+        - `origin  git@github.com:Masaru-DaL/Lifelong-Learning.git (push)`
+      - `git@github.com:Masaru-DaL/Lifelong-Learning.git`が`origin`という名前で設定されているということ
+
+
+
 ## 1. 変更操作
 
 ### 1-1. コミット時点に戻す
@@ -118,3 +128,16 @@
 
 3の手作業はVScodeでメインとブランチのどちらを採用するかを判断しながら取り込んでいく。
 
+## 6. フェッチ
+
+ローカルとリモートで差分があるかを調べるのを「フェッチ」と呼ぶ。
+
+## 設定編
+
+### アップストリーム
+
+- ブランチの紐付けを行う
+
+`git push --set-upstream origin main`
+ローカルのメインブランチとリモートのメインブランチが紐づいたので、次回から`git push`だけで`git push origin main`が行える。
+ブランチごとにアップストリームを設定する必要はある。
