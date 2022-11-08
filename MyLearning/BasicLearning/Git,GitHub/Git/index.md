@@ -325,7 +325,24 @@ squash: 統合させるコミット
 
 `git diff`と`patch`コマンドを使用する。
 
-<patch>
+ちょっと詰まったんで、概要だけ把握。
+
+## 11. その他の機能の概要だけさらっと
+
+1. GitHub issues
+プロジェクト内の連絡ツール
+
+2. Projects
+プロジェクト管理
+
+3. GitHub Pages
+Webサイトを公開できる
+
+4. GitHub Actions
+作業の自動化
+これはやってみる
+
+### 11-1. GitHub Actions
 
 ## 設定編
 
