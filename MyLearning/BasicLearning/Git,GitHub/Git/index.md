@@ -342,7 +342,19 @@ Webサイトを公開できる
 作業の自動化
 これはやってみる
 
+5. GitHub Gist
+メモの共有
+
+6. GitHub Desktop
+GitHub純正のクライアントソフト
+無料
+Sourcetreeのような感じか
+
 ### 11-1. GitHub Actions
+
+- サンプルで用意されている`greetings.yml`を利用する
+
+![](2022-11-08-15-46-25.png)
 
 ## 設定編
 
