@@ -1,7 +1,7 @@
 sample_list = ["A", "B", "C", "D", "E"]
 
 # ①index2~全て
-print(sample_list[2:])
+print(sample_list[:4])
 print(sample_list)
 # 出力結果:
 # ['C', 'D', 'E']

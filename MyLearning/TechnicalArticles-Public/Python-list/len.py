@@ -1,5 +1,5 @@
 sample_list1 = ["A", "B", "C", "D", "E"]
-sample_list2 = [100, 2000, True]
+sample_list2 = [100, 2000, True, ["X", "Y"]]
 
 # ①
 print(len(sample_list1))
@@ -7,4 +7,4 @@ print(len(sample_list1))
 
 # ②
 print(len(sample_list2))
-# 出力結果: 3
+# 出力結果: 4
