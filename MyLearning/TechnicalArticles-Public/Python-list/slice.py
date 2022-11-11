@@ -1,11 +1,13 @@
-sample_list = ["a", "b", "c", "d", "e"]
+sample_list = ["A", "B", "C", "D", "E"]
 
-# print(sample_list[6])
+# ①index2~全て
+print(sample_list[2:])
+print(sample_list)
+# 出力結果:
+# ['C', 'D', 'E']
+# ['A', 'B', 'C', 'D', 'E']
 
-# print(sample_list[:3])
-# print(sample_list[2:])
-
-# print(sample_list[:6])
-# print(sample_list[-0:])
-
-print(sample_list[6:])
+# ②index2~全て
+new_sample_list = sample_list[2:]
+print(new_sample_list)
+# 出力結果: ['C', 'D', 'E']
