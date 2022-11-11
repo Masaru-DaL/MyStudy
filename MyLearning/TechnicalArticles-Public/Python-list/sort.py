@@ -1,20 +1,16 @@
-sample_list = ["A", "B", "C", "D", "E"]
+sample_list = ["E", "D", "C", "B", "A"]
 
-# ①降順に整列
+# ①昇順に整列
+sample_list.sort()
+print(sample_list)
+# 出力結果: ['A', 'B', 'C', 'D', 'E']
+
+# ②降順に整列
 sample_list.sort(reverse=True)
 print(sample_list)
 # 出力結果: ['E', 'D', 'C', 'B', 'A']
 
-# ②
-print(sample_list.sort(reverse=True))
-# 出力結果: None
-
-# ③
-new_sample_list = sample_list.sort(reverse=True)
+# ③昇順に整列した結果を新しいリスト変数に格納する
+new_sample_list = sample_list.sort()
 print(new_sample_list)
-# 出力結果: None
-
-# ②昇順に整列
-sample_list.sort()
-print(sample_list)
-# 出力結果: ['A', 'B', 'C', 'D', 'E']
+# 出力結果: []
