@@ -1,7 +1,7 @@
 import csv
 
-with open("sample.csv") as rf:
-    reader_object = csv.reader(rf)
+with open("sample.csv") as file_object:
+    reader_object = csv.reader(file_object)
     # ①
     print(reader_object)
 
