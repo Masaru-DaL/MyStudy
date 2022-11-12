@@ -10,6 +10,21 @@ Pythonのcsvは、CSV（**C**omma **S**eparated **V**alues）形式で書かれ�
 
 CSVファイルはスプレッドシートやデータベース間で使用される最も一般的な形式です。Excelファイルと混同されがちですが、CSVファイルの方が**互換性が高い**という特徴があります。
 
+以下がCSVファイル形式で書いた場合です。
+
+```csv:
+学校名, 学年, 名前, 専攻カリキュラム, 成績
+Envader, 1st, Bob, Programming, A
+Envader, 2nd, Alisa, UI/UX, B
+Envader, 1st, Mike, Programming, B
+Envader, 2nd, Adam, DataScience, S
+Envader, 2nd, Lisa, Front-end, A
+```
+
+上記のCSVファイルを読み込むと以下のようになります。
+
+![](2022-11-13-06-15-03.png)
+
 ## ファイル操作
 
 csvモジュールはCSVファイルを扱いますので、まず簡単にPythonにおけるファイルの取り扱いを説明します。
@@ -37,11 +52,60 @@ with open(<ファイル>, mode=<"モード">, encoding="文字コード") as <�
 | t | テキストモード | r, w, aと一緒に指定が必要 |
 | + | 更新用 | r, w, a, xと一緒に指定が必要 |
 
-## csvファイルの読み込み
+## csvモジュールの主な関数
+
+今回紹介するcsvモジュールの関数を表にまとめました。
+
+| 関数 | 詳細 | 特徴 |
+| --- | --- | --- |
+| csv.reader | ファイルの読み込み | リスト型を返す |
+| csv.Dictreader | ファイルの読み込み | 辞書型を返す |
+| csv.writer | ファイルの書き込み | リスト型を書き込む |
+| csv.DictWriter | ファイルの書き込み | 辞書型を書き込む |
+
+## CSVファイルの読み込み
+
+ここから、実際にcsvモジュールを使ってCSVファイルを操作していきます。まずはCSVファイルの読み込み操作から行います。
 
 ### csv.reader
 
+CSVファイルの読み込みは、`csv.reader`を使用します。
+
 - csv.readerの基本的な使い方
+
+以下のCSVファイル（`sample.csv`とします）を読み込みます。
+
+```csv:
+学校名, 学年, 名前, 専攻カリキュラム, 成績
+Envader, 1st, Bob, Programming, A
+Envader, 2nd, Alisa, UI/UX, B
+```
+
+```py:
+import csv
+
+with open("sample.csv") as rf:
+    reader_object = csv.reader(rf)
+    # ①
+    print(reader_object)
+
+    # ②
+    for row in reader_object:
+        print(row)
+
+# 出力結果①: <_csv.reader object at 0x1029fc040>
+
+# 出力結果②:
+# ['学校名', ' 学年', ' 名前', ' 専攻カリキュラム', ' 成績']
+# ['Envader', ' 1st', ' Bob', ' Programming', ' A']
+# ['Envader', ' 2nd', ' Alisa', ' UI/UX', ' B']
+```
+
+出力結果①は、`open()`で開いたファイルオブジェクトを`csv.reader()`に渡して出力した結果です。つまり、`csv.reader`でファイルオブジェクトを読み込むと`reader`オブジェクトが返されます。
+
+csv.readerが返したreaderオブジェクトはイテレータプロトコルに対応します。そのため、②のようにfor文で行ごとに取り出すことができます。
+
+
 - 行ごとのデータの取り出し
     - `csv.reader`オブジェクトはイテレータとみなせること
     - for文を使用する
