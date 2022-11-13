@@ -138,6 +138,8 @@ print(two_dimensions_list)
 1, 2, 3, 4
 5, 6, 7, 8
 9, 10, 11, 12
+13, 14, 15, 16
+17, 18, 19, 20
 ```
 
 ```py:
@@ -150,7 +152,29 @@ with open("sample.csv") as file_object:
     two_dimensions_list = [row for row in reader_object]
 ```
 
-①の`two_dimensions_list`を使用して、行・列・要素を取得します。
+ここから①の`two_dimensions_list`を使用して、行・列・要素を取得します。
+
+- 行の取得
+
+二次元リストに対してインデックス指定、またはスライスで**行の取得**ができます。
+
+```py:
+# ①index指定
+print(two_dimensions_list[0])
+print(two_dimensions_list[-1])
+# 出力結果:
+# ['1', ' 2', ' 3', ' 4']
+# ['9', ' 10', ' 11', ' 12']
+
+# ②スライス
+print(two_dimensions_list[3:])
+print(two_dimensions_list[0:2])
+# 出力結果:
+# [['13', ' 14', ' 15', ' 16'], ['17', ' 18', ' 19', ' 20']]
+# [['1', ' 2', ' 3', ' 4'], ['5', ' 6', ' 7', ' 8']]
+```
+
+- 列の取得
 
 
 
