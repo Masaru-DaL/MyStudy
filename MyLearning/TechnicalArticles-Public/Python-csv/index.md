@@ -110,8 +110,8 @@ csv.readerが返したreaderオブジェクトはイテレータプロトコル�
 以下のCSVファイル（`sample.csv`）を読み込み、二次元リストで出力します。
 
 ```csv:
-1, 2, 3, 4, 5
-6, 7, 8, 9, 10
+1, 2, 3, 4
+5, 6, 7, 8
 ```
 
 ```py:
@@ -130,12 +130,30 @@ print(two_dimensions_list)
 
 ①のように、リスト内包表記を使用してreaderオブジェクトから行を取り出すと二次元リストで出力できます。
 
+### 行・列・要素の取得
+
+まず、以下のCSVファイル（`sample.csv`）を上記と同様に二次元リストとして取得します。
+
+```csv:
+1, 2, 3, 4
+5, 6, 7, 8
+9, 10, 11, 12
+```
+
+```py:
+import csv
+
+with open("sample.csv") as file_object:
+    reader_object = csv.reader(file_object)
+
+    # ①
+    two_dimensions_list = [row for row in reader_object]
+```
+
+①の`two_dimensions_list`を使用して、行・列・要素を取得します。
 
 
-    - `csv.reader`オブジェクトはイテレータとみなせること
-    - for文を使用する
-- 二次元配列として取得する
-    - リスト内包表記を使用する
+
 - 行・列・要素の取得
     - 行の取得方法
     - 要素の取得方法
