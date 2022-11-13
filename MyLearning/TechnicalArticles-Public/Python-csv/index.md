@@ -128,7 +128,7 @@ print(two_dimensions_list)
 # [['1', ' 2', ' 3', ' 4'], ['5', ' 6', ' 7', ' 8']]
 ```
 
-①のように、リスト内包表記を使用してreaderオブジェクトから行を取り出すと二次元リストで出力できます。
+今回はリスト内包表記を使用します。①のように、readerオブジェクトから行を取り出すと二次元リストで出力できます。
 
 ### 行・要素・列の取得
 
@@ -188,12 +188,60 @@ print(two_dimensions_list[2][3])
 #  12（先頭の空白は、sample.csvに空白があるため）
 ```
 
+- 列の取得
 
+列の取得方法は二種類あります。一つ目は、二次元リストの行と列を入れ替える（転置）方法です。
 
-- 行・列・要素の取得
-    - 行の取得方法
-    - 要素の取得方法
-    - 列の取得方法（転置を行う）
+```py:
+import csv
+
+with open("sample.csv") as file_object:
+    reader_object = csv.reader(file_object)
+
+    # ①二次元リストの取得
+    row_list = [row for row in reader_object]
+
+    # ②行と列を入れ替える（転置）
+    column_list = [list(x) for x in zip(*row_list)]
+    print(column_list)
+    # 出力結果: （可読性のため改行してます）
+    # [['1', '5', '9', '13', '17'],
+    # [' 2', ' 6', ' 10', ' 14', ' 18'],
+    # [' 3', ' 7', ' 11', ' 15', ' 19'],
+    # [' 4', ' 8', ' 12', ' 16', ' 20']]
+
+    # ③特定の列を取得
+    print(column_list[0])
+    print(column_list[3])
+    # 出力結果:
+    # ['1', '5', '9', '13', '17']
+    # [' 4', ' 8', ' 12', ' 16', ' 20']
+```
+
+2つ目は、readerオブジェクトから行を取り出し、行の特定のインデックスを繰り返し取得することで列として取得する方法です。
+
+```py:
+import csv
+
+with open("sample.csv") as file_object:
+    reader_object = csv.reader(file_object)
+
+    # ①特定の列を取得する
+    column_list_index0 = [row[0] for row in reader_object]
+    print(column_list_index0)
+    # 出力結果: ['1', '5', '9', '13', '17']
+
+# ②違う列を取得するためにはもう一度ファイル操作から行う
+with open("sample.csv") as file_object:
+    reader_object = csv.reader(file_object)
+    column_list_index3 = [row[3] for row in reader_object]
+    print(column_list_index3)
+    # 出力結果: [' 4', ' 8', ' 12', ' 16', ' 20']
+```
+
+こちらの方法は繰り返して列を取得するためには再度ファイルをオープンする必要があります。
+列の取得方法はどちらも多少の手間がかかります。ここでは紹介しませんが、Numpyやpandasを使用するともっと簡単に多次元の操作をすることが可能です。
+
 - 文字列を数値に変換
     - デフォルトで各要素が文字列であること
     - 型変換を行う必要があること
