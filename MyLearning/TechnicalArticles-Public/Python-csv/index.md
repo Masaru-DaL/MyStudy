@@ -121,9 +121,9 @@ with open("sample.csv") as file_object:
     reader_object = csv.reader(file_object)
 
     # ①
-    two_dimensions_list = [row for row in reader_object]
+    sample_list = [row for row in reader_object]
 
-print(two_dimensions_list)
+print(sample_list)
 # 出力結果:
 # [['1', ' 2', ' 3', ' 4'], ['5', ' 6', ' 7', ' 8']]
 ```
@@ -132,7 +132,7 @@ print(two_dimensions_list)
 
 ### 行・要素・列の取得
 
-まず、以下のCSVファイル（`sample.csv`）を二次元リストとして取得します。
+以下のCSVファイル（`sample.csv`）の、「行・要素・列」を取得します。
 
 ```csv:
 1, 2, 3, 4
@@ -142,33 +142,28 @@ print(two_dimensions_list)
 17, 18, 19, 20
 ```
 
+- 行の取得
+
+行の取得は、二次元リストに対して**インデックス指定**、または**スライス**を行います。
+
 ```py:
 import csv
 
 with open("sample.csv") as file_object:
     reader_object = csv.reader(file_object)
 
-    # ①
-    two_dimensions_list = [row for row in reader_object]
-```
+    sample_list = [row for row in reader_object]
 
-ここから①の`two_dimensions_list`を使用して、「行・要素・列」を取得します。
-
-- 行の取得
-
-行の取得は、二次元リストに対して**インデックス指定**、または**スライス**を行います。
-
-```py:
 # ①index指定
-print(two_dimensions_list[0])
-print(two_dimensions_list[-1])
+print(sample_list[0])
+print(sample_list[-1])
 # 出力結果:
 # ['1', ' 2', ' 3', ' 4']
 # ['9', ' 10', ' 11', ' 12']
 
 # ②スライス
-print(two_dimensions_list[3:])
-print(two_dimensions_list[0:2])
+print(sample_list[3:])
+print(sample_list[0:2])
 # 出力結果:
 # [['13', ' 14', ' 15', ' 16'], ['17', ' 18', ' 19', ' 20']]
 # [['1', ' 2', ' 3', ' 4'], ['5', ' 6', ' 7', ' 8']]
@@ -176,12 +171,19 @@ print(two_dimensions_list[0:2])
 
 - 要素の取得
 
-要素の取得は、二次元リストに対して**インデックス指定**を行います。インデックス指定は「**リスト内の何番目のリスト + 何番目の要素**」を指定します。
+要素の取得は、二次元リストに対して**インデックス指定**を行います。インデックス指定は①のように、「**リスト内の何番目のリスト + 何番目の要素**」を指定します。
 
 ```py:
+import csv
+
+with open("sample.csv") as file_object:
+    reader_object = csv.reader(file_object)
+
+    sample_list = [row for row in reader_object]
+
 # ①
-print(two_dimensions_list[0][0])
-print(two_dimensions_list[2][3])
+print(sample_list[0][0])
+print(sample_list[2][3])
 
 # 出力結果:
 # 1
@@ -198,27 +200,26 @@ import csv
 with open("sample.csv") as file_object:
     reader_object = csv.reader(file_object)
 
-    # ①二次元リストの取得
-    row_list = [row for row in reader_object]
+    sample_list = [row for row in reader_object]
 
-    # ②行と列を入れ替える（転置）
-    column_list = [list(x) for x in zip(*row_list)]
-    print(column_list)
+    # ①行と列を入れ替える（転置）
+    columns_list = [list(x) for x in zip(*sample_list)]
+    print(columns_list)
     # 出力結果: （可読性のため改行してます）
     # [['1', '5', '9', '13', '17'],
     # [' 2', ' 6', ' 10', ' 14', ' 18'],
     # [' 3', ' 7', ' 11', ' 15', ' 19'],
     # [' 4', ' 8', ' 12', ' 16', ' 20']]
 
-    # ③特定の列を取得
-    print(column_list[0])
-    print(column_list[3])
+    # ②特定の列を取得
+    print(columns_list[0])
+    print(columns_list[3])
     # 出力結果:
     # ['1', '5', '9', '13', '17']
     # [' 4', ' 8', ' 12', ' 16', ' 20']
 ```
 
-2つ目は、readerオブジェクトから行を取り出し、行の特定のインデックスを繰り返し取得することで列として取得する方法です。
+2つ目は、readerオブジェクトから行を取り出し、その行の特定のインデックスを繰り返し取得することで列として取得する方法です。
 
 ```py:
 import csv
@@ -227,24 +228,69 @@ with open("sample.csv") as file_object:
     reader_object = csv.reader(file_object)
 
     # ①特定の列を取得する
-    column_list_index0 = [row[0] for row in reader_object]
-    print(column_list_index0)
+    sample_list1 = [row[0] for row in reader_object]
+    print(sample_list1)
     # 出力結果: ['1', '5', '9', '13', '17']
 
 # ②違う列を取得するためにはもう一度ファイル操作から行う
 with open("sample.csv") as file_object:
     reader_object = csv.reader(file_object)
-    column_list_index3 = [row[3] for row in reader_object]
-    print(column_list_index3)
+    sample_list2 = [row[3] for row in reader_object]
+    print(sample_list2)
     # 出力結果: [' 4', ' 8', ' 12', ' 16', ' 20']
 ```
 
-こちらの方法は繰り返して列を取得するためには再度ファイルをオープンする必要があります。
-列の取得方法はどちらも多少の手間がかかります。ここでは紹介しませんが、Numpyやpandasを使用するともっと簡単に多次元の操作をすることが可能です。
+上記の①と②を見ての通り、最初に取得した列とは違う列を取得するためには、再度CSVファイルをオープンする所から始める必要があります。
+csvモジュールを用いて列を取得する方法はどちらも多少の手間がかかります。ここでは紹介しませんが、Numpyやpandasを使用するともっと簡単に多次元の操作をすることが可能です。
 
-- 文字列を数値に変換
-    - デフォルトで各要素が文字列であること
-    - 型変換を行う必要があること
+### 文字列を数値に変換
+
+CSVファイルから取り出した要素は**デフォルトで文字列型**です。その要素を更に加工したい場合は数値に変換する必要があります。
+
+- int型に変換
+以下のCSVファイルを使用し、int型に変換します。
+
+```csv:
+1, 2, 3, 4
+5, 6, 7, 8
+```
+
+```py:
+import csv
+
+with open("sample.csv") as file_object:
+    reader_object = csv.reader(file_object)
+
+    # ①二次元リストを取得
+    sample_list = [row for row in reader_object]
+
+# ②取り出した要素の型を確認する
+print(sample_list[0][0])
+print(type(sample_list[0][0]))
+# 出力結果:
+# 1
+# <class 'str'>
+
+# ③CSVファイルの最初の行をint型に変換する
+int_list = [int(i) for i in sample_list[0]]
+print(int_list)
+print(type(int_list[0]))
+# 出力結果:
+# [1, 2, 3, 4]
+# <class 'int'>
+
+# ④二次元リストを一気にint型に変換する
+print([[int(i) for i in row] for row in sample_list])
+# 出力結果:
+# [[1, 2, 3, 4], [5, 6, 7, 8]]
+```
+
+- float型に変換
+以下のCSVファイル（`sample.csv`）を使用し、float型に変換します。
+
+
+
+### 区切り文字
 - 区切り文字を指定
     - デフォルトが`,`（カンマ）であること
     - 任意の区切り文字の指定方法
