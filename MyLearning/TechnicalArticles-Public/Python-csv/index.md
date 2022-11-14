@@ -63,6 +63,72 @@ with open(<ファイル>, mode=<"モード">, encoding="文字コード") as <�
 | csv.writer | ファイルの書き込み | リスト型を書き込む |
 | csv.DictWriter | ファイルの書き込み | 辞書型を書き込む |
 
+## リスト内包表記
+
+本記事ではCSVファイルとその操作実際にコーディングを行いますので、全体的にコードが長くなっていきます。そのため、繰り返し処理はリスト内包表記を使用します。今回使用する範囲でのリスト内包表記を簡単に解説します。
+
+- リスト内包表の基本型
+
+```py:
+# 基本型（一次元リストの取得）
+[<式> for <任意の変数名> in <繰り返し可能なオブジェクト>]
+
+# ネストさせる場合（二次元リストの取得）
+[<式> for <任意の変数名> in <繰り返し可能なオブジェクト1>
+        for <任意の変数名> in <繰り返し可能なオブジェクト2>]
+# 可読性のためにインデントを入れてるが、必須ではない
+```
+
+リスト内包表記を使用しない場合と、使用した場合とを比較します。
+
+- リスト内包表記を使用しない場合
+
+```py:
+sample_list1 = [1, 2, 3, 4]
+new_sample_list1 = []
+
+# ①一次元リストの取得
+for i in sample_list1:
+    new_sample_list1.append(i)
+
+print(new_sample_list1)
+# 出力結果: [1, 2, 3, 4]
+
+
+sample_list2 = [[1, 2, 3, 4], [5, 6, 7, 8]]
+new_sample_list2 = []
+
+# ②二次元リストの取得
+for row in sample_list2:
+    for i in row:
+        new_sample_list2.append(i)
+
+print(new_sample_list2)
+# 出力結果: [1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+- リスト内包表記を使用した場合
+
+```py:
+sample_list1 = [1, 2, 3, 4]
+
+# ③リスト内包表記を使用して一次元リストを取得
+new_sample_list1 = [i for i in sample_list1]
+print(new_sample_list1)
+# 出力結果: [1, 2, 3, 4]
+
+
+sample_list2 = [[1, 2, 3, 4], [5, 6, 7, 8]]
+
+# ④リスト内包表記を使用して二次元リストを取得
+new_sample_list2 = [i for row in sample_list2 for i in row]
+print(new_sample_list2)
+# 出力結果: [1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+
+
+
 ## CSVファイルの読み込み
 
 ここから、実際にcsvモジュールを使ってCSVファイルを操作していきます。まずはCSVファイルの読み込み操作から行います。
