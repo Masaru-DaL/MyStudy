@@ -6,7 +6,7 @@ Pythonのcsvモジュールを操作は、アプリケーションから取り�
 
 ## csvとは
 
-Pythonのcsvは、CSV（**C**omma **S**eparated **V**alues）形式で書かれたファイルを扱えるモジュールのことを指します。csvを使用する際は`import`が必要です。
+Pythonのcsvは、CSV（**C**omma **S**eparated **V**alues）形式で書かれたファイルを扱えるモジュールのことを指します。csvを使用する際は `import` が必要です。
 
 CSVファイルはスプレッドシートやデータベース間で使用される最も一般的な形式です。Excelファイルと混同されがちですが、CSVファイルの方が**互換性が高い**という特徴があります。
 
@@ -19,6 +19,7 @@ Envader, 2nd, Alisa, UI/UX, B
 Envader, 1st, Mike, Programming, B
 Envader, 2nd, Adam, DataScience, S
 Envader, 2nd, Lisa, Front-end, A
+
 ```
 
 上記のCSVファイルを読み込むと以下のようになります。
@@ -38,7 +39,7 @@ withの構文は以下です。
 with open(<ファイル>, mode=<"モード">, encoding="文字コード") as <別名>:
 ```
 
-ファイル指定は必須です。モードと文字コードは必要に応じて使用・使い分けします。また、`as`でファイル操作を行うファイルオブジェクトに別名を付けることができます。その別名はファイルをクローズするまでのスコープで使用できます。
+ファイル指定は必須です。モードと文字コードは必要に応じて使用・使い分けします。また、 `as` でファイル操作を行うファイルオブジェクトに別名を付けることができます。その別名はファイルをクローズするまでのスコープで使用できます。
 
 モードはいくつかの種類とそれぞれの特徴がありますので表にまとめました。
 
@@ -59,24 +60,30 @@ with open(<ファイル>, mode=<"モード">, encoding="文字コード") as <�
 | 関数 | 詳細 | 特徴 |
 | --- | --- | --- |
 | csv.reader | ファイルの読み込み | リスト型を返す |
-| csv.Dictreader | ファイルの読み込み | 辞書型を返す |
+| csv. Dictreader | ファイルの読み込み | 辞書型を返す |
 | csv.writer | ファイルの書き込み | リスト型を書き込む |
-| csv.DictWriter | ファイルの書き込み | 辞書型を書き込む |
+| csv. DictWriter | ファイルの書き込み | 辞書型を書き込む |
 
 ## リスト内包表記
 
-本記事ではCSVファイルとその操作実際にコーディングを行いますので、全体的にコードが長くなっていきます。そのため、繰り返し処理はリスト内包表記を使用します。今回使用する範囲でのリスト内包表記を簡単に解説します。
+本記事ではCSVファイルとその操作実際にコーディングを行いますので、全体的にコードが長くなっていきます。そのため、繰り返し処理はfor文ではなく、リスト内包表記を使用します。今回使用する範囲でのリスト内包表記を簡単に解説します。
 
-- リスト内包表の基本型
+* リスト内包表の基本型
 
 ```py:
+
 # 基本型（一次元リストの取得）
+
 [<式> for <任意の変数名> in <繰り返し可能なオブジェクト>]
 
 # ネストさせる場合（二次元リストの取得）
+
 [<式> for <任意の変数名> in <繰り返し可能なオブジェクト1>
+
         for <任意の変数名> in <繰り返し可能なオブジェクト2>]
+
 # 可読性のためにインデントを入れてるが、必須ではない
+
 ```
 
 リスト内包表記を使用しない場合と、使用した場合とを比較します。
@@ -94,7 +101,6 @@ for i in sample_list1:
 print(new_sample_list1)
 # 出力結果: [1, 2, 3, 4]
 
-
 sample_list2 = [[1, 2, 3, 4], [5, 6, 7, 8]]
 new_sample_list2 = []
 
@@ -107,27 +113,30 @@ print(new_sample_list2)
 # 出力結果: [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
-- リスト内包表記を使用した場合
+* リスト内包表記を使用した場合
 
 ```py:
 sample_list1 = [1, 2, 3, 4]
 
 # ③リスト内包表記を使用して一次元リストを取得
+
 new_sample_list1 = [i for i in sample_list1]
 print(new_sample_list1)
-# 出力結果: [1, 2, 3, 4]
 
+# 出力結果: [1, 2, 3, 4]
 
 sample_list2 = [[1, 2, 3, 4], [5, 6, 7, 8]]
 
 # ④リスト内包表記を使用して二次元リストを取得
+
 new_sample_list2 = [i for row in sample_list2 for i in row]
 print(new_sample_list2)
+
 # 出力結果: [1, 2, 3, 4, 5, 6, 7, 8]
+
 ```
 
-
-
+リスト内包表記を使用すると空の配列の宣言や、繰り返し処理自体を短く書くことができます。慣れるまでは分かりにくいかもしれませんが、
 
 ## CSVファイルの読み込み
 
@@ -151,8 +160,11 @@ Envader, 2nd, Alisa, UI/UX, B
 import csv
 
 with open("sample.csv") as file_object:
+
     reader_object = csv.reader(file_object)
+
     # ①
+
     print(reader_object)
 
     # ②
@@ -162,9 +174,13 @@ with open("sample.csv") as file_object:
 # 出力結果①: <_csv.reader object at 0x1029fc040>
 
 # 出力結果②:
+
 # ['学校名', ' 学年', ' 名前', ' 専攻カリキュラム', ' 成績']
+
 # ['Envader', ' 1st', ' Bob', ' Programming', ' A']
+
 # ['Envader', ' 2nd', ' Alisa', ' UI/UX', ' B']
+
 ```
 
 出力結果①は、`open()`で開いたファイルオブジェクトを`csv.reader()`に渡して出力した結果です。つまり、`csv.reader`でファイルオブジェクトを読み込むとreaderオブジェクトが返されます。
@@ -184,14 +200,19 @@ csv.readerが返したreaderオブジェクトはイテレータプロトコル�
 import csv
 
 with open("sample.csv") as file_object:
+
     reader_object = csv.reader(file_object)
 
     # ①
+
     sample_list = [row for row in reader_object]
 
 print(sample_list)
+
 # 出力結果:
+
 # [['1', ' 2', ' 3', ' 4'], ['5', ' 6', ' 7', ' 8']]
+
 ```
 
 今回はリスト内包表記を使用します。①のように、readerオブジェクトから行を取り出すと二次元リストで出力できます。
@@ -208,7 +229,7 @@ print(sample_list)
 17, 18, 19, 20
 ```
 
-- 行の取得
+* 行の取得
 
 行の取得は、二次元リストに対して**インデックス指定**、または**スライス**を行います。
 
@@ -216,23 +237,32 @@ print(sample_list)
 import csv
 
 with open("sample.csv") as file_object:
+
     reader_object = csv.reader(file_object)
 
     sample_list = [row for row in reader_object]
 
 # ①index指定
+
 print(sample_list[0])
 print(sample_list[-1])
+
 # 出力結果:
+
 # ['1', ' 2', ' 3', ' 4']
+
 # ['9', ' 10', ' 11', ' 12']
 
 # ②スライス
 print(sample_list[3:])
 print(sample_list[0:2])
+
 # 出力結果:
+
 # [['13', ' 14', ' 15', ' 16'], ['17', ' 18', ' 19', ' 20']]
+
 # [['1', ' 2', ' 3', ' 4'], ['5', ' 6', ' 7', ' 8']]
+
 ```
 
 - 要素の取得
@@ -256,7 +286,7 @@ print(sample_list[2][3])
 #  12（先頭の空白は、sample.csvに空白があるため）
 ```
 
-- 列の取得
+* 列の取得
 
 列の取得方法は二種類あります。一つ目は、二次元リストの行と列を入れ替える（転置）方法です。
 
@@ -264,6 +294,7 @@ print(sample_list[2][3])
 import csv
 
 with open("sample.csv") as file_object:
+
     reader_object = csv.reader(file_object)
 
     sample_list = [row for row in reader_object]
@@ -283,6 +314,7 @@ with open("sample.csv") as file_object:
     # 出力結果:
     # ['1', '5', '9', '13', '17']
     # [' 4', ' 8', ' 12', ' 16', ' 20']
+
 ```
 
 2つ目は、readerオブジェクトから行を取り出し、その行の特定のインデックスを繰り返し取得することで列として取得する方法です。
@@ -313,12 +345,13 @@ csvモジュールを用いて列を取得する方法はどちらも多少の�
 
 CSVファイルから取り出した要素は**デフォルトで文字列型**です。その要素を更に加工したい場合は数値に変換する必要があります。
 
-- int型に変換
+* int型に変換
 以下のCSVファイルを使用し、int型に変換します。
 
 ```csv:
 1, 2, 3, 4
 5, 6, 7, 8
+
 ```
 
 ```py:
@@ -351,52 +384,57 @@ print([[int(i) for i in row] for row in sample_list])
 # [[1, 2, 3, 4], [5, 6, 7, 8]]
 ```
 
-- float型に変換
-以下のCSVファイル（`sample.csv`）を使用し、float型に変換します。
-
-
+* float型に変換
+以下のCSVファイル（ `sample.csv` ）を使用し、float型に変換します。
 
 ### 区切り文字
-- 区切り文字を指定
+
+* 区切り文字を指定
     - デフォルトが`,`（カンマ）であること
     - 任意の区切り文字の指定方法
-- 引用符の扱い
+* 引用符の扱い
     - 引数`quoting`の使い方
-- 改行を含むファイルの場合
+* 改行を含むファイルの場合
     - ファイル操作の時点で `newline = ‘’`としておくほうが安全
     - pythonドキュメントを引用する
-- headerなどを含むファイルの場合
+* headerなどを含むファイルの場合
     - リスト内包表記で取り出す際にスライスと組み合わせる方法があることを説明する
     - 後述するpandasを使う方が楽だということも伝えるので上はさらっと
 
-### csv.DictReader
+### csv. DictReader
 
-- 基本的な使い方
-- OrderedDictに触れる
-- headerがない場合は`fieldnames`を使用する
-- headerの削除方法
-    - `pop()`を使用する
-    - `popitem()`, `del`で出来ることをさらっと紹介
+* 基本的な使い方
+* OrderedDictに触れる
+* headerがない場合は `fieldnames` を使用する
+* headerの削除方法
+
+    - `pop()` を使用する
+    - `popitem()` , `del` で出来ることをさらっと紹介
 
 ## csvモジュールを使った書き込み
 
 ### csv.writer
 
-- 基本的な使い方
+* 基本的な使い方
     - `writerow()`
+
     - `writerows()`
-- 区切り文字の指定
-- 引用符の扱い
-- 改行を含むファイルの場合
-- headerなどを加える場合
 
-### csv.DictWriter
+* 区切り文字の指定
+* 引用符の扱い
+* 改行を含むファイルの場合
+* headerなどを加える場合
 
-- 基本的な使い方
+### csv. DictWriter
+
+* 基本的な使い方
     - `writerow()`
+
     - `writerows()`
-- キーが存在しない場合の`extrasaction`の使い方
-    - `extrasaction`のデフォルトが`’raise’`であること
+
+* キーが存在しない場合の `extrasaction` の使い方
+
+    - `extrasaction` のデフォルトが `’raise’` であること
 
 ## まとめ
 
