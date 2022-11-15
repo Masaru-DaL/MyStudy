@@ -13,4 +13,4 @@ with open("sample.csv") as file_object:
     reader_object = csv.reader(file_object)
     sample_list2 = [row[3] for row in reader_object]
     print(sample_list2)
-    # 出力結果: [' 4', ' 8', ' 12', ' 16', ' 20']
+    # 出力結果: ['4', '8', '12', '16', '20']
