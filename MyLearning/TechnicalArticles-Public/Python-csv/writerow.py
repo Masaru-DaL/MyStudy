@@ -6,13 +6,10 @@ with open("sample.csv", "w") as file_object:
     writer_object.writerow([1, 2, 3])
     writer_object.writerow(["A", "B", "C"])
 
-# ②ここから読み込み（書き込まれたことを確認）
+# ②書き込まれた内容の確認
 with open("sample.csv") as file_object:
-    reader_object = csv.reader(file_object)
-
-    for row in reader_object:
-        print(row)
+    print(file_object.read())
 
 # ③出力結果:
-# ['1', '2', '3']
-# ['A', 'B', 'C']
+# 1,2,3
+# A,B,C
