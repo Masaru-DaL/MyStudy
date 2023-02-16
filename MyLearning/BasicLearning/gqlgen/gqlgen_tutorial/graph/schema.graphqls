@@ -1,0 +1,30 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Query {
+  getCompany(companyID: String!): Company!
+}
+
+type Company {
+  id: ID!
+  name: String!
+  imageUrl: String!
+  abstract: String!
+  businessSummary: String!
+  workLocation: String!
+  hpUrl: String!
+  employeeNum: Int!
+  establishment: String!
+  businessDetail: String!
+  occupation: String!
+  occupationDetail: String!
+  selectionFlow: String!
+  comment: String!
+  estimatedAnnualIncome: Int!
+  wantedEngineer: String!
+  age: Int!
+  appeal: String!
+  requiredSkills: String!
+  careerPlan: String!
+}
