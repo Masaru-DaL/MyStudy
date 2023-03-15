@@ -501,6 +501,8 @@ VPCやサブネットの内外を結ぶ門のこと
 
 - NAT Gateway（Network Address Transition）
   - プライベートIPをグローバルIPアドレスに変換
+  - ※NATインスタンスではなく、NAT Gatewayが推奨
+    - マネージド型、ボトルネット解消、パフォーマンス向上...
 
 - VGW（Virtual Private Gateway）
   - VPCと、VPNやDirect Connectとを接続するゲートウェイ
@@ -510,3 +512,24 @@ VPCやサブネットの内外を結ぶ門のこと
 - Customer Gateway
   - オンプレミス側のVPNエンドポイント
   - パブリックIPアドレスと自立システム番号を指定する
+
+### 6-7. VPN
+
+- VPN（Virtual Private Network）
+  - 安全な仮想プライベートネットワーク
+  - 専用線接続ではなく、インターネットを使用
+
+- AWS managed VPN
+  - オンプレミス環境とVPC間とのサイト間を接続
+  - リモートの顧客ネットワークとVPCの間にIPsec VPN接続を作成するオプション
+
+- AWS VPN CloudHub
+  - 複数のカスタマーゲートウェイを使って仮想プライベートゲートウェイを作成し、サイト間接続
+
+- Acceleratedサイト間VPN（Global Accelerator）
+  - 高可用性・高パフォーマンスなVPNサービス
+  - VPCにおいてAccelerationを有効にすると、AWSグローバルネットワークを使用してパフォーマンスを向上
+
+- DirectConnect
+  - オンプレミス環境からAWSへの専用ネットワーク接続
+  - 高可用な専用線接続（※NPCによる接続ではない）
