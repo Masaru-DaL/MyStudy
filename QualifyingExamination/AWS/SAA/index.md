@@ -1011,3 +1011,57 @@ MFA、SSOなど多様化するアクセス方法において、IDを統合的に
   - アダブティブ認証（普段と違う環境からのサインインに対し、MFAやOTPを要求）
     - OTP => One Time Password
   - 複数のコンプライアンス要件をサポート
+
+### 8-6. Active Directory
+
+- AWS Directory Service AD Connector（もしくは単にAD Connector）
+  - IAM側のディレクトリ・リクエストをオンプレミスのMicrosoft Active Directoryへとリダイレクト（連携）するのに使用するディレクトリゲートウェイ
+  - ※Microsoft ADを構築することは出来ない
+
+- AWS Directory Service Simple AD（もしくは単にSimple AD）
+  - Samba 4 Active Directory Compatible Serverを使用するスタンドアロンのマネージド型ディレクトリ
+  - AWS上に新規にActive Directoryを構成する
+  - AWSの仮想デスクトップサービスなどへの簡易アクセスを外部ユーザに許可する場合などに利用
+
+- AWS Managed Microsoft AD（AWS Directory Service for Microsoft Active Directory）
+  - AWSクラウド内にマネージド型Active Directory設置
+  - AWSと既存のオンプレミスMicrosoft Active Directoryの間で信頼関係を設定
+  - シングルサインオン（SSO）を構成することも可能
+
+## 9. デプロイと自動化
+
+![](2023-03-15-12-31-36.png)
+
+### 9-1. Elastic Beanstalk
+
+#### 9-1-1. インフラの自動構築
+
+コードをアップロードすることで、インフラ環境を自動構築する
+キャパシティープロビジョニング、負荷分散、自動スケーリング、ウェブアプリケーションの状態のモニタリングまで、デプロイを自動的に処理し、パッチやセキュリティのフルマネージド型の更新を継続的に行う
+
+- Batchワーカー構成（SQS Auto Scaling EC2）
+
+![](2023-03-15-12-40-27.png)
+
+- Webサーバー構成（ELB Auto Scaling EC2）
+
+![](2023-03-15-12-40-41.png)
+
+#### 9-1-2. デプロイ方式
+
+- All at Once
+  - 全ての既存インスタンスのデプロイを一気に実施する
+  - デプロイの所要時間が短い一方、システムが全停止するリスクがある
+
+- Rollingデプロイ
+  - 既存のインスタンスの一部をデプロイし、確認後に残りのインスタンスをデプロイする
+  - システムが全停止することはない一方、デプロイの所要時間がAll at Onceより長い
+
+- Rolling with additional batch
+  - 新規のインスタンスをデプロイし、無事にデプロイ出来たら既存のインスタンスをデプロイする
+  - Rollingデプロイ同様、システムが全停止することはないが、インスタンスを新設する分、Rollingより時間を要する
+  - また、一時的に異なるバージョンのアプリがELBに構成されるため、それでも影響のない構成にする必要がある
+
+- Immutableデプロイ
+  - 新規のインスタンスを1つデプロイし、無事にデプロイ出来たら残りの新規インスタンスをデプロイし、続いて既存インスタンスをデプロイする
+  - 従来の方式の中で最も切り戻しがしやすく、失敗時のリスクが小さい
