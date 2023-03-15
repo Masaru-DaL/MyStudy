@@ -660,3 +660,40 @@ ENI（Elastic Network Interface）単位でログ（アドレス、ポート、�
 - エッジロケーションにより近接リソースから配信することができる
   - <=> Route 53の位置情報ルーティング
   - ユーザの位置情報（DNSクエリの発信位置）に基づいてリソースを選択
+
+## 7. データベースサービス
+
+### 7-1. データベースの種類
+
+- RDB（Relational Database）
+  - データをテーブルで表現し、SQLで操作し、テーブル間の関係を定義付ける
+  - AWS
+    - RDS
+    - Redshift
+    - Aurora
+  - Software
+    - Oracle
+    - Microsoft SQL Server
+    - My SQL
+    - Postgre SQL
+    - Maria DB
+
+- NoSQL（Not Only SQL）
+  - SQLを使わないRDBに変わる新しいデータ形式
+  - AWS
+    - Dynamo DB
+    - Elastic Cache
+    - Neptune
+  - Software
+    - Key-Valueストア
+      - Redis
+      - Memcached
+    - カラム指向データベース
+      - Cassandra
+      - HBase
+    - ドキュメント指向データベース
+      - MongoDB
+      - CouchDB
+    - グラフ指向データベース
+      - Neo4j
+      - Titan
